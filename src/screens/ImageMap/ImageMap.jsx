@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { ImageOverlay, MapContainer, Marker, Popup, Tooltip } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
-import melee from '../../_assets/img/melee.jpg'
-import ostrov from '../../_assets/img/ostrov.jpg'
-import thosgrar from '../../_assets/img/thosgrar.jpg'
 import marker from '../../_assets/img/marker_city.png'
 
 var Leaflet = require('leaflet')

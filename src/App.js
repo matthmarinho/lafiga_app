@@ -1,11 +1,19 @@
 import React from 'react'
 import Home from './screens/Home/Home'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { createTheme, ThemeProvider } from "@material-ui/core";
 import './index.css'
+
+const theme = createTheme({
+  palette: {
+    type: "dark"
+  }
+});
 
 function App() {
   return (
-    <Home />
+    <ThemeProvider theme={theme}>
+      <Home />
+    </ThemeProvider>
   );
 }
 
