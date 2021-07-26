@@ -13,6 +13,7 @@ export default function ImageMap(props) {
     const [center, setCenter] = useState([0, 0])
     const [loaded, setLoaded] = useState(false)
     const [image, setImage] = useState()
+
     const position = [1498, 1189]
     const thisIcon = new Leaflet.Icon({
         iconUrl: marker,
@@ -22,20 +23,19 @@ export default function ImageMap(props) {
 
     useEffect(() => {
         setLoaded(false);
-        // let imageName = require('../../_assets/img/' + props.mapValue + '.jpg')
+        let imageName = require('../../_assets/img/' + props.mapName + '.jpg')
         let img = new Image();
-        // img.src = imageName.default
-        img.src = melee
+        img.src = imageName.default
         img.onload = async () => {
             setImage(img)
             setCenter([img.height/2, img.width/2])
             setBounds([[0, 0], [img.height, img.width]])
             setLoaded(true)
         }
-    }, [props.mapValue])
+    }, [props.mapName])
 
     return (
-        true && (
+        loaded && (
             <MapContainer
                 center={center}
                 bounds={bounds}
@@ -47,8 +47,7 @@ export default function ImageMap(props) {
                 style={{ height: '100%', width: '100%', background: 'black', display: 'flex' }}
             >
                 <ImageOverlay
-                    // url={image.src}
-                    url={melee}
+                    url={image.src}
                     bounds={bounds}
                 />
                 <Marker icon={thisIcon} position={position}>

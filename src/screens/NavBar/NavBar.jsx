@@ -3,10 +3,22 @@ import Body from '../Body/Body'
 import ImageMap from '../ImageMap/ImageMap'
 import logo from '../../_assets/img/logo.png'
 
-export default function NavBar() {
+export default function NavBar(props) {
     const [showSidebar, setShowSidebar] = useState(false);
+    const [openMenu, setOpenMenu] = useState(false);
+    
+    const menuCollapse = () => {
+        return (
+            <div class="mb-4"> 
+                <a onClick={() => {props.setMapName('melee')}} class="flex items-center py-2 pl-12 pr-4 transition cursor-pointer hover:bg-gray-800 hover:text-gray-200">Melee </a> 
+                <a onClick={() => {props.setMapName('ostrov')}} class="flex items-center py-2 pl-12 pr-4 transition cursor-pointer hover:bg-gray-800 hover:text-gray-200">Ostrov </a> 
+                <a onClick={() => {props.setMapName('thosgrar')}} class="flex items-center py-2 pl-12 pr-4 transition cursor-pointer hover:bg-gray-800 hover:text-gray-200">Thosgrar </a> 
+            </div>
+        )
+    }
+
     return (
-        <React.Fragment>
+        <>
             <aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
                 <div class="p-6">
                     <a class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Saite</a>
@@ -15,10 +27,15 @@ export default function NavBar() {
           </button> */}
                 </div>
                 <nav class="text-white text-base font-semibold pt-3">
-                    <a onClick={() => {console.log('preda')}} class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                        <i class="fas fa-tachometer-alt mr-3"></i>
-                        Continentes
-                    </a>
+                    <div>
+                        <div onClick={() => { setOpenMenu(!openMenu) }}>
+                            <a class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item cursor-pointer">
+                                <i class="fas fa-tachometer-alt mr-3"></i>
+                                Continentes
+                            </a>
+                        </div>
+                        { openMenu && menuCollapse() }
+                    </div>
                 </nav>
             </aside>
 
@@ -29,6 +46,6 @@ export default function NavBar() {
             </div> */}
 
             {/* <Body showSidebar={showSidebar} /> */}
-        </React.Fragment>
+        </>
     )
 }

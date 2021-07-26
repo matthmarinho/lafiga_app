@@ -10,7 +10,3 @@
 .active-nav-link { background: #734046; }
 .nav-item:hover { background: #734046; }
 .account-link:hover { background: #321F28; }
-
-a:hover {
-    cursor:pointer;
-}
