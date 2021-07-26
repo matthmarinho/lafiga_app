@@ -1,15 +1,16 @@
-import NavBar from '../NavBar/NavBar'
+import Sidebar from '../Sidebar/Sidebar'
 import ImageMap from '../ImageMap/ImageMap'
 import { useState } from 'react'
 import { Col, Container, Navbar, Row } from 'react-bootstrap'
 import logo from '../../_assets/img/logo.png'
+import './Home.css'
 
 export default function Home() {
     const [mapName, setMapName] = useState('melee')
 
     return (
         <>
-            <Navbar bg="dark" variant="dark" style={{height: '10vh'}}>
+            <Navbar bg="dark" variant="dark" className="header">
                 <Container>
                     <Navbar.Brand href="#home">
                         <img
@@ -23,12 +24,12 @@ export default function Home() {
                     </Navbar.Brand>
                 </Container>
             </Navbar>
-            <Container fluid bg="dark">
-                <Row style={{height: '90vh'}}>
-                    <Col sm={2}>
-                        <NavBar setMapName={setMapName} />
+            <Container fluid>
+                <Row >
+                    <Col xs={2} className="sidebar">      
+                        <Sidebar setMapName={setMapName} />
                     </Col>
-                    <Col>
+                    <Col className="body">
                         <ImageMap mapName={mapName} />
                     </Col>
                 </Row>
