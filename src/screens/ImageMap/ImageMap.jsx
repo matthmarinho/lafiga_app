@@ -70,6 +70,7 @@ export default function ImageMap(props) {
     const [openModal, setOpenModal] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [editing, setEditing] = useState(false);
+    const [editMarkerId, setEditMarkerId] = useState();
 
     const position = [1498, 1189]
     const thisIcon = new Leaflet.Icon({
@@ -85,6 +86,7 @@ export default function ImageMap(props) {
     const addNewMarker = (marker) => {
         console.log(marker)
         let newMarker = {
+            id: markers.length + 1,
             name: marker.name,
             description: marker.description,
             position: [image.height / 2, image.width / 2],
@@ -97,7 +99,6 @@ export default function ImageMap(props) {
 
     const saveNewMarker = () => {
         let mkrs = markers
-        console.log(mkrs, currentIndex)
         mkrs[currentIndex].draggable = false
         setMarkers(mkrs)
         setEditing(false)
@@ -108,6 +109,10 @@ export default function ImageMap(props) {
         mkrs.pop()
         setMarkers(mkrs)
         setEditing(false)
+    }
+
+    const viewMarker = (marker) => {
+        setEditMarkerId(marker.sourceTarget.options.id)
     }
 
     useEffect(() => {
@@ -134,7 +139,8 @@ export default function ImageMap(props) {
                     maxBoundsViscosity={1}
                     crs={Leaflet.CRS.Simple}
                     maxZoom={1}
-                    minZoom={-2}
+                    minZoom={-3}
+                    zoom={0}
                     style={{ height: '100%', width: '100%', background: 'black', display: 'flex' }}
                 >
                     <ImageOverlay
@@ -142,9 +148,15 @@ export default function ImageMap(props) {
                         bounds={bounds}
                     />
                     {markers.map((marker, index) =>
-                        <Marker icon={thisIcon} position={marker.position} draggable={marker.draggable}>
+                        <Marker id={marker.id} icon={thisIcon} position={marker.position} draggable={marker.draggable} 
+                            eventHandlers={{
+                                click: (e) => {
+                                    viewMarker(e)
+                                },
+                            }}
+                        >
                             <Popup>
-                                {marker.name}
+                                {marker.description}
                             </Popup>
                             <Tooltip>{marker.name}</Tooltip>
                         </Marker>
