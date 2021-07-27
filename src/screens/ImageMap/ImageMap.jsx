@@ -140,7 +140,7 @@ export default function ImageMap(props) {
                     crs={Leaflet.CRS.Simple}
                     maxZoom={1}
                     minZoom={-3}
-                    zoom={0}
+                    zoom={-1}
                     style={{ height: '100%', width: '100%', background: 'black', display: 'flex' }}
                 >
                     <ImageOverlay
