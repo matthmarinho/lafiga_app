@@ -91,12 +91,12 @@ export default function LoginModal({anchorEl, setAnchorEl}) {
     e.preventDefault();
 
 
-    console.log(e);
     if (!email || !password) {
       setError("Preencha e-mail e senha para continuar!");
     } else {
       try {
         const response = await api.post("/authenticate", { email, password });
+        console.log(response.data.auth_token)
         sendUserInfo(response.data.user_info);
         login(response.data);
         sendToken(response.data.auth_token);

@@ -40,7 +40,6 @@ export default function MarkerModal(props) {
     };
 
     const handleSubmit = (event) => {
-        console.log('opa')
         event.preventDefault()
         props.addNewMarker({name: name, description: description})
         props.setOpenModal(false)

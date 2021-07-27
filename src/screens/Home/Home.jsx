@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import clsx from 'clsx'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import {
@@ -20,6 +20,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import { red } from '@material-ui/core/colors';
+
+import {userData} from '../../services/auth'
 
 const drawerWidth = 240
 
@@ -105,7 +107,7 @@ const useStyles = makeStyles((theme) => ({
             duration: theme.transitions.duration.leavingScreen,
         }),
         marginLeft: -drawerWidth,
-        height: '90vh'
+        height: '95vh'
     },
     contentShift: {
         transition: theme.transitions.create('margin', {
@@ -152,6 +154,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Home() {
     const classes = useStyles()
     const theme = useTheme()
+    const [name, setName] = useState(null);
     const [open, setOpen] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null);
     const [openCollapse, setOpenCollapse] = useState(false)
@@ -187,11 +190,22 @@ export default function Home() {
 
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
-    };
+    }; 
+    const getName = () => {
+        const {newName} = userData()
+        return newName
+    }
 
     const renderMenu = (
-        <LoginModal anchorEl={anchorEl} setAnchorEl={setAnchorEl}/>
+       name ? null : <LoginModal anchorEl={anchorEl} setAnchorEl={setAnchorEl}/>
     );
+
+    useEffect(() => {
+        const newName = userData()
+        if (newName) {
+            setName(newName.name)
+        }
+    }, [userData()])
 
     return (
         <div className={classes.root}>
@@ -215,7 +229,7 @@ export default function Home() {
                     <Typography variant="h6" className={classes.title} noWrap>
                         Láfiga Mundi
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    { name ? 'Bem Vindo ' + name :<Button color="inherit">Login</Button>}
                     <IconButton
                         edge="end"
                         aria-label="account of current user"
