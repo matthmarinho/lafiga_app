@@ -128,7 +128,7 @@ export default function LoginModal({anchorEl, setAnchorEl}) {
             title="Paella dish"
         />
         <CardContent>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSignIn}>
                 <TextField
                     variant="outlined"
                     margin="normal"

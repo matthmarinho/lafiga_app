@@ -134,12 +134,13 @@ export default function ImageMap(props) {
                     maxBoundsViscosity={1}
                     crs={Leaflet.CRS.Simple}
                     maxZoom={1}
-                    minZoom={-2}
-                    style={{ height: '100%', width: '100%', background: 'black', display: 'flex' }}
+                    minZoom={-1.5}
+                    style={{ height: '104%', width: '100%', background: 'black', display: 'flex' }}
                 >
                     <ImageOverlay
                         url={image.src}
                         bounds={bounds}
+                        
                     />
                     {markers.map((marker, index) =>
                         <Marker icon={thisIcon} position={marker.position} draggable={marker.draggable}>
