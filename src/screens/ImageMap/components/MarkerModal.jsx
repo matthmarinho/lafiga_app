@@ -32,7 +32,20 @@ const useStyles = makeStyles((theme) => ({
 export default function MarkerModal(props) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
 
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleSubmit = (event) => {
+        console.log('opa')
+        event.preventDefault()
+        props.addNewMarker({name: name, description: description})
+        props.setOpenModal(false)
+    }
+    
     useEffect(() => {
         setOpen(props.openModal)
     }, [props.openModal])
@@ -49,6 +62,8 @@ export default function MarkerModal(props) {
                                 id="outlined-margin-none"
                                 className={classes.textField}
                                 variant="outlined"
+                                value={name}
+                                onInput={ e=>setName(e.target.value)}
                             />
                             <TextField
                                 id="outlined-full-width"
@@ -56,6 +71,8 @@ export default function MarkerModal(props) {
                                 fullWidth
                                 multiline={true}
                                 variant="outlined"
+                                value={description}
+                                onInput={ e=>setDescription(e.target.value)}
                             />
                         </FormControl>
                     </form>
@@ -64,7 +81,7 @@ export default function MarkerModal(props) {
                     <Button onClick={() => props.setOpenModal(false)} color="primary">
                         Cancelar
                     </Button>
-                    <Button onClick={() => props.setOpenModal(false)} color="primary">
+                    <Button onClick={(e) => handleSubmit(e)} color="primary">
                         Criar
                     </Button>
                 </DialogActions>

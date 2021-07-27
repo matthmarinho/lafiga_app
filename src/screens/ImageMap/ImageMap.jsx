@@ -5,7 +5,10 @@ import Dialog from '@material-ui/core/Dialog';
 import AddLocationIcon from '@material-ui/icons/AddLocation'
 import markerCity from '../../_assets/img/marker_city.png'
 import { makeStyles } from '@material-ui/core/styles'
-import MarkerModal from './components/MarkerModal';
+import MarkerModal from './components/MarkerModal'
+import SaveIcon from '@material-ui/icons/Save'
+import CancelIcon from '@material-ui/icons/Cancel'
+import { red } from '@material-ui/core/colors';
 import 'leaflet/dist/leaflet.css'
 
 var Leaflet = require('leaflet')
@@ -21,11 +24,40 @@ const useStyles = makeStyles((theme) => ({
         bottom: 20,
         left: 'auto',
         position: 'fixed',
-        zIndex: 400
+        zIndex: 400,
+    },
+    fabSave: {
+        margin: 1,
+        top: 'auto',
+        right: 20,
+        bottom: 20,
+        left: 'auto',
+        position: 'fixed',
+        zIndex: 400,
+        backgroundColor: 'green',
+        color: 'white'
+    },
+    fabCancel: {
+        margin: 1,
+        top: 'auto',
+        right: 100,
+        bottom: 20,
+        left: 'auto',
+        position: 'fixed',
+        zIndex: 400,
+        backgroundColor: 'red',
+        color: 'white'
     },
     extendedIcon: {
         marginRight: theme.spacing(1),
     },
+    cancelButton: {
+        color: theme.palette.getContrastText(red[500]),
+        backgroundColor: red[500],
+        '&:hover': {
+          backgroundColor: red[700],
+        },
+      }
 }))
 
 export default function ImageMap(props) {
@@ -34,9 +66,10 @@ export default function ImageMap(props) {
     const [center, setCenter] = useState([0, 0])
     const [loaded, setLoaded] = useState(false)
     const [image, setImage] = useState()
-    const [marker, setMarker] = useState({})
     const [markers, setMarkers] = useState([])
     const [openModal, setOpenModal] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [editing, setEditing] = useState(false);
 
     const position = [1498, 1189]
     const thisIcon = new Leaflet.Icon({
@@ -50,13 +83,31 @@ export default function ImageMap(props) {
     }
 
     const addNewMarker = (marker) => {
+        console.log(marker)
         let newMarker = {
             name: marker.name,
+            description: marker.description,
             position: [image.height / 2, image.width / 2],
             draggable: true,
         }
-
+        setCurrentIndex(markers.length)
         setMarkers([...markers, newMarker])
+        setEditing(true)
+    }
+
+    const saveNewMarker = () => {
+        let mkrs = markers
+        console.log(mkrs, currentIndex)
+        mkrs[currentIndex].draggable = false
+        setMarkers(mkrs)
+        setEditing(false)
+    }
+
+    const cancelNewMarker = () => {
+        let mkrs = markers
+        mkrs.pop()
+        setMarkers(mkrs)
+        setEditing(false)
     }
 
     useEffect(() => {
@@ -75,7 +126,7 @@ export default function ImageMap(props) {
     return (
         loaded && (
             <>
-                <MarkerModal openModal={openModal} setOpenModal={setOpenModal} setMarker={setMarker} />
+                <MarkerModal openModal={openModal} setOpenModal={setOpenModal} addNewMarker={addNewMarker} />
                 <MapContainer
                     center={center}
                     bounds={bounds}
@@ -90,7 +141,7 @@ export default function ImageMap(props) {
                         url={image.src}
                         bounds={bounds}
                     />
-                    {markers.map((marker, index) => 
+                    {markers.map((marker, index) =>
                         <Marker icon={thisIcon} position={marker.position} draggable={marker.draggable}>
                             <Popup>
                                 {marker.name}
@@ -99,17 +150,19 @@ export default function ImageMap(props) {
                         </Marker>
                     )}
                 </MapContainer>
-                <Fab
-                    variant="extended"
-                    size="small"
-                    color="primary"
-                    aria-label="add"
-                    className={classes.fab}
-                    onClick={() => openMarkerModal()}
-                >
-                    <AddLocationIcon className={classes.extendedIcon} />
-                        Add. Localização
-                </Fab>
+                {editing ?
+                    <>
+                        <Fab aria-label="add" className={classes.fabCancel} onClick={() => cancelNewMarker()}>
+                            <CancelIcon />
+                        </Fab>
+                        <Fab aria-label="add" className={classes.fabSave} onClick={() => saveNewMarker()}>
+                            <SaveIcon />
+                        </Fab>
+                    </> :
+                    <Fab  color="primary" aria-label="add" className={classes.fab} onClick={() => openMarkerModal()} >
+                        <AddLocationIcon />
+                    </Fab>
+                }
             </>
         )
     )
