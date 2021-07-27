@@ -5,21 +5,22 @@ import ImageMap from './screens/ImageMap/ImageMap'
 import Home from './screens/Home/Home'
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import './index.css'
-import LoginModal from './screens/Login/LoginModal'
 
+import { red } from '@material-ui/core/colors';
 
 const theme = createTheme({
   palette: {
-    type: "dark"
+    type: "dark",
+    primary: {
+      main: red[500],
+    },
+    secondary: {
+      main: '#e65100',
+    }
   }
 });
 
 function App() {
-  const [showModal, setShowModal] = useState(false)
-
-  const openModal = () => {
-    setShowModal(prev => !prev)
-  }
 
   return (
     <ThemeProvider theme={theme}>
