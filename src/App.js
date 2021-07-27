@@ -1,34 +1,26 @@
 import React from 'react'
-import NavBar from './screens/NavBar/NavBar'
-import ImageMap from './screens/ImageMap/ImageMap'
+import Home from './screens/Home/Home'
+import { createTheme, ThemeProvider } from "@material-ui/core";
 import './index.css'
+import { red } from '@material-ui/core/colors';
 
-const theme = {
-  global: {
-    colors: {
-      brand: '#000000',
+const theme = createTheme({
+  palette: {
+    type: "dark",
+    primary: {
+      main: red[500],
     },
-    font: {
-      family: 'Roboto',
-      size: '18px',
-      height: '0px',
-    },
-  },
-  header: {
-    marginLeft: '12px',
+    secondary: {
+      main: '#e65100',
+    }
   }
-};
+});
 
 function App() {
   return (
-    <React.Fragment>
-      <div class="flex">
-        <NavBar />
-        <div class="w-full overflow-x-hidden flex flex-col">
-          <ImageMap />
-        </div>
-      </div>
-    </React.Fragment>
+    <ThemeProvider theme={theme}>
+      <Home />
+    </ThemeProvider>
   );
 }
 
