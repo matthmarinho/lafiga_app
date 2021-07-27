@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Body from '../Body/Body'
 import ImageMap from '../ImageMap/ImageMap'
 import logo from '../../_assets/img/logo.png'
 
