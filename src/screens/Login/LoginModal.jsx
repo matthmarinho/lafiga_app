@@ -4,7 +4,7 @@ import { login } from "../../services/auth";
 import { makeStyles } from '@material-ui/core/styles'
 import {
   Button, Menu, TextField, FormControlLabel, Checkbox, Grid, Link, Card,
-  CardMedia, CardContent, withStyles
+  CardMedia, CardContent, withStyles, Container, Box
 } from '@material-ui/core'
 
 import { red } from '@material-ui/core/colors';
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.secondary.main,
   },
   form: {
-      width: '100%', // Fix IE 11 issue.
+      width: '100%',
       marginTop: theme.spacing(1),
   },
   submit: {
@@ -64,10 +64,6 @@ const useStyles = makeStyles((theme) => ({
   loginCard: {
       maxWidth: 345,
       background: 'black'
-  },
-  media: {
-      height: 0,
-      paddingTop: '60.25%', // 16:9
   },
 }))
 
@@ -120,63 +116,73 @@ export default function LoginModal({anchorEl, setAnchorEl}) {
         open={isMenuOpen}
         onClose={handleMenuClose}
         style={{color: 'black'}}
+        PaperProps={{  
+          style: {  
+            maxWidth: 300
+          },  
+       }}
     >
-       <Card className={classes.loginCard}>
+       {/* <Card className={classes.loginCard}>
         <CardMedia
             className={classes.media}
             image="https://media.discordapp.net/attachments/583492070644383777/869017329109979156/Logo_Marca_final.jpeg"
             title="Paella dish"
         />
-        <CardContent>
-        <form className={classes.form} noValidate onSubmit={handleSignIn}>
-                <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    label="Email"
-                    name="email"
-                    autoComplete="email"
-                    autoFocus
-                />
-                <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                />
-                <FormControlLabel
-                    control={<ColorCheckbox value="remember" color="primary" />}
-                    label="Lembrar"
-                />
-                <ColorButton
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                >
-                    Entrar
-                </ColorButton>
-                <Grid container>
-                    <Grid item xs>
-                        <ColorLink href="#" variant="body2">
-                            Esqueceu a senha?
-                        </ColorLink>
-                    </Grid>
-                </Grid>
-            </form>
-        </CardContent>
+        <CardContent> */}
+        <Container>
+          {/* <Box>
+            <img className={classes.media} src="https://media.discordapp.net/attachments/583492070644383777/869017329109979156/Logo_Marca_final.jpeg" />
+          </Box> */}
+          <form className={classes.form} noValidate onSubmit={handleSignIn}>
+                  <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="email"
+                      onChange={(e) => setEmail(e.target.value)}
+                      label="Email"
+                      name="email"
+                      autoComplete="email"
+                      autoFocus
+                  />
+                  <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      name="password"
+                      onChange={(e) => setPassword(e.target.value)}
+                      label="Password"
+                      type="password"
+                      id="password"
+                      autoComplete="current-password"
+                  />
+                  <FormControlLabel
+                      control={<ColorCheckbox value="remember" color="primary" />}
+                      label="Lembrar"
+                  />
+                  <ColorButton
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      className={classes.submit}
+                  >
+                      Entrar
+                  </ColorButton>
+                  <Grid container>
+                      <Grid item xs>
+                          <ColorLink href="#" variant="body2">
+                              Esqueceu a senha?
+                          </ColorLink>
+                      </Grid>
+                  </Grid>
+              </form>
+        </Container>
+        {/* </CardContent>
 
-        </Card>
+        </Card> */}
       </Menu>
     )
   }
