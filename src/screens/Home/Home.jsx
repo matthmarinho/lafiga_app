@@ -5,7 +5,8 @@ import {
     Drawer, CssBaseline, AppBar, Toolbar, List, Typography,
     Divider, IconButton, ListItem, ListItemIcon, ListItemText, Collapse, 
     Button, Menu, MenuItem, Avatar, TextField, FormControlLabel, Checkbox, Grid, Link, Card,
-    CardHeader, CardMedia, CardContent, CardActions, withStyles
+    CardHeader, CardMedia, CardContent, CardActions, withStyles, SwipeableDrawer, Accordion, AccordionSummary,
+    AccordionDetails
 } from '@material-ui/core'
 import ImageMap from '../ImageMap/ImageMap'
 import LoginModal from '../Login/LoginModal'
@@ -15,10 +16,14 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import PublicIcon from '@material-ui/icons/Public';
 import RoomIcon from '@material-ui/icons/Room';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import TeamModal from '../ImageMap/components/TeamModal'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import GroupIcon from '@material-ui/icons/Group';
 import ShareIcon from '@material-ui/icons/Share';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { red } from '@material-ui/core/colors';
 
 import {userData} from '../../services/auth'
@@ -41,6 +46,56 @@ const api = {
         },
     ]
 }
+const groups = [
+    {
+        id: 1, 
+        group: 'Grupo 1', 
+        date: 'Inverno - 50º dia'
+    }, 
+    {
+        id: 2, 
+        group: 'Grupo 2', 
+        date: 'Inverno - 62º dia'
+    }, 
+    {
+        id: 3, 
+        group: 'Grupo 3', 
+        date: 'Inverno - 90º dia'
+    }, 
+    {
+        id: 4, 
+        group: 'Grupo 4', 
+        date: 'Inverno - 112º dia'
+    }
+]
+
+const ColorButton = withStyles((theme) => ({
+    root: {
+      color: theme.palette.getContrastText(red[500]),
+      backgroundColor: red[500],
+      '&:hover': {
+        backgroundColor: red[700],
+      },
+    },
+  }))(Button);
+
+const ColorLink = withStyles((theme) => ({
+    root: {
+      color: red[500],
+      '&:hover': {
+        color: red[700],
+      },
+    },
+  }))(Link);
+
+  const ColorCheckbox = withStyles((theme) => ({
+    root: {
+      color: red[500],
+      '&:hover': {
+        color: red[700],
+      },
+    },
+  }))(Checkbox);
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -106,6 +161,44 @@ const useStyles = makeStyles((theme) => ({
     title: {
         flexGrow: 1,
     },
+    paper: {
+        marginTop: theme.spacing(8),
+        peddingTop: theme.spacing(8),
+        maxWidth: theme.spacing(50),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+    },
+    loginCard: {
+        maxWidth: 345,
+        background: 'black'
+    },
+    media: {
+        height: 0,
+        paddingTop: '60.25%', // 16:9
+    },
+    list: {
+        width: 500,
+      },
+    teamDrawerHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-start',
+    }
 }))
 
 export default function Home() {
@@ -118,6 +211,7 @@ export default function Home() {
     const [mapName, setMapName] = useState('melee');
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
     const [maps, setMaps] = useState([])
+    const [openDrower, setOpenDrower] = useState(false);
     const menuId = 'primary-search-account-menu';
     const isMenuOpen = Boolean(anchorEl)
 
@@ -149,10 +243,17 @@ export default function Home() {
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
     }; 
-    const getName = () => {
-        const {newName} = userData()
-        return newName
-    }
+
+    const handleTeamDrawerOpen = () => {
+        if(openDrower == false)
+            setOpenDrower(true);
+    };
+    
+    const handleTeamDrawerClose = () => {
+        console.log('123')
+        setOpenDrower(false);
+    };
+    
 
     const renderMenu = (
        name ? null : <LoginModal anchorEl={anchorEl} setAnchorEl={setAnchorEl}/>
@@ -165,6 +266,9 @@ export default function Home() {
     useEffect(() => {
         getMenuData()
     }, [])
+    const list = () => (
+        <TeamModal groups={groups} openDrower={openDrower} handleTeamDrawerClose={handleTeamDrawerClose}/>
+      );
 
     useEffect(() => {
         const newName = userData()
@@ -196,7 +300,7 @@ export default function Home() {
                     <Typography variant="h6" className={classes.title} noWrap>
                         Láfiga Mundi
                     </Typography>
-                    { name ? 'Bem Vindo ' + name :<Button onClick={handleProfileMenuOpen} color="inherit">Login</Button>}
+                    { name ? 'Bem vindo ' + name : null }
                     <IconButton
                         edge="end"
                         aria-label="account of current user"
@@ -246,6 +350,16 @@ export default function Home() {
                             </Collapse>
                         </>
                     ))}
+                    <ListItem button key={'teams'} onClick={() => handleTeamDrawerOpen()}>
+                        <ListItemIcon><GroupIcon /></ListItemIcon>
+                        <ListItemText primary={'Equipes'} />
+                        <SwipeableDrawer
+                            anchor={'right'}
+                            open={openDrower}
+                        >
+                            {list()}
+                        </SwipeableDrawer>
+                    </ListItem>
                 </List>
             </Drawer>
             <main className={classes.mapContent}>
