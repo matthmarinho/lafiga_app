@@ -25,33 +25,22 @@ import {userData} from '../../services/auth'
 
 const drawerWidth = 240
 
-const ColorButton = withStyles((theme) => ({
-    root: {
-      color: theme.palette.getContrastText(red[500]),
-      backgroundColor: red[500],
-      '&:hover': {
-        backgroundColor: red[700],
-      },
-    },
-  }))(Button);
-
-const ColorLink = withStyles((theme) => ({
-    root: {
-      color: red[500],
-      '&:hover': {
-        color: red[700],
-      },
-    },
-  }))(Link);
-
-  const ColorCheckbox = withStyles((theme) => ({
-    root: {
-      color: red[500],
-      '&:hover': {
-        color: red[700],
-      },
-    },
-  }))(Checkbox);
+const api = {
+    data: [
+        {
+            id: 1,
+            name: 'melee',
+        },
+        {
+            id: 2,
+            name: 'ostrov',
+        },
+        {
+            id: 3,
+            name: 'thosgrar',
+        },
+    ]
+}
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -108,14 +97,8 @@ const useStyles = makeStyles((theme) => ({
         }),
         marginLeft: -drawerWidth,
         height: '100vh',
-        overflow: 'hidden'
-    },
-    contentShift: {
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-        marginLeft: 0,
+        overflow: 'hidden',
+        paddingTop: '64px'
     },
     nested: {
         paddingLeft: theme.spacing(4),
@@ -123,46 +106,20 @@ const useStyles = makeStyles((theme) => ({
     title: {
         flexGrow: 1,
     },
-    paper: {
-        marginTop: theme.spacing(8),
-        peddingTop: theme.spacing(8),
-        maxWidth: theme.spacing(50),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-    },
-    loginCard: {
-        maxWidth: 345,
-        background: 'black'
-    },
-    media: {
-        height: 0,
-        paddingTop: '60.25%', // 16:9
-    },
 }))
 
 export default function Home() {
     const classes = useStyles()
     const theme = useTheme()
-    const [name, setName] = useState(null);
+    const [name, setName] = useState(null)
     const [open, setOpen] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null);
     const [openCollapse, setOpenCollapse] = useState(false)
     const [mapName, setMapName] = useState('melee');
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
+    const [maps, setMaps] = useState([])
     const menuId = 'primary-search-account-menu';
-    const isMenuOpen = Boolean(anchorEl);
+    const isMenuOpen = Boolean(anchorEl)
 
     const handleDrawerOpen = () => {
         setOpen(true)
@@ -201,11 +158,20 @@ export default function Home() {
        name ? null : <LoginModal anchorEl={anchorEl} setAnchorEl={setAnchorEl}/>
     );
 
+    const getMenuData = () => {
+        setMaps(api.data)
+    }
+
+    useEffect(() => {
+        getMenuData()
+    }, [])
+
     useEffect(() => {
         const newName = userData()
         if (newName) {
             setName(newName.name)
         }
+        getMenuData()
     }, [userData()])
 
     return (
@@ -230,7 +196,7 @@ export default function Home() {
                     <Typography variant="h6" className={classes.title} noWrap>
                         Láfiga Mundi
                     </Typography>
-                    { name ? 'Bem Vindo ' + name :<Button color="inherit">Login</Button>}
+                    { name ? 'Bem Vindo ' + name :<Button onClick={handleProfileMenuOpen} color="inherit">Login</Button>}
                     <IconButton
                         edge="end"
                         aria-label="account of current user"
@@ -268,12 +234,12 @@ export default function Home() {
                             </ListItem>
                             <Collapse in={openCollapse} timeout="auto" unmountOnExit>
                                 <List component="div" disablePadding>
-                                    {['melee', 'ostrov', 'thosgrar'].map((city, index) => (
-                                        <ListItem key={city} button className={classes.nested} onClick={() => setMapName(city)}>
+                                    {maps.map((map, index) => (
+                                        <ListItem key={map.id} button className={classes.nested} onClick={() => setMapName(map.name)}>
                                             <ListItemIcon>
                                                 <RoomIcon />
                                             </ListItemIcon>
-                                            <ListItemText primary={capitalize(city)} />
+                                            <ListItemText primary={capitalize(map.name)} />
                                         </ListItem>
                                     ))}
                                 </List>
@@ -283,7 +249,6 @@ export default function Home() {
                 </List>
             </Drawer>
             <main className={classes.mapContent}>
-                <div className={classes.drawerHeader} />
                 <ImageMap mapName={mapName} />
             </main>
         </div>

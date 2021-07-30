@@ -1,17 +1,56 @@
 import React, { useEffect, useState } from 'react'
-import { ImageOverlay, MapContainer, Marker, Popup, Tooltip } from 'react-leaflet'
+import { ImageOverlay, MapContainer, Popup, Tooltip } from 'react-leaflet'
 import Fab from '@material-ui/core/Fab'
-import Dialog from '@material-ui/core/Dialog';
 import AddLocationIcon from '@material-ui/icons/AddLocation'
 import markerCity from '../../_assets/img/marker_city.png'
+import markerDungeon from '../../_assets/img/marker_dungeon.png'
 import { makeStyles } from '@material-ui/core/styles'
 import MarkerModal from './components/MarkerModal'
 import SaveIcon from '@material-ui/icons/Save'
 import CancelIcon from '@material-ui/icons/Cancel'
-import { red } from '@material-ui/core/colors';
+import { red } from '@material-ui/core/colors'
+import Marker from 'react-leaflet-enhanced-marker'
 import 'leaflet/dist/leaflet.css'
+import { Icon } from '@material-ui/core'
 
 var Leaflet = require('leaflet')
+
+const api = {
+    data: [
+        {
+            id: 1,
+            name: 'cidade 1',
+            category: 'city',
+            description: 'sei que la, sei que la, sei que la',
+            position: [1498, 1189],
+            color: '#fff'
+        },
+        {
+            id: 2,
+            name: 'região 1',
+            category: 'region',
+            description: 'sei que la, sei que la, sei que la',
+            position: [1098, 1489],
+            color: '#fff'
+        },
+        {
+            id: 3,
+            name: 'masmorra 1',
+            category: 'dungeon',
+            description: 'sei que la, sei que la, sei que la',
+            position: [988, 1689],
+            color: '#fff'
+        },
+        {
+            id: 4,
+            name: 'equipe 1',
+            category: 'team',
+            description: 'sei que la, sei que la, sei que la',
+            position: [918, 1889],
+            color: '#fff'
+        },
+    ]
+}
 
 const useStyles = makeStyles((theme) => ({
     margin: {
@@ -55,9 +94,9 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.getContrastText(red[500]),
         backgroundColor: red[500],
         '&:hover': {
-          backgroundColor: red[700],
+            backgroundColor: red[700],
         },
-      }
+    }
 }))
 
 export default function ImageMap(props) {
@@ -67,10 +106,11 @@ export default function ImageMap(props) {
     const [loaded, setLoaded] = useState(false)
     const [image, setImage] = useState()
     const [markers, setMarkers] = useState([])
-    const [openModal, setOpenModal] = useState(false);
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [editing, setEditing] = useState(false);
-    const [editMarkerId, setEditMarkerId] = useState();
+    const [openModal, setOpenModal] = useState(false)
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [editing, setEditing] = useState(false)
+    const [editMarkerId, setEditMarkerId] = useState()
+    const [mapName, setMapName] = useState()
 
     const position = [1498, 1189]
     const thisIcon = new Leaflet.Icon({
@@ -84,13 +124,14 @@ export default function ImageMap(props) {
     }
 
     const addNewMarker = (marker) => {
-        console.log(marker)
         let newMarker = {
             id: markers.length + 1,
             name: marker.name,
             description: marker.description,
             position: [image.height / 2, image.width / 2],
             draggable: true,
+            color: marker.color,
+            category: marker.category
         }
         setCurrentIndex(markers.length)
         setMarkers([...markers, newMarker])
@@ -115,7 +156,7 @@ export default function ImageMap(props) {
         setEditMarkerId(marker.sourceTarget.options.id)
     }
 
-    useEffect(() => {
+    const setMap = () => {
         setLoaded(false)
         let imageName = require('../../_assets/img/' + props.mapName + '.jpg')
         let img = new Image()
@@ -126,6 +167,76 @@ export default function ImageMap(props) {
             setBounds([[0, 0], [img.height, img.width]])
             setLoaded(true)
         }
+    }
+
+    const getMap = () => {
+        let markers = api.data.map(x => Object.assign(x, { draggable: false }))
+        console.log(markers)
+        setMarkers(markers)
+    }
+
+    const imgMarker = (marker) => {
+        return (
+            <Marker key={marker.id} icon={thisIcon} position={marker.position} draggable={marker.draggable}
+                eventHandlers={{
+                    click: (e) => {
+                        viewMarker(e)
+                    },
+                }}
+            >
+                <Popup>
+                    {marker.description}
+                </Popup>
+                <Tooltip>{marker.name}</Tooltip>
+            </Marker>
+        )
+    }
+
+    const customTextMarker = (marker) => {
+        let icon
+        switch (marker.category) {
+            case 'region':
+                icon = marker.name.toUpperCase()
+                break
+            case 'city':
+                icon = <img src={markerCity} style={{width:'25px', height: '25px'}} />
+                break
+            case 'dungeon':
+                icon = <img src={markerDungeon} style={{width:'25px', height: '25px'}} />
+                break
+            case 'team':
+                console.log(marker)
+                icon = <div><Icon style={{ color: marker.color, width:'25px', height: '25px' }}>room</Icon></div>
+                break
+            default:
+        }
+        console.log(icon)
+        return icon
+    }
+
+    const renderMarkers = () => {
+        return markers.map((marker) => {
+            return (
+                <Marker 
+                    key={marker.id} 
+                    icon={customTextMarker(marker)} 
+                    position={marker.position} 
+                    draggable={marker.draggable} 
+                    eventHandlers={{
+                        click: (e) => {
+                            viewMarker(e)
+                        },
+                    }}
+                >
+                    <Tooltip direction="top" offset={[-35, -27]}>{marker.name}</Tooltip>
+                </Marker>
+            )
+        })
+    }
+
+    useEffect(() => {
+        getMap()
+        setMap()
     }, [props.mapName])
 
     return (
@@ -146,22 +257,9 @@ export default function ImageMap(props) {
                     <ImageOverlay
                         url={image.src}
                         bounds={bounds}
-                        
+
                     />
-                    {markers.map((marker, index) =>
-                        <Marker id={marker.id} icon={thisIcon} position={marker.position} draggable={marker.draggable} 
-                            eventHandlers={{
-                                click: (e) => {
-                                    viewMarker(e)
-                                },
-                            }}
-                        >
-                            <Popup>
-                                {marker.description}
-                            </Popup>
-                            <Tooltip>{marker.name}</Tooltip>
-                        </Marker>
-                    )}
+                    {renderMarkers()}
                 </MapContainer>
                 {editing ?
                     <>
@@ -172,7 +270,7 @@ export default function ImageMap(props) {
                             <SaveIcon />
                         </Fab>
                     </> :
-                    <Fab  color="primary" aria-label="add" className={classes.fab} onClick={() => openMarkerModal()} >
+                    <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => openMarkerModal()} >
                         <AddLocationIcon />
                     </Fab>
                 }

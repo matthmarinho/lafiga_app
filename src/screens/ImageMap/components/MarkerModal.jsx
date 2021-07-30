@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
+import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
@@ -7,7 +7,8 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import FormControl from '@material-ui/core/FormControl'
-import { InputLabel, MenuItem, Select, useMediaQuery } from '@material-ui/core'
+import { Box, InputLabel, MenuItem, Select, useMediaQuery } from '@material-ui/core'
+import { SketchPicker } from 'react-color'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -37,15 +38,20 @@ const useStyles = makeStyles((theme) => ({
     },
     formControl: {
         margin: theme.spacing(1),
-    }
+    },
+    margin: {
+        margin: theme.spacing(1),
+    },
 }))
 
 export default function MarkerModal(props) {
     const classes = useStyles()
     const [open, setOpen] = useState(false)
     const [name, setName] = useState('')
+    const [color, setColor] = useState('#fff')
+    const [openPicker, setOpenPicker] = useState(false)
     const [description, setDescription] = useState('')
-    const [type, setType] = useState('')
+    const [category, setCategory] = useState('')
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -55,9 +61,20 @@ export default function MarkerModal(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        props.addNewMarker({ name: name, description: description })
+        props.addNewMarker({ name: name, description: description, color: color, category: category })
         props.setOpenModal(false)
     }
+
+    const ColorButton = withStyles((theme) => ({
+        root: {
+            color: theme.palette.getContrastText(color),
+            backgroundColor: color,
+            '&:hover': {
+                backgroundColor: color,
+            },
+            alignContent: 'left'
+        },
+    }))(Button);
 
     useEffect(() => {
         setOpen(props.openModal)
@@ -93,13 +110,21 @@ export default function MarkerModal(props) {
                             <Select
                                 labelId="demo-simple-select-filled-label"
                                 id="demo-simple-select-filled"
-                                value={type}
-                                onChange={e => setType(e.target.value)}
+                                value={category}
+                                onChange={e => setCategory(e.target.value)}
                             >
-                                <MenuItem value={10}>Cidade</MenuItem>
-                                <MenuItem value={20}>Masmorra</MenuItem>
-                                <MenuItem value={30}>Equipe</MenuItem>
+                                <MenuItem value={'region'}>Região</MenuItem>
+                                <MenuItem value={'city'}>Cidade</MenuItem>
+                                <MenuItem value={'dungeon'}>Masmorra</MenuItem>
+                                <MenuItem value={'team'}>Equipe</MenuItem>
                             </Select>
+                        </FormControl>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <Box>
+                                <ColorButton variant="contained" color="primary" onClick={() => setOpenPicker(!openPicker)}>
+                                    Cor
+                                </ColorButton>
+                            </Box>
                         </FormControl>
                     </form>
                 </DialogContent>
@@ -111,6 +136,9 @@ export default function MarkerModal(props) {
                         Criar
                     </Button>
                 </DialogActions>
+            </Dialog>
+            <Dialog onClose={() => setOpenPicker(false)} aria-labelledby="simple-dialog-title" open={openPicker}>
+                <SketchPicker color={color} onChangeComplete={color => { setColor(color.hex)}} />
             </Dialog>
         </div>
     )
