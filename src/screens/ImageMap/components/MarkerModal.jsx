@@ -9,6 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import FormControl from '@material-ui/core/FormControl'
 import { Box, InputLabel, MenuItem, Select, useMediaQuery } from '@material-ui/core'
 import { SketchPicker } from 'react-color'
+import CategoryService from '../services/category'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -52,6 +53,8 @@ export default function MarkerModal(props) {
     const [openPicker, setOpenPicker] = useState(false)
     const [description, setDescription] = useState('')
     const [category, setCategory] = useState('')
+    const [categoryName, setCategoryName] = useState('')
+    const [categories, setCategories] = useState([])
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -59,9 +62,27 @@ export default function MarkerModal(props) {
         setOpen(false)
     }
 
+    const componentToHex = (c) => {
+        var hex = c.toString(16);
+        return hex.length == 1 ? "0" + hex : hex;
+    }
+
+    const rgbToHex = (r, g, b) => {
+        return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+    }
+
+    const hexToRgb = (hex) => {
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault()
-        props.addNewMarker({ name: name, description: description, color: color, category: category })
+        props.addNewMarker({ name: name, description: description, color: hexToRgb(color), category: category, categoryName: categoryName })
         props.setOpenModal(false)
     }
 
@@ -76,7 +97,21 @@ export default function MarkerModal(props) {
         },
     }))(Button);
 
+    const getCategories = () => {
+        CategoryService.getAll()
+            .then(response => {
+                setCategories(response.data)
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
     useEffect(() => {
+        setName('')
+        setDescription('')
+        setCategory('')
+        getCategories()
         setOpen(props.openModal)
     }, [props.openModal])
 
@@ -94,6 +129,7 @@ export default function MarkerModal(props) {
                                 variant="outlined"
                                 value={name}
                                 onInput={e => setName(e.target.value)}
+                                required={true}
                             />
                             <TextField
                                 id="outlined-full-width"
@@ -103,42 +139,46 @@ export default function MarkerModal(props) {
                                 variant="outlined"
                                 value={description}
                                 onInput={e => setDescription(e.target.value)}
+                                required={true}
                             />
                         </FormControl>
                         <FormControl variant="outlined" className={classes.formControl}>
-                            <InputLabel id="demo-simple-select-filled-label">Tipo</InputLabel>
+                            <InputLabel id="demo-simple-select-filled-label">Tipo *</InputLabel>
                             <Select
                                 labelId="demo-simple-select-filled-label"
                                 id="demo-simple-select-filled"
                                 value={category}
+                                name={'teste'}
                                 onChange={e => setCategory(e.target.value)}
+                                required={true}
                             >
-                                <MenuItem value={'region'}>Região</MenuItem>
-                                <MenuItem value={'city'}>Cidade</MenuItem>
-                                <MenuItem value={'dungeon'}>Masmorra</MenuItem>
-                                <MenuItem value={'team'}>Equipe</MenuItem>
+                                {categories.map((category) => (
+                                    <MenuItem key={category.id} value={category.id} onClick={e => setCategoryName(category.name)}>{category.name}</MenuItem>
+                                ))}
                             </Select>
                         </FormControl>
-                        <FormControl variant="outlined" className={classes.formControl}>
-                            <Box>
-                                <ColorButton variant="contained" color="primary" onClick={() => setOpenPicker(!openPicker)}>
-                                    Cor
-                                </ColorButton>
-                            </Box>
-                        </FormControl>
+                        {categoryName === 'Equipe' &&
+                            <FormControl variant="outlined" className={classes.formControl}>
+                                <Box>
+                                    <ColorButton variant="contained" color="primary" onClick={() => setOpenPicker(!openPicker)}>
+                                        Cor
+                                    </ColorButton>
+                                </Box>
+                            </FormControl>
+                        }
                     </form>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => props.setOpenModal(false)} className={classes.cancel}>
                         Cancelar
                     </Button>
-                    <Button onClick={(e) => handleSubmit(e)} className={classes.create}>
+                    <Button onClick={(e) => handleSubmit(e)} className={classes.create} disabled={name === '' || description === '' || category === ''}>
                         Criar
                     </Button>
                 </DialogActions>
             </Dialog>
             <Dialog onClose={() => setOpenPicker(false)} aria-labelledby="simple-dialog-title" open={openPicker}>
-                <SketchPicker color={color} onChangeComplete={color => { setColor(color.hex)}} />
+                <SketchPicker color={color} onChangeComplete={color => { setColor(color.hex) }} />
             </Dialog>
         </div>
     )
