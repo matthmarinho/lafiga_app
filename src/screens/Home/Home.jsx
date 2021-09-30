@@ -21,7 +21,7 @@ import Room from '@mui/icons-material/Room'
 import MapService from './services/maps'
 import ImageMap from '../ImageMap/ImageMap'
 import { Box } from '@mui/system'
-import { AccountCircle } from '@material-ui/icons'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { userData, logout } from '../../services/auth'
 import LoginModal from '../Login/LoginModal'
 import LogoutIcon from '@mui/icons-material/Logout'
@@ -206,7 +206,7 @@ function HomeContent() {
                                 onClick={handleProfileMenuOpen}
                                 color="inherit"
                             >
-                                <AccountCircle />
+                                <AccountCircleIcon />
                             </IconButton>
                         }
                     </Toolbar>

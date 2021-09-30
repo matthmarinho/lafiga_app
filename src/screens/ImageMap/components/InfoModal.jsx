@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { styled } from '@material-ui/core'
+import { styled } from '@mui/material/styles'
 import MarkerService from './../services/marker'
 
 
