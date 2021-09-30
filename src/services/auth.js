@@ -1,6 +1,3 @@
-import { LocalConvenienceStoreTwoTone } from "@material-ui/icons"
-import { sendToken, sendUserInfo } from "../screens/Login/LoginModal"
-// export const getToken = sendToken
 export const TOKEN_KEY = "@lafiga-token"
 export const USER_INFO = "@user-info"
 export const isAuthenticated = () => localStorage.getItem(TOKEN_KEY) !== null

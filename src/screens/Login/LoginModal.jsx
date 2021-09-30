@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import api from "../../services/api"
 import { login } from "../../services/auth"
-import { Button, Checkbox, FormControlLabel, Grid, Link, Menu, TextField } from '@mui/material'
-import { Box } from '@mui/system'
+import Button from '@mui/material/Button'
+import Menu from '@mui/material/Menu'
+import TextField from '@mui/material/TextField'
+import Box from '@mui/system/Box'
 import { styled } from '@mui/material/styles'
 import FormHelperText from '@mui/material/FormHelperText'
 
@@ -34,10 +36,6 @@ export default function LoginModal({ anchorEl, setAnchorEl, setLogged }) {
     setError(false)
   }
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget)
-  }
-
   const handleSignIn = async (e) => {
     e.preventDefault()
 
@@ -46,7 +44,7 @@ export default function LoginModal({ anchorEl, setAnchorEl, setLogged }) {
       setError(true)
     } else {
       try {
-        const response = await api.post("/authenticate", { email, password })
+        await api.post("/authenticate", { email, password })
           .then(response => {
             login(response.data)
             setLogged(true)

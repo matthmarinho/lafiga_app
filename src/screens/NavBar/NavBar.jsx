@@ -21,7 +21,7 @@ export default function NavBar({openModal}) {
                 </div>
                 
                 <nav class="text-white text-base font-semibold pt-3">
-                    <a onClick={() => {console.log('preda')}} class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <a class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
                         <i class="fas fa-tachometer-alt mr-3"></i>
                         Continentes
                     </a>

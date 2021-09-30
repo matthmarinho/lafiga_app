@@ -78,7 +78,10 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
             setDescription(markerInfo.description)
             setCategory(markerInfo.category_id)
             setCategoryName(markerInfo.category_name)
-            if (markerInfo.color) setColor(rgbToHex(markerInfo.color)) 
+            if (markerInfo.color) {
+                let hex = rgbToHex(markerInfo.color)
+                setColor(hex) 
+            }
         }
     }, [markerInfo])
 

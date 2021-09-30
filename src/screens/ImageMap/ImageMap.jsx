@@ -171,9 +171,7 @@ export default function ImageMap({map, user}) {
 
     const setMap = () => {
         setLoaded(false)
-        console.log(map)
         let imageName = require('../../_assets/img/' + map.name.toLowerCase() + '.jpg')
-        console.log(imageName)
         let img = new Image()
         img.src = imageName.default
         img.onload = async () => {
@@ -336,7 +334,6 @@ export default function ImageMap({map, user}) {
     }
 
     useEffect(() => {
-        console.log(map, 'opa')
         if (map && map.id) {
             getMap()
         }

@@ -227,7 +227,7 @@ function HomeContent() {
                     <Divider />
                     <List>
                         {['Continentes'].map((text, index) => (
-                            <>
+                            <React.Fragment key={`fragment_${index}`}>
                                 <ListItemButton key={`button_${index}`} onClick={handleClick}>
                                     <ListItemIcon key={`item_icon_${index}`}>
                                         <Public key={`icon_public_${index}`}/>
@@ -237,21 +237,20 @@ function HomeContent() {
                                 </ListItemButton>
                                 <Collapse key={`collapse_${index}`} in={openCollapse} timeout="auto" unmountOnExit>
                                     <List component="div" disablePadding key={`list_${index}`}>
-                                        {maps.map((map, index) => (
-                                            <ListItemButton key={`list_button_${index}`} sx={{ pl: 4 }} onClick={() => setMap(map)}>
-                                                <ListItemIcon key={`list_icon_${index}`} >
-                                                    <Room key={`room_icon_${index}`} />
+                                        {maps.map((map, idx) => (
+                                            <ListItemButton key={`list_button_${index}_${idx}`} sx={{ pl: 4 }} onClick={() => setMap(map)}>
+                                                <ListItemIcon key={`list_icon_${index}_${idx}`} >
+                                                    <Room key={`room_icon_${index}_${idx}`} />
                                                 </ListItemIcon>
-                                                <ListItemText key={`list_item_${index}`} primary={capitalize(map.name)} />
+                                                <ListItemText key={`list_item_${index}_${idx}`} primary={capitalize(map.name)} />
                                             </ListItemButton>
                                         ))}
                                     </List>
                                 </Collapse>
-                            </>
+                            </React.Fragment>
                         ))}
                     </List>
                     <Divider />
-                    <List>{ }</List>
                     <FooterDiv>
                         <Typography>Version: {`${process.env.REACT_APP_VERSION}`}</Typography>
                     </FooterDiv>
