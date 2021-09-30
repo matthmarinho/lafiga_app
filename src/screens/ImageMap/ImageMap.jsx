@@ -194,7 +194,7 @@ export default function ImageMap({map, user}) {
                         position: [x.latitude, x.longitude],
                     }))
                     setMarkers(markers)
-                    setLastId(markers.at(-1).id)
+                    setLastId(markers[markers.length -1].id)
                 } else {
                     setMarkers([])
                     setNewMarkers([])
