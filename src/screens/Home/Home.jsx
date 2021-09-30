@@ -79,6 +79,14 @@ const WelcomeDiv = styled('div')(({ theme }) => ({
     paddingRight: theme.spacing(1)
 }));
 
+const FooterDiv = styled('div')(({ theme }) => ({
+    position: 'absolute',
+    bottom: 0,
+    textAlign: "center",
+    paddingBottom: 10,
+    width: '100%'
+}));
+
 function HomeContent() {
     const [open, setOpen] = useState(false)
     const [openCollapse, setOpenCollapse] = useState(false)
@@ -244,6 +252,9 @@ function HomeContent() {
                     </List>
                     <Divider />
                     <List>{ }</List>
+                    <FooterDiv>
+                        <Typography>Version: {`${process.env.REACT_APP_VERSION}`}</Typography>
+                    </FooterDiv>
                 </Drawer>
                 <MapDiv>
                     <ImageMap map={map} user={user} /> 
