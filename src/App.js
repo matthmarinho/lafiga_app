@@ -1,18 +1,13 @@
 import React from 'react'
-import { useEffect, useState } from "react";
-import NavBar from './screens/NavBar/NavBar'
-import ImageMap from './screens/ImageMap/ImageMap'
 import Home from './screens/Home/Home'
-import { createTheme, ThemeProvider } from "@material-ui/core";
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 import './index.css'
-
-import { red } from '@material-ui/core/colors';
 
 const theme = createTheme({
   palette: {
-    type: "dark",
+    mode: "dark",
     primary: {
-      main: red[500],
+      main: '#FFFFFF',
     },
     secondary: {
       main: '#e65100',

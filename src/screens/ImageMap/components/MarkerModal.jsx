@@ -1,73 +1,35 @@
 import React, { useEffect, useState } from 'react'
-import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import FormControl from '@material-ui/core/FormControl'
-import { Box, InputLabel, MenuItem, Select, useMediaQuery } from '@material-ui/core'
+import {
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Select,
+    TextField,
+} from '@mui/material'
+import { Box } from '@mui/system'
 import { SketchPicker } from 'react-color'
-import CategoryService from '../services/category'
+import { styled } from '@mui/material/styles'
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    form: {
-        display: 'flex',
-        flexDirection: 'column',
-        margin: 'auto',
-        width: '100%',
-    },
-    textField: {
-        paddingBottom: '15px',
-        width: '100%',
-    },
-    textFieldMulti: {
-        paddingTop: '15px'
-    },
-    cancel: {
-        color: 'white',
-        backgroundColor: 'red'
-    },
-    create: {
-        color: 'white',
-        backgroundColor: 'green'
-    },
-    formControl: {
-        margin: theme.spacing(1),
-    },
-    margin: {
-        margin: theme.spacing(1),
-    },
-}))
-
-export default function MarkerModal(props) {
-    const classes = useStyles()
-    const [open, setOpen] = useState(false)
+export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModal, categories, markerInfo }) {
     const [name, setName] = useState('')
     const [color, setColor] = useState('#fff')
     const [openPicker, setOpenPicker] = useState(false)
     const [description, setDescription] = useState('')
     const [category, setCategory] = useState('')
     const [categoryName, setCategoryName] = useState('')
-    const [categories, setCategories] = useState([])
-    const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-
-    const handleClose = () => {
-        setOpen(false)
-    }
+    const isOpen = Boolean(openModal)
 
     const componentToHex = (c) => {
         var hex = c.toString(16);
-        return hex.length == 1 ? "0" + hex : hex;
+        return hex.length === 1 ? "0" + hex : hex;
     }
 
-    const rgbToHex = (r, g, b) => {
+    const rgbToHex = ({r, g, b}) => {
         return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
     }
 
@@ -82,98 +44,118 @@ export default function MarkerModal(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        props.addNewMarker({ name: name, description: description, color: hexToRgb(color), category: category, categoryName: categoryName })
-        props.setOpenModal(false)
-    }
-
-    const ColorButton = withStyles((theme) => ({
-        root: {
-            color: theme.palette.getContrastText(color),
-            backgroundColor: color,
-            '&:hover': {
-                backgroundColor: color,
-            },
-            alignContent: 'left'
-        },
-    }))(Button);
-
-    const getCategories = () => {
-        CategoryService.getAll()
-            .then(response => {
-                setCategories(response.data)
-            })
-            .catch(e => {
-                console.log(e);
-            });
-    }
-
-    useEffect(() => {
+        let data = {
+            name: name,
+            description: description,
+            color: hexToRgb(color),
+            category: category,
+            categoryName: categoryName,
+        }
+        if (Object.values(markerInfo).length === 0) {
+            addNewMarker(data)
+        } else {
+            edit(data)
+        }
         setName('')
         setDescription('')
         setCategory('')
-        getCategories()
-        setOpen(props.openModal)
-    }, [props.openModal])
+        setCategoryName('')
+        setOpenModal(false)
+    }
+
+    const ColorButton = styled(Button)(({ theme }) => ({
+        color: theme.palette.getContrastText(color),
+        backgroundColor: color,
+        '&:hover': {
+            backgroundColor: color,
+        },
+        alignContent: 'left'
+    }));
+
+    useEffect(() => {
+        if (markerInfo) {
+            setName(markerInfo.name)
+            setDescription(markerInfo.description)
+            setCategory(markerInfo.category_id)
+            setCategoryName(markerInfo.category_name)
+            if (markerInfo.color) setColor(rgbToHex(markerInfo.color)) 
+        }
+    }, [markerInfo])
 
     return (
         <div>
-            <Dialog open={open} onClose={() => props.setOpenModal(false)} aria-labelledby="form-dialog-title" fullWidth maxWidth="md" fullScreen={fullScreen}>
-                <DialogTitle id="form-dialog-title">Nova Localização</DialogTitle>
+            <Dialog
+                open={isOpen}
+                onClose={() => setOpenModal(false)}
+                aria-labelledby="form-dialog-title"
+                fullWidth maxWidth="md"
+            >
+                <DialogTitle id="form-dialog-title">New Marker</DialogTitle>
                 <DialogContent>
-                    <form className={classes.form} noValidate variant="filled">
-                        <FormControl className={classes.formControl}>
-                            <TextField
-                                label="Nome"
-                                id="outlined-margin-none"
-                                className={classes.textField}
-                                variant="outlined"
-                                value={name}
-                                onInput={e => setName(e.target.value)}
-                                required={true}
-                            />
-                            <TextField
-                                id="outlined-full-width"
-                                label="Descrição"
-                                multiline
-                                rows={5}
-                                variant="outlined"
-                                value={description}
-                                onInput={e => setDescription(e.target.value)}
-                                required={true}
-                            />
-                        </FormControl>
-                        <FormControl variant="outlined" className={classes.formControl}>
-                            <InputLabel id="demo-simple-select-filled-label">Tipo *</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-filled-label"
-                                id="demo-simple-select-filled"
-                                value={category}
-                                name={'teste'}
-                                onChange={e => setCategory(e.target.value)}
-                                required={true}
-                            >
-                                {categories.map((category) => (
-                                    <MenuItem key={category.id} value={category.id} onClick={e => setCategoryName(category.name)}>{category.name}</MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                        {categoryName === 'Equipe' &&
-                            <FormControl variant="outlined" className={classes.formControl}>
-                                <Box>
-                                    <ColorButton variant="contained" color="primary" onClick={() => setOpenPicker(!openPicker)}>
-                                        Cor
-                                    </ColorButton>
-                                </Box>
+                    <Box component="form"
+                        noValidate
+                        sx={{ flexGrow: 1 }}
+                    >
+                        <Box item sx={{ paddingTop: 1, paddingBottom: 2 }}>
+                            <FormControl FormControl fullWidth>
+                                <TextField
+                                    label="Name"
+                                    id="outlined-margin-none"
+                                    variant="outlined"
+                                    value={name}
+                                    onInput={e => setName(e.target.value)}
+                                    required={true}
+                                />
                             </FormControl>
+                        </Box>
+                        <Box item sx={{ paddingBottom: 2 }}>
+                            <FormControl FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-helper-label">Category *</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-filled-label"
+                                    id="demo-simple-select-filled"
+                                    value={category}
+                                    label={'Category*'}
+                                    onChange={e => setCategory(e.target.value)}
+                                    required={true}
+                                >
+                                    {categories.map((category) => (
+                                        <MenuItem key={category.id} value={category.id} onClick={e => setCategoryName(category.name)}>{category.name}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </Box>
+                        <Box item sx={{ paddingBottom: 2 }}>
+                            <FormControl FormControl fullWidth>
+                                <TextField
+                                    id="outlined-full-width"
+                                    label="Description"
+                                    multiline
+                                    rows={5}
+                                    variant="outlined"
+                                    value={description}
+                                    onInput={e => setDescription(e.target.value)}
+                                    required={true}
+                                />
+                            </FormControl>
+                        </Box>
+                        {categoryName === 'Equipe' &&
+                            <Box item>
+                                <FormControl FormControl fullWidth>
+                                    <ColorButton variant="contained" color="primary" onClick={() => setOpenPicker(!openPicker)}>
+                                        Color
+                                    </ColorButton>
+                                </FormControl>
+                            </Box>
                         }
-                    </form>
+                    </Box>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => props.setOpenModal(false)} className={classes.cancel}>
-                        Cancelar
+                    <Button onClick={() => setOpenModal(false)} >
+                        Cancel
                     </Button>
-                    <Button onClick={(e) => handleSubmit(e)} className={classes.create} disabled={name === '' || description === '' || category === ''}>
-                        Criar
+                    <Button onClick={(e) => handleSubmit(e)} disabled={name === '' || description === '' || category === ''}>
+                        {Object.values(markerInfo).length === 0 ? 'Create' : 'Edit'}
                     </Button>
                 </DialogActions>
             </Dialog>

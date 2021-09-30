@@ -1,188 +1,135 @@
 import React, { useState } from 'react'
-import api from "../../services/api";
-import { login } from "../../services/auth";
-import { makeStyles } from '@material-ui/core/styles'
-import {
-  Button, Menu, TextField, FormControlLabel, Checkbox, Grid, Link, Card,
-  CardMedia, CardContent, withStyles, Container, Box
-} from '@material-ui/core'
+import api from "../../services/api"
+import { login } from "../../services/auth"
+import { Button, Checkbox, FormControlLabel, Grid, Link, Menu, TextField } from '@mui/material'
+import { Box } from '@mui/system'
+import { styled } from '@mui/material/styles'
+import FormHelperText from '@mui/material/FormHelperText'
 
-import { red } from '@material-ui/core/colors';
+export const sendToken = (token) => token
+export const sendUserInfo = (info) => info
 
-export const sendToken = (token) => token;
-export const sendUserInfo = (info) => info;
+const Form = styled('form')(({ theme }) => ({
+  width: '100%',
+  marginTop: theme.spacing(1),
+}));
 
-const ColorButton = withStyles((theme) => ({
-  root: {
-    color: theme.palette.getContrastText(red[500]),
-    backgroundColor: red[500],
-    '&:hover': {
-      backgroundColor: red[700],
-    },
-  },
-}))(Button);
+const ButtonSubmit = styled(Button)(({ theme }) => ({
+  margin: theme.spacing(3, 0, 2),
+}));
 
-const ColorLink = withStyles((theme) => ({
-  root: {
-    color: red[500],
-    '&:hover': {
-      color: red[700],
-    },
-  },
-}))(Link);
+const CustomBox = styled(Box)(({ theme }) => ({
+  margin: theme.spacing(3),
+}));
 
-const ColorCheckbox = withStyles((theme) => ({
-  root: {
-    color: red[500],
-    '&:hover': {
-      color: red[700],
-    },
-  },
-}))(Checkbox);
-
-const useStyles = makeStyles((theme) => ({
-  
-  paper: {
-      marginTop: theme.spacing(8),
-      peddingTop: theme.spacing(8),
-      maxWidth: theme.spacing(50),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-  },
-  avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-      width: '100%',
-      marginTop: theme.spacing(1),
-  },
-  submit: {
-      margin: theme.spacing(3, 0, 2),
-  },
-  loginCard: {
-      maxWidth: 345,
-      background: 'black'
-  },
-}))
-
-export default function LoginModal({anchorEl, setAnchorEl}) {
-  const classes = useStyles()
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const menuId = 'primary-search-account-menu';
-  const isMenuOpen = Boolean(anchorEl);
+export default function LoginModal({ anchorEl, setAnchorEl, setLogged }) {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState(false)
+  const menuId = 'primary-search-account-menu'
+  const isMenuOpen = Boolean(anchorEl)
 
   const handleMenuClose = () => {
-      setAnchorEl(null);
-  };
+    setAnchorEl(null)
+    setError(false)
+  }
 
   const handleProfileMenuOpen = (event) => {
-      setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleSignIn = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
 
     if (!email || !password) {
-      setError("Preencha e-mail e senha para continuar!");
+      setError(true)
     } else {
       try {
-        const response = await api.post("/authenticate", { email, password });
-        console.log(response.data.auth_token)
-        sendUserInfo(response.data.user_info);
-        login(response.data);
-        sendToken(response.data.auth_token);
-        // props.history.push("/");
+        const response = await api.post("/authenticate", { email, password })
+          .then(response => {
+            login(response.data)
+            setLogged(true)
+            setAnchorEl(false)
+            setError(false)
+          })
+          .catch(e => {
+            setError(true)
+            console.log(e)
+          })
       } catch (err) {
-        setError(
-          "Houve um problema com o login, verifique suas credenciais ou crie uma conta"
-        );
+        setError(true)
       }
     }
-  };
-
-    return (
-      anchorEl &&
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
-        id={menuId}
-        keepMounted
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        open={isMenuOpen}
-        onClose={handleMenuClose}
-        style={{color: 'black'}}
-        PaperProps={{  
-          style: {  
-            maxWidth: 300
-          },  
-       }}
-    >
-       {/* <Card className={classes.loginCard}>
-        <CardMedia
-            className={classes.media}
-            image="https://media.discordapp.net/attachments/583492070644383777/869017329109979156/Logo_Marca_final.jpeg"
-            title="Paella dish"
-        />
-        <CardContent> */}
-        <Container>
-          {/* <Box>
-            <img className={classes.media} src="https://media.discordapp.net/attachments/583492070644383777/869017329109979156/Logo_Marca_final.jpeg" />
-          </Box> */}
-          <form className={classes.form} noValidate onSubmit={handleSignIn}>
-                  <TextField
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="email"
-                      onChange={(e) => setEmail(e.target.value)}
-                      label="Email"
-                      name="email"
-                      autoComplete="email"
-                      autoFocus
-                  />
-                  <TextField
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="password"
-                      onChange={(e) => setPassword(e.target.value)}
-                      label="Password"
-                      type="password"
-                      id="password"
-                      autoComplete="current-password"
-                  />
-                  <FormControlLabel
-                      control={<ColorCheckbox value="remember" color="primary" />}
-                      label="Lembrar"
-                  />
-                  <ColorButton
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      className={classes.submit}
-                  >
-                      Entrar
-                  </ColorButton>
-                  <Grid container>
-                      <Grid item xs>
-                          <ColorLink href="#" variant="body2">
-                              Esqueceu a senha?
-                          </ColorLink>
-                      </Grid>
-                  </Grid>
-              </form>
-        </Container>
-        {/* </CardContent>
-
-        </Card> */}
-      </Menu>
-    )
   }
+
+  return (
+    anchorEl &&
+    <Menu
+      id={menuId}
+      keepMounted
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+      PaperProps={{
+        style: {
+          maxWidth: 300
+        },
+      }}
+    >
+      <CustomBox>
+        <Form noValidate onSubmit={handleSignIn}>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            onChange={(e) => setEmail(e.target.value)}
+            label="Email"
+            name="email"
+            autoComplete="email"
+            autoFocus
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            onChange={(e) => setPassword(e.target.value)}
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+          />
+          {/* <FormControlLabel
+            control={<Checkbox value="remember" />}
+            label="Remenber me"
+          /> */}
+          {error &&
+            <FormHelperText error id="component-error-text" >
+              Sorry, we can't find that account, or your password didn't match. Please try again!
+            </FormHelperText>
+          }
+          <ButtonSubmit
+            type="submit"
+            fullWidth
+            variant="contained"
+          >
+            Log In
+          </ButtonSubmit>
+          {/* <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                Esqueceu a senha?
+              </Link>
+            </Grid>
+          </Grid> */}
+        </Form>
+      </CustomBox>
+    </Menu>
+  )
+}
