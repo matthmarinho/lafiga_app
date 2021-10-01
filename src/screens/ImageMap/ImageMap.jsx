@@ -312,7 +312,7 @@ export default function ImageMap({map, user}) {
     }
 
     const GetMarkerPos = () => {
-        const map = mapEvent({
+        mapEvent({
             click(e) {
                 setCurrentPoint(e.latlng)
                 if (creating) {
@@ -337,7 +337,7 @@ export default function ImageMap({map, user}) {
         if (map && map.id) {
             getMap()
         }
-    }, [map])
+    }, [map]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         getCategories()

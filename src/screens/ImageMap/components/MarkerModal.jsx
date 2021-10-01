@@ -83,7 +83,7 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
                 setColor(hex) 
             }
         }
-    }, [markerInfo])
+    }, [markerInfo])// eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div>
