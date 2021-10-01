@@ -229,10 +229,11 @@ export default function ImageMap({map, user}) {
                 icon = L.divIcon({
                     className: "dummy",
                     iconSize: [25, 25],
+                    iconAnchor: [12, 12],
                     html: `
                     <div style="overflow:visible">
                         <i class="material-icons" 
-                            style="color: rgb(${marker.color.r}, ${marker.color.g}, ${marker.color.b}); width: 25px, height: 25px"
+                            style="color: rgb(${marker.color.r}, ${marker.color.g}, ${marker.color.b});"
                         >
                             room
                         </i>
@@ -363,7 +364,7 @@ export default function ImageMap({map, user}) {
                     maxBoundsViscosity={1}
                     crs={Leaflet.CRS.Simple}
                     maxZoom={1}
-                    minZoom={-3}
+                    minZoom={-1}
                     zoom={0}
                     zoomControl={false}
                     style={{ height: '100%', width: '100%', background: 'black', display: 'flex' }}
