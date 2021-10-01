@@ -108,7 +108,7 @@ export default function InfoModal({
                     <Typography variant="caption" display="block" gutterBottom>
                         {marker.category_name}
                     </Typography>
-                    <DialogContentText id="alert-dialog-description">
+                    <DialogContentText id="alert-dialog-description" sx={{ whiteSpace: 'pre-line' }}>
                         {marker.description}
                     </DialogContentText>
                 </DialogContent>
