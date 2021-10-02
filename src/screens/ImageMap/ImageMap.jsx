@@ -1,19 +1,30 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { ImageOverlay, MapContainer, Popup, Tooltip, Marker, useMapEvents as mapEvent } from 'react-leaflet'
+import { ImageOverlay, MapContainer, Popup, Tooltip, Marker, useMapEvents as mapEvent, Polyline } from 'react-leaflet'
 import Fab from '@material-ui/core/Fab'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
 import AddLocationIcon from '@material-ui/icons/AddLocation'
 import markerCity from '../../_assets/img/marker_city.png'
+import Button from '@material-ui/core/Button'
+
 import markerDungeon from '../../_assets/img/marker_dungeon.png'
 import { makeStyles } from '@material-ui/core/styles'
+import Popper from '@material-ui/core/Popper';
+import TextField from '@material-ui/core/TextField';
 import MarkerModal from './components/MarkerModal'
+import PolylinePoper from './components/PolylinePoper'
 import SaveIcon from '@material-ui/icons/Save'
 import CancelIcon from '@material-ui/icons/Cancel'
 import { red } from '@material-ui/core/colors'
+import { SketchPicker } from 'react-color'
 // import Marker from 'react-leaflet-enhanced-marker'
 import 'leaflet/dist/leaflet.css'
+import TimelineIcon from '@material-ui/icons/Timeline';
 import { Box, Divider, Drawer, Icon, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
 import MarkerService from './services/marker'
 import L from "leaflet";
+import { ContactlessOutlined, PolymerOutlined } from '@material-ui/icons'
 
 var Leaflet = require('leaflet')
 
@@ -52,6 +63,17 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'red',
         color: 'white'
     },
+    fabPoly: {
+        margin: 1,
+        top: 'auto',
+        right: 20,
+        bottom: 100,
+        left: 'auto',
+        position: 'fixed',
+        zIndex: 400,
+        backgroundColor: 'red',
+        color: 'white'
+    },
     extendedIcon: {
         marginRight: theme.spacing(1),
     },
@@ -82,12 +104,18 @@ export default function ImageMap(props) {
     const [bounds, setBounds] = useState([[0, 0], [0, 0]])
     const [center, setCenter] = useState([0, 0])
     const [loaded, setLoaded] = useState(false)
+    const [anchorEl, setAnchorEl] = React.useState(null);
     const [image, setImage] = useState()
-
+    const [colorLine, setColorLine] = useState('#fff')
+    const [openLineColor, setOpenLineColor] = useState(false)
     const [markers, setMarkers] = useState([])
+    const [lineName, setLineName] = useState('')
+    const [newPolyline, setNewPolyline] = useState([])
     const [newMarkers, setNewMarkers] = useState([])
+    const [polylines, setPolylines] = useState([])
+    const [polyline, setPolyline] = useState([])
     const [lastId, setLastId] = useState(null)
-
+    const [creatingLine, setCreatingLine] = useState()
     const [openModal, setOpenModal] = useState(false)
     const [currentIndex, setCurrentIndex] = useState(0)
     const [editing, setEditing] = useState(false)
@@ -98,16 +126,24 @@ export default function ImageMap(props) {
     const [loading, setLoading] = useState()
     const [creating, setCreating] = useState()
     const [showDrawer, setShowDrawer] = useState(false)
-
+    const id = openLineColor ? 'spring-popper' : undefined
     const position = [1498, 1189]
+    const limeOptions = { color: 'lime' }
     const thisIcon = new Leaflet.Icon({
         iconUrl: markerCity,
         iconAnchor: new Leaflet.Point(16, 16),
         iconSize: [25, 25],
     })
-
+    const [openLineModal, setOpenLineModal] = useState(false)
+    const [inchangeLine, setInchangeLine] = useState()
     const openMarkerModal = () => {
         setCreating(true)
+    }
+
+    const createNewPolyline = (event) => {
+        setAnchorEl(anchorEl ? null : document.querySelector('#new-line-element'));
+        setOpenLineColor(true)
+        setCreatingLine(true)
     }
 
     const addNewMarker = (marker) => {
@@ -151,6 +187,69 @@ export default function ImageMap(props) {
         // setMarkers([...markers, newMarker])
         setEditing(true)
     }
+
+    const addNewPolyline = () => {
+        const newPolyline = {
+            id: 0,
+            name: lineName,
+            options: {
+                color: 0,
+                opacity: 0
+            },
+            position: polyline,
+            map_id: props.map.id,
+
+        }
+    }
+
+    const saveNewLine = () => {
+        setLoading(true)
+        setCreatingLine(false)
+        setLoading(false)
+        setPolylines([...polylines, {
+            id: polylines.slice(-1)[0]?.id ||  polylines.slice(-1)[0]?.id == 0 ? polylines.sort((a,b) => parseFloat(a.id) - parseFloat(b.id)).slice(-1)[0].id + 1 : 0,
+            name: lineName,
+            options: {
+                color: colorLine,
+                opacity: 0.5
+            },
+            polyline: newPolyline,
+            map_id: props.map.id,
+        }])
+        setNewPolyline([])
+        setCreatingLine(false)
+        setOpenLineColor(false)
+        setAnchorEl(null);
+        setLineName('')
+
+
+        // let payload = []
+        // newMarkers.map((marker) =>
+        //     payload.push(
+        //         {
+        //             id: marker.id,
+        //             category_id: marker.category_id,
+        //             description: marker.description,
+        //             latitude: marker.position[0],
+        //             longitude: marker.position[1],
+        //             map_id: marker.map_id,
+        //             name: marker.name,
+        //             color: marker.color
+        //         }
+        //     )
+        // )
+
+        // MarkerService.create(props.map.id, { data: JSON.stringify(payload) })
+        //     .then(response => {
+        //         getMap()
+        //         setNewMarkers([])
+        //         setLoading(false)
+        //     })
+        //     .catch(e => {
+        //         console.log(e);
+        //     });
+    }
+
 
     const saveNewMarkers = () => {
         setCreating(false)
@@ -217,6 +316,26 @@ export default function ImageMap(props) {
         setCreating(false)
     }
 
+    const cancelNewLine = () => {
+        if(inchangeLine){
+            setCreatingLine(false)
+            setNewPolyline([])
+            setPolylines([...polylines, inchangeLine])
+            setAnchorEl(null)
+            setOpenLineColor(false)
+            setColorLine('#fff')
+
+        }else{
+            setNewPolyline([])
+            setCreatingLine(false)
+            setLineName('')
+            setOpenLineColor(false)
+            setAnchorEl(null);
+            setColorLine('#fff')
+        }
+
+    }
+
     const viewMarker = (marker) => {
         setEditMarkerId(marker.sourceTarget.options.id)
     }
@@ -244,6 +363,7 @@ export default function ImageMap(props) {
                         position: [x.latitude, x.longitude],
                     }))
                     setMarkers(markers)
+                    setPolylines(polylines)
                     setLastId(markers.at(-1).id)
                 }
                 setLoading(false)
@@ -350,6 +470,24 @@ export default function ImageMap(props) {
         }
     })
     )
+    const polylineRef = useRef(null)
+
+    const polylineEvents = useMemo(() => ({
+        click(e){
+            const selectedPolyline = polylineRef.current
+            setOpenLineModal(true)
+            setInchangeLine(polylines.filter(poly => poly.id === selectedPolyline.options.id)[0])
+        }
+    }))
+
+    const editLine = () => {
+        setNewPolyline(inchangeLine.polyline)
+        setColorLine(inchangeLine.options.color)
+        setLineName(inchangeLine.name)
+        setPolylines(polylines.filter(poly => poly.id !== inchangeLine.id))
+        setOpenLineModal(false)
+        createNewPolyline()
+       }
 
     const renderMarkers = () => {
         return [...markers, ...newMarkers].map((marker) => {
@@ -387,8 +525,71 @@ export default function ImageMap(props) {
         </Box>
     );
 
+    const updatePolyline = () => {
+        setNewPolyline({
+            name: '',
+            position: polyline,
+            options: {
+                color: colorLine,
+                opacity: 0.5,
+            }
+        })
+    }
+    const GetLines = () => {
+        // console.log(colorLine);
+        const map = mapEvent({
+            click(e) { 
+                console.log(newPolyline)
+                setNewPolyline([...newPolyline, e.latlng])
+                // setCurrentMap(map)
+                // setOpenModal(true)
+            },
+            keydown(e){
+                if(e.originalEvent.ctrlKey && e.originalEvent.code === 'KeyZ'){
+                    if (newPolyline.length === 0) return
+                    if (newPolyline.length === 2){
+                        setNewPolyline([])
+                    }else{
+                        const [...newPoly] = newPolyline.slice(-1)
+                        setNewPolyline(newPolyline.filter(point => (point.lat !== newPoly[0].lat) && (point.lng !== newPoly[0].lng)))
+
+                    }
+                }
+            }
+        })
+        return null
+    }
+    const ShowLines = () => {
+        return [...polylines].map(poly=> {
+            return (
+                <>
+                    <Polyline id={poly.id} 
+                              key={`poly_${poly.id}`}
+                              pathOptions={poly.options} 
+                              positions={poly.polyline} 
+                              eventHandlers={polylineEvents} 
+                              ref={polylineRef}
+                              >
+                        <Tooltip direction="top" offset={[0, -17]}>{poly?.name}</Tooltip>
+                    </Polyline>                
+                </>
+            )
+        })
+    }
+
+    const ShowCreatingLine = () => {
+            return (
+                <>
+                    <Polyline 
+                        pathOptions={{color: colorLine}} 
+                        positions={newPolyline} 
+                    />
+                                    
+                </>
+            )
+        }
+
     const GetMarkerPos = () => {
-        console.log('opa');
         const map = mapEvent({
             click(e) {
                 console.log(e)
@@ -411,7 +612,28 @@ export default function ImageMap(props) {
     return (
         loaded && (
             <>
+                <PolylinePoper 
+                    openLineColor={openLineColor} 
+                    setOpenLineColor={setOpenLineColor}
+                    colorLine={colorLine}
+                    setColorLine={setColorLine}
+                    anchorEl={anchorEl}
+                    setAnchorEl={setAnchorEl}
+                    lineName={lineName}
+                    setLineName={setLineName} 
+                />
+
                 <MarkerModal openModal={openModal} setOpenModal={setOpenModal} addNewMarker={addNewMarker} />
+                <Dialog open={openLineModal} onClose={() => setOpenLineModal(false)} aria-labelledby="form-dialog-title" maxWidth="sm">
+                <DialogActions>
+                    <Button onClick={() => editLine()} className={classes.cancel}>
+                        Editar
+                    </Button>
+                    <Button className={classes.create}>
+                        Deletar
+                    </Button>
+                </DialogActions>
+                </Dialog>
                 <Drawer
                     variant="persistent"
                     anchor="left"
@@ -441,8 +663,15 @@ export default function ImageMap(props) {
                     {creating &&
                         <GetMarkerPos />
                     }
+                    {creatingLine &&
+                        <GetLines />
+                    }
                     {!loading && renderMarkers()}
+                    {!loading && <ShowLines/>}
+                    {!loading && creatingLine && newPolyline.length && <ShowCreatingLine/>}
+
                 </MapContainer>
+
                 {creating ?
                     <>
                         <Fab aria-label="add" className={classes.fabCancel} onClick={() => cancelNewMarker()}>
@@ -451,10 +680,24 @@ export default function ImageMap(props) {
                         <Fab aria-label="add" className={classes.fabSave} onClick={() => saveNewMarkers()}>
                             <SaveIcon />
                         </Fab>
+                    </> : 
+                    creatingLine ?
+                    <>
+                        <Fab aria-label="add" className={classes.fabCancel} onClick={() => cancelNewLine()}>
+                            <CancelIcon />
+                        </Fab>
+                        <Fab aria-label="add" className={classes.fabSave} onClick={() => saveNewLine()}>
+                            <SaveIcon />
+                        </Fab>
                     </> :
-                    <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => openMarkerModal()} >
-                        <AddLocationIcon />
-                    </Fab>
+                    <>
+                        <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => openMarkerModal()} >
+                            <AddLocationIcon  />
+                        </Fab>
+                        <Fab color="primary" id="new-line-element" aria-describedby={id} aria-label="add" className={classes.fabPoly} onClick={(e) => createNewPolyline(e)}>
+                            <TimelineIcon />
+                        </Fab>
+                    </>
                 }
             </>
         )
