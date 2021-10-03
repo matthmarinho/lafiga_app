@@ -174,6 +174,10 @@ function HomeContent() {
     );
 
     useEffect(() => {
+        getGroups()
+    }, [groupObject])
+
+    useEffect(() => {
         getMenuData()
         getGroups()
         setUser(userData())

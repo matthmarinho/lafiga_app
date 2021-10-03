@@ -72,7 +72,6 @@ export default function TeamModal({groupsObject, setGroupObject,openDrower, hand
     const [member, setNewMember] = useState()
     const admin = Boolean(user && user.role_id === 1 ? true : false)
 
-
     const seasons = [
         'Verão',
         'Outono',
