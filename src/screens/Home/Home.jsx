@@ -97,6 +97,7 @@ function HomeContent() {
     const [map, setMap] = useState(null)
     const [mapName, setMapName] = useState(null)
     const [maps, setMaps] = useState([])
+    const [groupsObject, setGroupObject] = useState([])
     const [user, setUser] = useState(null)
     const [anchorEl, setAnchorEl] = useState(null)
     const [logged, setLogged] = useState(false)
@@ -170,7 +171,7 @@ function HomeContent() {
     };
 
     const groupList = () => (
-        <TeamModal groups={groupObject} openDrawer={openDrawer} handleTeamDrawerClose={handleTeamDrawerClose} user={user} />
+        <TeamModal groupsObject={groupObject} setGroupObject={setGroupObject} openDrawer={openDrawer} handleTeamDrawerClose={handleTeamDrawerClose} user={user} />
     );
 
     useEffect(() => {
