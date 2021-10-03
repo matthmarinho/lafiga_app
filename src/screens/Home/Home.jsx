@@ -17,14 +17,18 @@ import Collapse from '@mui/material/Collapse'
 import Public from '@mui/icons-material/Public'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Room from '@mui/icons-material/Room'
 import MapService from './services/maps'
+import GroupService from './services/group'
 import ImageMap from '../ImageMap/ImageMap'
 import { Box } from '@mui/system'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { userData, logout } from '../../services/auth'
 import LoginModal from '../Login/LoginModal'
+import TeamModal from './components/TeamModal'
 import LogoutIcon from '@mui/icons-material/Logout'
+import GroupIcon from '@mui/icons-material/Group'
 
 const drawerWidth = 240
 
@@ -96,7 +100,8 @@ function HomeContent() {
     const [user, setUser] = useState(null)
     const [anchorEl, setAnchorEl] = useState(null)
     const [logged, setLogged] = useState(false)
-
+    const [openDrawer, setOpenDrawer] = useState(false);
+    const [groupObject, setGroupObject] = useState()
     const menuId = 'primary-search-account-menu';
 
     const handleClick = () => {
@@ -119,6 +124,23 @@ function HomeContent() {
         user ? null : <LoginModal anchorEl={anchorEl} setAnchorEl={setAnchorEl} setLogged={setLogged} />
     );
 
+    const getGroups = async () => {
+        GroupService.getAll()
+            .then(response => {
+                if (response.data.length > 0) {
+                    let group = response.data.map(x => Object.assign(x, {
+                        group: x.name,
+                        date: `${x.season} - ${x.day}º dia`,
+                        players: x.players
+                    }))
+                    setGroupObject(group)
+                }
+            })
+            .catch(e => {
+                console.error(e);
+            });
+    }
+
     const getMenuData = () => {
         MapService.getAll()
             .then(response => {
@@ -138,8 +160,22 @@ function HomeContent() {
         setUser(null)
     }
 
+    const handleTeamDrawerOpen = () => {
+        if (openDrawer === false)
+            setOpenDrawer(true);
+    };
+
+    const handleTeamDrawerClose = () => {
+        setOpenDrawer(false);
+    };
+
+    const groupList = () => (
+        <TeamModal groups={groupObject} openDrawer={openDrawer} handleTeamDrawerClose={handleTeamDrawerClose} user={user} />
+    );
+
     useEffect(() => {
         getMenuData()
+        getGroups()
         setUser(userData())
     }, [])
 
@@ -249,6 +285,16 @@ function HomeContent() {
                                 </Collapse>
                             </React.Fragment>
                         ))}
+                         <ListItemButton button key={'teams'} onClick={() => handleTeamDrawerOpen()}>
+                        <ListItemIcon><GroupIcon /></ListItemIcon>
+                        <ListItemText primary={'Equipes'} />
+                        <SwipeableDrawer
+                            anchor={'right'}
+                            open={openDrawer}
+                        >
+                            {groupList()}
+                        </SwipeableDrawer>
+                    </ListItemButton>
                     </List>
                     <Divider />
                     <FooterDiv>
