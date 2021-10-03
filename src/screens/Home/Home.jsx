@@ -97,7 +97,6 @@ function HomeContent() {
     const [map, setMap] = useState(null)
     const [mapName, setMapName] = useState(null)
     const [maps, setMaps] = useState([])
-    const [groupsObject, setGroupObject] = useState([])
     const [user, setUser] = useState(null)
     const [anchorEl, setAnchorEl] = useState(null)
     const [logged, setLogged] = useState(false)
