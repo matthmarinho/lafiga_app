@@ -56,7 +56,7 @@ const Accordion = styled((props) => (
     borderTop: '1px solid rgba(0, 0, 0, .125)',
   }));
   
-export default function TeamModal({groups, openDrower, handleTeamDrawerClose, user}) {
+export default function TeamModal({groupsObject, setGroupObject,openDrower, handleTeamDrawerClose, user}) {
 
     const [creatingGroup, setCreatingGroup] = useState(false)
     const [editing, setEditing] = useState(false)
@@ -70,9 +70,7 @@ export default function TeamModal({groups, openDrower, handleTeamDrawerClose, us
     const [day, setDay] = useState()
     const [name, setName] = useState()
     const [member, setNewMember] = useState()
-    const [groupsObject, setGroupObject] = useState(groups)
     const admin = Boolean(user && user.role_id === 1 ? true : false)
-
 
     const seasons = [
         'Verão',
@@ -80,6 +78,7 @@ export default function TeamModal({groups, openDrower, handleTeamDrawerClose, us
         'Inverno',
         'Primavera'
       ];
+      
     const days = Array.from({length:120},(v,k)=>k+1)
     const hundleCreatingGroup = () => {
         setCreatingGroup(true)
@@ -163,6 +162,8 @@ export default function TeamModal({groups, openDrower, handleTeamDrawerClose, us
                         players: x.players
                     }))
                     setGroupObject(group)
+                }else{
+                    setGroupObject([])
                 }
             })
             .catch(e => {
