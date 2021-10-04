@@ -78,6 +78,7 @@ export default function TeamModal({groupsObject, setGroupObject,openDrower, hand
         'Inverno',
         'Primavera'
       ];
+      
     const days = Array.from({length:120},(v,k)=>k+1)
     const hundleCreatingGroup = () => {
         setCreatingGroup(true)
@@ -161,6 +162,8 @@ export default function TeamModal({groupsObject, setGroupObject,openDrower, hand
                         players: x.players
                     }))
                     setGroupObject(group)
+                }else{
+                    setGroupObject([])
                 }
             })
             .catch(e => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { styled } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import MuiDrawer from '@mui/material/Drawer'
@@ -124,22 +124,25 @@ function HomeContent() {
         user ? null : <LoginModal anchorEl={anchorEl} setAnchorEl={setAnchorEl} setLogged={setLogged} />
     );
 
-    const getGroups = async () => {
+    const getGroups = useCallback(async () => {
         GroupService.getAll()
             .then(response => {
                 if (response.data.length > 0) {
+                    console.log(response.data.length)
                     let group = response.data.map(x => Object.assign(x, {
                         group: x.name,
                         date: `${x.season} - ${x.day}º dia`,
                         players: x.players
                     }))
                     setGroupObject(group)
+                }else{
+                    setGroupObject([])
                 }
             })
             .catch(e => {
                 console.error(e);
             });
-    }
+    }, [])
 
     const getMenuData = () => {
         MapService.getAll()
@@ -175,11 +178,10 @@ function HomeContent() {
 
     useEffect(() => {
         getGroups()
-    }, [groupObject])
+    }, [getGroups])
 
     useEffect(() => {
         getMenuData()
-        getGroups()
         setUser(userData())
     }, [])
 
