@@ -28,7 +28,7 @@ const findByTitle = title => {
   return api.get(`/api/v1/maps?title=${title}`)
 }
 
-export default {
+const exportedObject = {
   getAll,
   get,
   create,
@@ -37,3 +37,5 @@ export default {
   removeAll,
   findByTitle
 }
+
+export default exportedObject
