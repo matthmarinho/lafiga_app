@@ -431,7 +431,7 @@ export default function TeamModal({groupsObject, setGroupObject,openDrower, hand
 
     return (
         <Box
-            sx={window.innerWidth > 500 ? { width: 400 } : {width: 300}}
+            sx={window.innerWidth > 500 ? { width: 400 } : {width: '100%'}}
             role="presentation"
         >
           <div style={{marginTop: '20%'}}></div>

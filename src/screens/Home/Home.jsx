@@ -173,7 +173,13 @@ function HomeContent() {
     };
 
     const groupList = () => (
-        <TeamModal groupsObject={groupObject} setGroupObject={setGroupObject} openDrawer={openDrawer} handleTeamDrawerClose={handleTeamDrawerClose} user={user} />
+        <TeamModal 
+            groupsObject={groupObject} 
+            setGroupObject={setGroupObject} 
+            openDrawer={openDrawer} 
+            handleTeamDrawerClose={handleTeamDrawerClose} 
+            user={user} 
+        />
     );
 
     useEffect(() => {
