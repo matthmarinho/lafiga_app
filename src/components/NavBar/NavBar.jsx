@@ -112,10 +112,11 @@ function NavBarContent() {
         setActiveIndex(index);
     };
 
-    const handleClick = (key) => {
+    const handleClick = (key, name) => {
+        setActiveIndex(key)
         setOpenCollapse(prevState => ({
             ...prevState,
-            [key]: !prevState[key]
+            [name]: !prevState[name]
         }))
     }
 
@@ -312,7 +313,7 @@ function NavBarContent() {
                                         if (item.name === 'Teams') {
                                             handleTeamDrawerOpen()
                                         }
-                                        handleClick(item.name, index)
+                                        handleClick(index, item.name)
                                     }}
                                     component={item.route && Link}
                                     to={item.route}
