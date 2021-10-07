@@ -1,7 +1,11 @@
-import api from "../../../services/api"
+import api from "./api"
 
 const getAll = mapId => {
   return api.get(`/api/v1/maps/${mapId}/markers`)
+}
+
+const getFeed = () => {
+  return api.get(`/api/v1/markers/feed`)
 }
 
 const get = (mapId, id) => {
@@ -35,7 +39,8 @@ const exportedObject = {
   update,
   remove,
   removeAll,
-  findByTitle
+  findByTitle,
+  getFeed
 }
 
 export default exportedObject
