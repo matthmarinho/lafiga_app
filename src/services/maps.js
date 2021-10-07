@@ -1,4 +1,4 @@
-import api from "../../../services/api";
+import api from "./api";
 
 const getAll = () => {
   return api.get("/api/v1/maps");

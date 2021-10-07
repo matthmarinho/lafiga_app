@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import markerCity from '../../_assets/img/marker_city.png'
 import markerDungeon from '../../_assets/img/marker_dungeon.png'
 import CategoryService from './services/category'
-import MarkerService from './services/marker'
+import MarkerService from '../../services/marker'
 import MarkerModal from './components/MarkerModal'
 import InfoModal from './components/InfoModal'
 import SaveIcon from '@mui/icons-material/Save'
@@ -11,9 +11,10 @@ import AddLocationIcon from '@mui/icons-material/AddLocation'
 import SettingsIcon from '@mui/icons-material/Settings'
 import InfoIcon from '@mui/icons-material/Info'
 import { ImageOverlay, MapContainer, Tooltip, Marker, useMapEvents as mapEvent, ZoomControl } from 'react-leaflet'
-import { SpeedDial, SpeedDialAction } from '@mui/material'
+import { Backdrop, CircularProgress, SpeedDial, SpeedDialAction } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import L from "leaflet";
+import L from "leaflet"
+import { useParams } from "react-router-dom"
 import 'leaflet/dist/leaflet.css'
 
 var Leaflet = require('leaflet')
@@ -29,15 +30,23 @@ const iconDungeon = L.icon({
 });
 
 const SpeedDialCustom = styled(SpeedDial)(({ theme, admin }) => ({
-        position: 'absolute', 
-        bottom: 16, 
-        right: 16,
+    position: 'absolute',
+    bottom: 16,
+    right: 16,
     ...(admin && {
         right: 88
     }),
 }));
 
-export default function ImageMap({map, user}) {
+const MapDiv = styled('div')(({ theme }) => ({
+    flexGrow: 1,
+    height: '100vh',
+    overflow: 'hidden',
+    paddingTop: 64,
+}));
+
+export default function ImageMap({ user }) {
+    const { mapName, mapId } = useParams()
     const [bounds, setBounds] = useState([[0, 0], [0, 0]])
     const [center, setCenter] = useState([0, 0])
     const [loaded, setLoaded] = useState(false)
@@ -50,8 +59,8 @@ export default function ImageMap({map, user}) {
     const [loading, setLoading] = useState()
     const [creating, setCreating] = useState()
     const [showInfo, setShowInfo] = useState(false)
-    const [openDial, setOpenDial] = React.useState(false)
-    const [openMarkerDial, setOpenMarkerDial] = React.useState(false)
+    const [openDial, setOpenDial] = useState(false)
+    const [openMarkerDial, setOpenMarkerDial] = useState(false)
     const [categories, setCategories] = useState([])
     const [openInfoModal, setOpenInfoModal] = useState(false)
     const [infoMarker, setInfoMarker] = useState({})
@@ -85,7 +94,7 @@ export default function ImageMap({map, user}) {
 
         let newMarker = {
             id: lastId + 1,
-            map_id: map.id,
+            map_id: mapId,
             name: marker.name,
             description: marker.description,
             position: [lat, lng],
@@ -112,7 +121,7 @@ export default function ImageMap({map, user}) {
         setShowInfo(false)
 
         let data = {
-            map_id: map.id,
+            map_id: mapId,
             name: marker.name,
             description: marker.description,
             position: [lat, lng],
@@ -123,7 +132,7 @@ export default function ImageMap({map, user}) {
             new: true,
         }
 
-        MarkerService.update(map.id, infoMarker.id, data)
+        MarkerService.update(mapId, infoMarker.id, data)
             .then(response => {
                 getMap()
                 setLoading(false)
@@ -153,7 +162,7 @@ export default function ImageMap({map, user}) {
             )
         )
 
-        MarkerService.create(map.id, { data: JSON.stringify(payload) })
+        MarkerService.create(mapId, { data: JSON.stringify(payload) })
             .then(response => {
                 getMap()
                 setNewMarkers([])
@@ -171,7 +180,7 @@ export default function ImageMap({map, user}) {
 
     const setMap = () => {
         setLoaded(false)
-        let imageName = require('../../_assets/img/' + map.name.toLowerCase() + '.jpg')
+        let imageName = require('../../_assets/img/' + mapName.toLowerCase() + '.jpg')
         let img = new Image()
         img.src = imageName.default
         img.onload = async () => {
@@ -184,7 +193,7 @@ export default function ImageMap({map, user}) {
 
     const getMap = async () => {
         setLoading(true)
-        MarkerService.getAll(map.id)
+        MarkerService.getAll(mapId)
             .then(response => {
                 if (response.data.length > 0) {
                     let markers = response.data.map(x => Object.assign(x, {
@@ -192,7 +201,7 @@ export default function ImageMap({map, user}) {
                         position: [x.latitude, x.longitude],
                     }))
                     setMarkers(markers)
-                    setLastId(markers[markers.length -1].id)
+                    setLastId(markers[markers.length - 1].id)
                 } else {
                     setMarkers([])
                     setNewMarkers([])
@@ -335,17 +344,12 @@ export default function ImageMap({map, user}) {
     }
 
     useEffect(() => {
-        if (map && map.id) {
-            getMap()
-        }
-    }, [map]) // eslint-disable-line react-hooks/exhaustive-deps
-
-    useEffect(() => {
+        getMap()
         getCategories()
-    }, [])
+    }, [mapId])
 
     return (
-        <>
+        <MapDiv>
             <MarkerModal openModal={openModal} setOpenModal={setOpenModal} addNewMarker={addNewMarker} edit={editMarker} categories={categories} markerInfo={infoMarker} />
             <InfoModal
                 openModal={openInfoModal}
@@ -356,7 +360,8 @@ export default function ImageMap({map, user}) {
                 getMap={getMap}
                 admin={admin}
             />
-            {loaded && (
+
+            {loaded ? (
                 <MapContainer
                     center={center}
                     bounds={bounds}
@@ -377,6 +382,13 @@ export default function ImageMap({map, user}) {
                     <GetMarkerPos />
                     {!loading && renderMarkers()}
                 </MapContainer>
+            ) : (
+                <Backdrop
+                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    open={!loaded}
+                >
+                    <CircularProgress color="inherit" />
+                </Backdrop>
             )}
             {admin && !creating && <SpeedDial
                 ariaLabel="SpeedDial actions"
@@ -421,6 +433,6 @@ export default function ImageMap({map, user}) {
                 onClick={() => setOpenInfoModal(true)}
             >
             </SpeedDialCustom>}
-        </>
+        </MapDiv>
     )
 }

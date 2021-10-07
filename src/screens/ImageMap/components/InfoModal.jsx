@@ -12,7 +12,7 @@ import {
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { styled } from '@mui/material/styles'
-import MarkerService from './../services/marker'
+import MarkerService from '../../../services/marker'
 
 
 const DivButton = styled('div')(({ theme }) => ({
