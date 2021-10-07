@@ -7,7 +7,7 @@ import {
     Box, Toolbar, TextField
 } from '@mui/material'
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
-import GroupService from '../services/group'
+import GroupService from '../../../services/group'
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
@@ -56,7 +56,7 @@ const Accordion = styled((props) => (
     borderTop: '1px solid rgba(0, 0, 0, .125)',
   }));
   
-export default function TeamModal({groupsObject, setGroupObject,openDrower, handleTeamDrawerClose, user}) {
+export default function TeamModal({groupsObject, setGroupObject, openDrower, handleTeamDrawerClose, user}) {
 
     const [creatingGroup, setCreatingGroup] = useState(false)
     const [editing, setEditing] = useState(false)
@@ -354,9 +354,9 @@ export default function TeamModal({groupsObject, setGroupObject,openDrower, hand
                             value={editedDay}
                             onChange={e => setEditedDay(e.target.value)}
                             >
-                            {days.map((day) => (
+                            {days.map((day, index) => (
                                 <MenuItem
-                                key={day}
+                                key={index}
                                 value={day}
                                 >
                                 {day}

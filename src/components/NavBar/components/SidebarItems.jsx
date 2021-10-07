@@ -18,13 +18,13 @@ const SidebarItems = [
             },
             {
                 name: "Melee",
-                active: true,
+                active: false,
                 icon: "Map",
                 route: "/map/melee"
             },
             {
                 name: "Thosgrar",
-                active: true,
+                active: false,
                 icon: "Map",
                 route: "/map/thosgrar"
             },
@@ -83,6 +83,11 @@ const SidebarItems = [
                 route: "/map/mundi"
             }
         ]
+    },
+    {
+        name: "Teams",
+        active: true,
+        icon: "Group",
     },
     {
         name: "Settings",

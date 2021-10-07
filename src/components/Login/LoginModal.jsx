@@ -50,6 +50,7 @@ export default function LoginModal({ anchorEl, setAnchorEl, setLogged }) {
             setLogged(true)
             setAnchorEl(false)
             setError(false)
+            window.location.reload()
           })
           .catch(e => {
             setError(true)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { styled } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import MuiDrawer from '@mui/material/Drawer'
@@ -25,6 +25,9 @@ import LoginModal from '../Login/LoginModal'
 import SidebarItems from './components/SidebarItems'
 import IconComponents from './components/IconComponents'
 import { Link } from "react-router-dom"
+import SwipeableDrawer from '@mui/material/SwipeableDrawer'
+import TeamModal from './components/TeamModal'
+import GroupService from '../../services/group'
 
 const drawerWidth = 300
 
@@ -100,6 +103,8 @@ function NavBarContent() {
     const [logged, setLogged] = useState(false)
     const [activeIndex, setActiveIndex] = useState(0)
     const [sideBarItems, setSideBarItems] = useState([])
+    const [openDrawer, setOpenDrawer] = useState(false)
+    const [groupObject, setGroupObject] = useState()
 
     const menuId = 'primary-search-account-menu'
 
@@ -163,6 +168,7 @@ function NavBarContent() {
         logout()
         setLogged(false)
         setUser(null)
+        window.location.reload()
     }
 
     const renderComponent = (index) => {
@@ -170,8 +176,53 @@ function NavBarContent() {
         return <ComponentToRender />
     }
 
+    const handleTeamDrawerOpen = () => {
+        console.log('open')
+        setOpenDrawer(true);
+    }
+
+    const handleTeamDrawerClose = () => {
+        console.log('close')
+        setOpenDrawer(false);
+    };
+
+    const groupList = () => (
+        <TeamModal
+            groupsObject={groupObject}
+            setGroupObject={setGroupObject}
+            openDrawer={openDrawer}
+            handleTeamDrawerClose={handleTeamDrawerClose}
+            user={user}
+        />
+    )
+
+    const getGroups = useCallback(async () => {
+        GroupService.getAll()
+            .then(response => {
+                if (response.data.length > 0) {
+                    console.log(response.data.length)
+                    let group = response.data.map(x => Object.assign(x, {
+                        group: x.name,
+                        date: `${x.season} - ${x.day}º dia`,
+                        players: x.players
+                    }))
+                    setGroupObject(group)
+                } else {
+                    setGroupObject([])
+                }
+            })
+            .catch(e => {
+                console.error(e);
+            });
+    }, [])
+
+    useEffect(() => {
+        getGroups()
+    }, [getGroups])
+
     useEffect(() => {
         getMenuData()
+        getGroups()
         setUser(userData())
     }, [])
 
@@ -257,7 +308,12 @@ function NavBarContent() {
                                 <ListItemButton
                                     key={`button_${index}`}
                                     selected={activeIndex === index}
-                                    onClick={(event) => handleClick(item.name, index)}
+                                    onClick={(event) => {
+                                        if (item.name === 'Teams') {
+                                            handleTeamDrawerOpen()
+                                        }
+                                        handleClick(item.name, index)
+                                    }}
                                     component={item.route && Link}
                                     to={item.route}
                                 >
@@ -294,6 +350,14 @@ function NavBarContent() {
                                 }
                             </React.Fragment>
                         ))}
+                        <SwipeableDrawer
+                            anchor={'right'}
+                            open={openDrawer}
+                            onClose={() => setOpenDrawer(false)}
+                            onOpen={() => setOpenDrawer(true)}
+                        >
+                            {groupList()}
+                        </SwipeableDrawer>
                     </List>
                     <Divider />
                     <Box sx={{ alignItems: 'flex-end' }}>

@@ -16,36 +16,38 @@ import { styled } from '@mui/material/styles'
 import L from "leaflet"
 import { useParams } from "react-router-dom"
 import 'leaflet/dist/leaflet.css'
+import { userData } from '../../services/auth'
 
 var Leaflet = require('leaflet')
 
 const iconCity = L.icon({
     iconSize: [25, 25],
     iconUrl: markerCity,
-});
+})
 
 const iconDungeon = L.icon({
     iconSize: [25, 25],
     iconUrl: markerDungeon,
-});
+})
 
-const SpeedDialCustom = styled(SpeedDial)(({ theme, admin }) => ({
+const SpeedDialCustom = styled(SpeedDial)(({ theme, isAdmin }) => ({
     position: 'absolute',
     bottom: 16,
     right: 16,
-    ...(admin && {
+    ...(isAdmin && {
         right: 88
     }),
-}));
+}))
 
 const MapDiv = styled('div')(({ theme }) => ({
     flexGrow: 1,
     height: '100vh',
     overflow: 'hidden',
     paddingTop: 64,
-}));
+}))
 
-export default function ImageMap({ user }) {
+export default function ImageMap() {
+
     const { mapName, mapId } = useParams()
     const [bounds, setBounds] = useState([[0, 0], [0, 0]])
     const [center, setCenter] = useState([0, 0])
@@ -64,21 +66,21 @@ export default function ImageMap({ user }) {
     const [categories, setCategories] = useState([])
     const [openInfoModal, setOpenInfoModal] = useState(false)
     const [infoMarker, setInfoMarker] = useState({})
-    const admin = Boolean(user && user.role_id === 1 ? true : false)
+    const [isAdmin, setIsAdmin] = useState(false)
 
     const actions = [
         { icon: <AddLocationIcon />, name: 'Config Markers', function: () => handleCreate() },
-    ];
+    ]
 
     const createActions = [
         { icon: <ClearIcon />, name: 'Cancel', function: () => cancelNewMarker() },
         { icon: <SaveIcon />, name: 'Save', function: () => saveNewMarkers() },
-    ];
+    ]
 
-    const handleOpenDial = () => setOpenDial(true);
-    const handleCloseDial = () => setOpenDial(false);
-    const handleOpenMarkerDial = () => setOpenMarkerDial(true);
-    const handleCloseMarkerDial = () => setOpenMarkerDial(false);
+    const handleOpenDial = () => setOpenDial(true)
+    const handleCloseDial = () => setOpenDial(false)
+    const handleOpenMarkerDial = () => setOpenMarkerDial(true)
+    const handleCloseMarkerDial = () => setOpenMarkerDial(false)
     const handleCreate = () => {
         setInfoMarker({})
         setCreating(true)
@@ -107,7 +109,7 @@ export default function ImageMap({ user }) {
 
         let filtered = newMarkers.filter(function (value) {
             return value.id !== newMarker.id
-        });
+        })
 
         setLastId(lastId + 1)
         setNewMarkers([...filtered, newMarker])
@@ -138,8 +140,8 @@ export default function ImageMap({ user }) {
                 setLoading(false)
             })
             .catch(e => {
-                console.log(e);
-            });
+                console.log(e)
+            })
     }
 
     const saveNewMarkers = () => {
@@ -169,8 +171,8 @@ export default function ImageMap({ user }) {
                 setLoading(false)
             })
             .catch(e => {
-                console.log(e);
-            });
+                console.log(e)
+            })
     }
 
     const cancelNewMarker = () => {
@@ -210,9 +212,9 @@ export default function ImageMap({ user }) {
                 setLoading(false)
             })
             .catch(e => {
-                console.log(e);
+                console.log(e)
                 setLoading(false)
-            });
+            })
     }
 
     const customIcon = (marker) => {
@@ -226,7 +228,7 @@ export default function ImageMap({ user }) {
                     <div style="overflow:visible">
                         ${marker.name.toUpperCase()}
                     </div>`
-                });
+                })
                 break
             case 'Cidade':
                 icon = iconCity
@@ -242,12 +244,12 @@ export default function ImageMap({ user }) {
                     html: `
                     <div style="overflow:visible">
                         <i class="material-icons" 
-                            style="color: rgb(${marker.color.r}, ${marker.color.g}, ${marker.color.b});"
+                            style="color: rgb(${marker.color.r}, ${marker.color.g}, ${marker.color.b})"
                         >
                             room
                         </i>
                     </div>`
-                });
+                })
                 break
             default:
         }
@@ -262,14 +264,14 @@ export default function ImageMap({ user }) {
                 editedMarker = newMarkers.find(m => m.id === e.target.options.id)
                 filtered = newMarkers.filter(function (value) {
                     return value.id !== e.target.options.id
-                });
+                })
                 editedMarker.position = Object.values(e.target._latlng)
                 setNewMarkers([...filtered, editedMarker])
             } else {
                 editedMarker = markers.find(m => m.id === e.target.options.id)
                 filtered = markers.filter(function (value) {
                     return value.id !== e.target.options.id
-                });
+                })
                 editedMarker.position = Object.values(e.target._latlng)
                 editedMarker.new = true
                 setMarkers([...filtered])
@@ -340,12 +342,18 @@ export default function ImageMap({ user }) {
             })
             .catch(e => {
                 console.log(e)
-            });
+            })
+    }
+
+    const getUser = () => {
+        let user = userData()
+        setIsAdmin(Boolean(user && user.role_id === 1 ? true : false))
     }
 
     useEffect(() => {
         getMap()
         getCategories()
+        getUser()
     }, [mapId])
 
     return (
@@ -358,7 +366,7 @@ export default function ImageMap({ user }) {
                 markerInfo={infoMarker}
                 openEdit={setOpenModal}
                 getMap={getMap}
-                admin={admin}
+                isAdmin={isAdmin}
             />
 
             {loaded ? (
@@ -390,7 +398,7 @@ export default function ImageMap({ user }) {
                     <CircularProgress color="inherit" />
                 </Backdrop>
             )}
-            {admin && !creating && <SpeedDial
+            {isAdmin && !creating && <SpeedDial
                 ariaLabel="SpeedDial actions"
                 sx={{ position: 'absolute', bottom: 16, right: 16 }}
                 icon={<SettingsIcon />}
@@ -408,7 +416,7 @@ export default function ImageMap({ user }) {
                     />
                 ))}
             </SpeedDial>}
-            {admin && creating && <SpeedDial
+            {isAdmin && creating && <SpeedDial
                 ariaLabel="SpeedDial create actions"
                 sx={{ position: 'absolute', bottom: 16, right: 16 }}
                 icon={<AddLocationIcon />}
@@ -428,7 +436,7 @@ export default function ImageMap({ user }) {
             </SpeedDial>}
             {showInfo && <SpeedDialCustom
                 ariaLabel="SpeedDial info"
-                admin={admin}
+                isAdmin={isAdmin}
                 icon={<InfoIcon />}
                 onClick={() => setOpenInfoModal(true)}
             >
