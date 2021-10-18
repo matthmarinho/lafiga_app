@@ -1,0 +1,22 @@
+[
+    {
+        "dependence_name": "elfo",
+        "name": "alto elfo",
+        "id": "high-elf"
+    },
+    {
+        "dependence_name": "anão",
+        "name": "anão da colina",
+        "id": "hill-dwarf"
+    },
+    {
+        "dependence_name": "gnomo",
+        "name": "gnomo das rochas",
+        "id": "rock-gnome"
+    },
+    {
+        "dependence_name": "elfo",
+        "name": "drow elfo",
+        "id": "drow-elf"
+    }
+]

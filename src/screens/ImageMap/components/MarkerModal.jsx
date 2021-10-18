@@ -100,7 +100,7 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
                         sx={{ flexGrow: 1 }}
                     >
                         <Box item sx={{ paddingTop: 1, paddingBottom: 2 }}>
-                            <FormControl FormControl fullWidth>
+                            <FormControl fullWidth>
                                 <TextField
                                     label="Name"
                                     id="outlined-margin-none"
@@ -112,7 +112,7 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
                             </FormControl>
                         </Box>
                         <Box item sx={{ paddingBottom: 2 }}>
-                            <FormControl FormControl fullWidth>
+                            <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-helper-label">Category *</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-filled-label"
@@ -129,7 +129,7 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
                             </FormControl>
                         </Box>
                         <Box item sx={{ paddingBottom: 2 }}>
-                            <FormControl FormControl fullWidth>
+                            <FormControl fullWidth>
                                 <TextField
                                     id="outlined-full-width"
                                     label="Description"
@@ -144,7 +144,7 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
                         </Box>
                         {categoryName === 'Equipe' &&
                             <Box item>
-                                <FormControl FormControl fullWidth>
+                                <FormControl fullWidth>
                                     <ColorButton variant="contained" color="primary" onClick={() => setOpenPicker(!openPicker)}>
                                         Color
                                     </ColorButton>

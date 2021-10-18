@@ -27,7 +27,6 @@ const theme = createTheme({
 });
 
 function App() {
-  console.log(isBrowser)
   return (
     <ThemeProvider theme={theme}>
       {/* <Map /> */}

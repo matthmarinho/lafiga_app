@@ -95,22 +95,22 @@ const SidebarItems = [
         icon: "Settings",
         items: [
             {
-                name: "Player",
-                active: false,
+                name: "Chars",
+                active: true,
                 icon: "Person",
-                route: "/map/mundi"
+                route: "/chars"
             },
             {
-                name: "Team",
+                name: "Teams",
                 active: false,
                 icon: "Group",
-                route: "/map/mundi"
+                route: "/teams"
             },
             {
-                name: "Map",
+                name: "Maps",
                 active: false,
                 icon: "Map",
-                route: "/map/mundi"
+                route: "/maps"
             }
         ]
     },

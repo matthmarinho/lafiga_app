@@ -1,0 +1,218 @@
+[
+    {
+        "dependence_name": "patrulheiro",
+        "name": "caçador",
+        "id": "caçador",
+        "sources_rels": [
+            {
+                "page": 37,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spell_list_name": null
+    },
+    {
+        "dependence_name": "monge",
+        "name": "caminho da mão aberta",
+        "id": "caminho da mão aberta",
+        "sources_rels": [
+            {
+                "page": 28,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spell_list_name": null
+    },
+    {
+        "dependence_name": "bárbaro",
+        "name": "caminho do berserker",
+        "id": "caminho do berserker",
+        "sources_rels": [
+            {
+                "page": 9,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spell_list_name": null
+    },
+    {
+        "dependence_name": "guerreiro",
+        "name": "campeão",
+        "id": "campeão",
+        "sources_rels": [
+            {
+                "page": 25,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spell_list_name": null
+    },
+    {
+        "dependence_name": "druida",
+        "name": "círculo da terra (ártico)",
+        "id": "círculo da terra (ártico)",
+        "sources_rels": [
+            {
+                "page": 21,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spell_list_name": "círculo da terra (ártico)"
+    },
+    {
+        "dependence_name": "druida",
+        "name": "círculo da terra (costa)",
+        "id": "círculo da terra (costa)",
+        "sources_rels": [
+            {
+                "page": 21,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spell_list_name": "círculo da terra (costa)"
+    },
+    {
+        "dependence_name": "druida",
+        "name": "círculo da terra (deserto)",
+        "id": "círculo da terra (deserto)",
+        "sources_rels": [
+            {
+                "page": 21,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spell_list_name": "círculo da terra (deserto)"
+    },
+    {
+        "dependence_name": "druida",
+        "name": "círculo da terra (floresta)",
+        "id": "círculo da terra (floresta)",
+        "sources_rels": [
+            {
+                "page": 21,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spell_list_name": "círculo da terra (floresta)"
+    },
+    {
+        "dependence_name": "druida",
+        "name": "círculo da terra (planice)",
+        "id": "círculo da terra (planice)",
+        "sources_rels": [
+            {
+                "page": 21,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spell_list_name": "círculo da terra (planice)"
+    },
+    {
+        "dependence_name": "druida",
+        "name": "círculo da terra (montanha)",
+        "id": "círculo da terra (montanha)",
+        "sources_rels": [
+            {
+                "page": 21,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spell_list_name": "círculo da terra (montanha)"
+    },
+    {
+        "dependence_name": "druida",
+        "name": "círculo da terra (pântano)",
+        "id": "círculo da terra (pântano)",
+        "sources_rels": [
+            {
+                "page": 21,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spell_list_name": "círculo da terra (pântano)"
+    },
+    {
+        "dependence_name": "bardo",
+        "name": "colégio do conhecimento",
+        "id": "colégio do conhecimento",
+        "sources_rels": [
+            {
+                "page": 13,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spell_list_name": null
+    },
+    {
+        "dependence_name": "clérigo",
+        "name": "domínio da vida",
+        "id": "domínio da vida",
+        "sources_rels": [
+            {
+                "page": 17,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spell_list_name": "domínio da vida"
+    },
+    {
+        "dependence_name": "feiticeiro",
+        "name": "linhagem dracônica",
+        "id": "linhagem dracônica",
+        "sources_rels": [
+            {
+                "page": 44,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spell_list_name": null
+    },
+    {
+        "dependence_name": "mago",
+        "name": "escola de evocação",
+        "id": "escola de evocação",
+        "sources_rels": [
+            {
+                "page": 54,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spell_list_name": null
+    },
+    {
+        "dependence_name": "paladino",
+        "name": "juramento da devoção",
+        "id": "juramento da devoção",
+        "sources_rels": [
+            {
+                "page": 32,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spell_list_name": "juramento da devoção"
+    },
+    {
+        "dependence_name": "ladino",
+        "name": "ladrão",
+        "id": "ladrão",
+        "sources_rels": [
+            {
+                "page": 40,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spell_list_name": null
+    },
+    {
+        "dependence_name": "bruxo",
+        "name": "o corruptor",
+        "id": "o corruptor",
+        "sources_rels": [
+            {
+                "page": 50,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spell_list_name": "o corruptor"
+    }
+]

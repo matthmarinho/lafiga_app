@@ -46,35 +46,33 @@ export default function Feed() {
             <Typography component="h2" variant="h6" color="primary" gutterBottom>
                 Feed
             </Typography>
-            {/* <Container > */}
-                <CustomStack spacing={2}>
-                    {feed.map((item, index) => (
-                        <Item key={index} elevation={1}>
-                            <List>
-                                <ListItem>
-                                    <ListItemText        
-                                        primary={
-                                            <>
-                                                <Typography variant="h6">
-                                                    {item.name}
-                                                </Typography>
-                                                <Typography variant="caption" display="block" gutterBottom>
-                                                    {item.category.name}
-                                                </Typography>
-                                            </>
-                                        }
-                                        secondary={
-                                            <Typography variant="subtitle2" sx={{ whiteSpace: 'pre-line' }}>
-                                                {item.description}
+            <CustomStack spacing={2}>
+                {feed.map((item, index) => (
+                    <Item key={index} elevation={1}>
+                        <List>
+                            <ListItem>
+                                <ListItemText
+                                    primary={
+                                        <>
+                                            <Typography variant="h6">
+                                                {item.name}
                                             </Typography>
-                                        }
-                                    />
-                                </ListItem>
-                            </List>
-                        </Item>
-                    ))}
-                </CustomStack>
-            {/* </Container> */}
+                                            <Typography variant="caption" display="block" gutterBottom>
+                                                {item.category.name}
+                                            </Typography>
+                                        </>
+                                    }
+                                    secondary={
+                                        <Typography variant="subtitle2" sx={{ whiteSpace: 'pre-line' }}>
+                                            {item.description}
+                                        </Typography>
+                                    }
+                                />
+                            </ListItem>
+                        </List>
+                    </Item>
+                ))}
+            </CustomStack>
         </React.Fragment>
     )
 }

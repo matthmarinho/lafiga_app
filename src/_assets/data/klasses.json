@@ -1,0 +1,1466 @@
+[
+    {
+        "can_cast_cantrips": false,
+        "can_cast_rituals": false,
+        "can_learn_extra_spells": false,
+        "can_use_magic_focus": false,
+        "must_learn_spells": false,
+        "must_prepare_spells": false,
+        "name": "bárbaro",
+        "id": "barbarian",
+        "sources_rels": [
+            {
+                "page": 8,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spec_at_level": 3,
+        "spell_list_name": null,
+        "spellcaster_type_name": null,
+        "spellcasting_ability_abbreviation": null,
+        "class_levels": [
+            {
+                "cantrips_known": null,
+                "level": 1,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 2,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 3,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 4,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 5,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 6,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 7,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 8,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 9,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 10,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 11,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 12,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 13,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 14,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 15,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 16,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 17,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 18,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 19,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 20,
+                "spells_known": null
+            }
+        ]
+    },
+    {
+        "can_cast_cantrips": true,
+        "can_cast_rituals": true,
+        "can_learn_extra_spells": false,
+        "can_use_magic_focus": true,
+        "must_learn_spells": true,
+        "must_prepare_spells": false,
+        "name": "bardo",
+        "id": "bard",
+        "sources_rels": [
+            {
+                "page": 11,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spec_at_level": 3,
+        "spell_list_name": "bardo",
+        "spellcaster_type_name": "primary",
+        "spellcasting_ability_abbreviation": "car",
+        "class_levels": [
+            {
+                "cantrips_known": 2,
+                "level": 1,
+                "spells_known": 4
+            },
+            {
+                "cantrips_known": 2,
+                "level": 2,
+                "spells_known": 5
+            },
+            {
+                "cantrips_known": 2,
+                "level": 3,
+                "spells_known": 6
+            },
+            {
+                "cantrips_known": 3,
+                "level": 4,
+                "spells_known": 7
+            },
+            {
+                "cantrips_known": 3,
+                "level": 5,
+                "spells_known": 8
+            },
+            {
+                "cantrips_known": 3,
+                "level": 6,
+                "spells_known": 9
+            },
+            {
+                "cantrips_known": 3,
+                "level": 7,
+                "spells_known": 10
+            },
+            {
+                "cantrips_known": 3,
+                "level": 8,
+                "spells_known": 11
+            },
+            {
+                "cantrips_known": 3,
+                "level": 9,
+                "spells_known": 12
+            },
+            {
+                "cantrips_known": 4,
+                "level": 10,
+                "spells_known": 12
+            },
+            {
+                "cantrips_known": 4,
+                "level": 11,
+                "spells_known": 13
+            },
+            {
+                "cantrips_known": 4,
+                "level": 12,
+                "spells_known": 13
+            },
+            {
+                "cantrips_known": 4,
+                "level": 13,
+                "spells_known": 14
+            },
+            {
+                "cantrips_known": 4,
+                "level": 14,
+                "spells_known": 14
+            },
+            {
+                "cantrips_known": 4,
+                "level": 15,
+                "spells_known": 15
+            },
+            {
+                "cantrips_known": 4,
+                "level": 16,
+                "spells_known": 15
+            },
+            {
+                "cantrips_known": 4,
+                "level": 17,
+                "spells_known": 16
+            },
+            {
+                "cantrips_known": 4,
+                "level": 18,
+                "spells_known": 16
+            },
+            {
+                "cantrips_known": 4,
+                "level": 19,
+                "spells_known": 16
+            },
+            {
+                "cantrips_known": 4,
+                "level": 20,
+                "spells_known": 16
+            }
+        ]
+    },
+    {
+        "can_cast_cantrips": true,
+        "can_cast_rituals": false,
+        "can_learn_extra_spells": true,
+        "can_use_magic_focus": true,
+        "must_learn_spells": true,
+        "must_prepare_spells": false,
+        "name": "bruxo",
+        "id": "warlock",
+        "sources_rels": [
+            {
+                "page": 46,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spec_at_level": 1,
+        "spell_list_name": "bruxo",
+        "spellcaster_type_name": "warlock",
+        "spellcasting_ability_abbreviation": "car",
+        "class_levels": [
+            {
+                "cantrips_known": 2,
+                "level": 1,
+                "spells_known": 2
+            },
+            {
+                "cantrips_known": 2,
+                "level": 2,
+                "spells_known": 3
+            },
+            {
+                "cantrips_known": 2,
+                "level": 3,
+                "spells_known": 4
+            },
+            {
+                "cantrips_known": 3,
+                "level": 4,
+                "spells_known": 5
+            },
+            {
+                "cantrips_known": 3,
+                "level": 5,
+                "spells_known": 6
+            },
+            {
+                "cantrips_known": 3,
+                "level": 6,
+                "spells_known": 7
+            },
+            {
+                "cantrips_known": 3,
+                "level": 7,
+                "spells_known": 8
+            },
+            {
+                "cantrips_known": 3,
+                "level": 8,
+                "spells_known": 9
+            },
+            {
+                "cantrips_known": 3,
+                "level": 9,
+                "spells_known": 10
+            },
+            {
+                "cantrips_known": 4,
+                "level": 10,
+                "spells_known": 10
+            },
+            {
+                "cantrips_known": 4,
+                "level": 11,
+                "spells_known": 11
+            },
+            {
+                "cantrips_known": 4,
+                "level": 12,
+                "spells_known": 11
+            },
+            {
+                "cantrips_known": 4,
+                "level": 13,
+                "spells_known": 12
+            },
+            {
+                "cantrips_known": 4,
+                "level": 14,
+                "spells_known": 12
+            },
+            {
+                "cantrips_known": 4,
+                "level": 15,
+                "spells_known": 13
+            },
+            {
+                "cantrips_known": 4,
+                "level": 16,
+                "spells_known": 13
+            },
+            {
+                "cantrips_known": 4,
+                "level": 17,
+                "spells_known": 14
+            },
+            {
+                "cantrips_known": 4,
+                "level": 18,
+                "spells_known": 14
+            },
+            {
+                "cantrips_known": 4,
+                "level": 19,
+                "spells_known": 15
+            },
+            {
+                "cantrips_known": 4,
+                "level": 20,
+                "spells_known": 15
+            }
+        ]
+    },
+    {
+        "can_cast_cantrips": true,
+        "can_cast_rituals": true,
+        "can_learn_extra_spells": false,
+        "can_use_magic_focus": true,
+        "must_learn_spells": false,
+        "must_prepare_spells": true,
+        "name": "clérigo",
+        "id": "cleric",
+        "sources_rels": [
+            {
+                "page": 15,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spec_at_level": 1,
+        "spell_list_name": "clérigo",
+        "spellcaster_type_name": "primary",
+        "spellcasting_ability_abbreviation": "sab",
+        "class_levels": [
+            {
+                "cantrips_known": 3,
+                "level": 1,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 3,
+                "level": 2,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 3,
+                "level": 3,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 4,
+                "level": 4,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 4,
+                "level": 5,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 4,
+                "level": 6,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 4,
+                "level": 7,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 4,
+                "level": 8,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 4,
+                "level": 9,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 5,
+                "level": 10,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 5,
+                "level": 11,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 5,
+                "level": 12,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 5,
+                "level": 13,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 5,
+                "level": 14,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 5,
+                "level": 15,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 5,
+                "level": 16,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 5,
+                "level": 17,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 5,
+                "level": 18,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 5,
+                "level": 19,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 5,
+                "level": 20,
+                "spells_known": null
+            }
+        ]
+    },
+    {
+        "can_cast_cantrips": true,
+        "can_cast_rituals": true,
+        "can_learn_extra_spells": false,
+        "can_use_magic_focus": true,
+        "must_learn_spells": false,
+        "must_prepare_spells": true,
+        "name": "druida",
+        "id": "druid",
+        "sources_rels": [
+            {
+                "page": 19,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spec_at_level": 2,
+        "spell_list_name": "druida",
+        "spellcaster_type_name": "primary",
+        "spellcasting_ability_abbreviation": "sab",
+        "class_levels": [
+            {
+                "cantrips_known": 2,
+                "level": 1,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 2,
+                "level": 2,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 2,
+                "level": 3,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 3,
+                "level": 4,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 3,
+                "level": 5,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 3,
+                "level": 6,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 3,
+                "level": 7,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 3,
+                "level": 8,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 3,
+                "level": 9,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 4,
+                "level": 10,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 4,
+                "level": 11,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 4,
+                "level": 12,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 4,
+                "level": 13,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 4,
+                "level": 14,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 4,
+                "level": 15,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 4,
+                "level": 16,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 4,
+                "level": 17,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 4,
+                "level": 18,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 4,
+                "level": 19,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": 4,
+                "level": 20,
+                "spells_known": null
+            }
+        ]
+    },
+    {
+        "can_cast_cantrips": true,
+        "can_cast_rituals": false,
+        "can_learn_extra_spells": false,
+        "can_use_magic_focus": true,
+        "must_learn_spells": true,
+        "must_prepare_spells": false,
+        "name": "feiticeiro",
+        "id": "sorcerer",
+        "sources_rels": [
+            {
+                "page": 42,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spec_at_level": 1,
+        "spell_list_name": "feiticeiro",
+        "spellcaster_type_name": "primary",
+        "spellcasting_ability_abbreviation": "car",
+        "class_levels": [
+            {
+                "cantrips_known": 4,
+                "level": 1,
+                "spells_known": 2
+            },
+            {
+                "cantrips_known": 4,
+                "level": 2,
+                "spells_known": 3
+            },
+            {
+                "cantrips_known": 4,
+                "level": 3,
+                "spells_known": 4
+            },
+            {
+                "cantrips_known": 5,
+                "level": 4,
+                "spells_known": 5
+            },
+            {
+                "cantrips_known": 5,
+                "level": 5,
+                "spells_known": 6
+            },
+            {
+                "cantrips_known": 5,
+                "level": 6,
+                "spells_known": 7
+            },
+            {
+                "cantrips_known": 5,
+                "level": 7,
+                "spells_known": 8
+            },
+            {
+                "cantrips_known": 5,
+                "level": 8,
+                "spells_known": 9
+            },
+            {
+                "cantrips_known": 5,
+                "level": 9,
+                "spells_known": 10
+            },
+            {
+                "cantrips_known": 6,
+                "level": 10,
+                "spells_known": 1
+            },
+            {
+                "cantrips_known": 6,
+                "level": 11,
+                "spells_known": 12
+            },
+            {
+                "cantrips_known": 6,
+                "level": 12,
+                "spells_known": 12
+            },
+            {
+                "cantrips_known": 6,
+                "level": 13,
+                "spells_known": 13
+            },
+            {
+                "cantrips_known": 6,
+                "level": 14,
+                "spells_known": 13
+            },
+            {
+                "cantrips_known": 6,
+                "level": 15,
+                "spells_known": 14
+            },
+            {
+                "cantrips_known": 6,
+                "level": 16,
+                "spells_known": 14
+            },
+            {
+                "cantrips_known": 6,
+                "level": 17,
+                "spells_known": 15
+            },
+            {
+                "cantrips_known": 6,
+                "level": 18,
+                "spells_known": 15
+            },
+            {
+                "cantrips_known": 6,
+                "level": 19,
+                "spells_known": 15
+            },
+            {
+                "cantrips_known": 6,
+                "level": 20,
+                "spells_known": 15
+            }
+        ]
+    },
+    {
+        "can_cast_cantrips": true,
+        "can_cast_rituals": false,
+        "can_learn_extra_spells": false,
+        "can_use_magic_focus": false,
+        "must_learn_spells": true,
+        "must_prepare_spells": false,
+        "name": "guerreiro",
+        "id": "fighter",
+        "sources_rels": [
+            {
+                "page": 24,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spec_at_level": 3,
+        "spell_list_name": null,
+        "spellcaster_type_name": "tertiary",
+        "spellcasting_ability_abbreviation": "int",
+        "class_levels": [
+            {
+                "cantrips_known": 0,
+                "level": 1,
+                "spells_known": 0
+            },
+            {
+                "cantrips_known": 0,
+                "level": 2,
+                "spells_known": 0
+            },
+            {
+                "cantrips_known": 2,
+                "level": 3,
+                "spells_known": 3
+            },
+            {
+                "cantrips_known": 2,
+                "level": 4,
+                "spells_known": 4
+            },
+            {
+                "cantrips_known": 2,
+                "level": 5,
+                "spells_known": 4
+            },
+            {
+                "cantrips_known": 2,
+                "level": 6,
+                "spells_known": 4
+            },
+            {
+                "cantrips_known": 2,
+                "level": 7,
+                "spells_known": 5
+            },
+            {
+                "cantrips_known": 2,
+                "level": 8,
+                "spells_known": 6
+            },
+            {
+                "cantrips_known": 2,
+                "level": 9,
+                "spells_known": 6
+            },
+            {
+                "cantrips_known": 3,
+                "level": 10,
+                "spells_known": 7
+            },
+            {
+                "cantrips_known": 3,
+                "level": 11,
+                "spells_known": 8
+            },
+            {
+                "cantrips_known": 3,
+                "level": 12,
+                "spells_known": 8
+            },
+            {
+                "cantrips_known": 3,
+                "level": 13,
+                "spells_known": 9
+            },
+            {
+                "cantrips_known": 3,
+                "level": 14,
+                "spells_known": 10
+            },
+            {
+                "cantrips_known": 3,
+                "level": 15,
+                "spells_known": 10
+            },
+            {
+                "cantrips_known": 3,
+                "level": 16,
+                "spells_known": 11
+            },
+            {
+                "cantrips_known": 3,
+                "level": 17,
+                "spells_known": 11
+            },
+            {
+                "cantrips_known": 3,
+                "level": 18,
+                "spells_known": 11
+            },
+            {
+                "cantrips_known": 3,
+                "level": 19,
+                "spells_known": 12
+            },
+            {
+                "cantrips_known": 3,
+                "level": 20,
+                "spells_known": 13
+            }
+        ]
+    },
+    {
+        "can_cast_cantrips": true,
+        "can_cast_rituals": false,
+        "can_learn_extra_spells": false,
+        "can_use_magic_focus": false,
+        "must_learn_spells": true,
+        "must_prepare_spells": false,
+        "name": "ladino",
+        "id": "rogue",
+        "sources_rels": [
+            {
+                "page": 39,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spec_at_level": 3,
+        "spell_list_name": null,
+        "spellcaster_type_name": "tertiary",
+        "spellcasting_ability_abbreviation": "int",
+        "class_levels": [
+            {
+                "cantrips_known": 0,
+                "level": 1,
+                "spells_known": 0
+            },
+            {
+                "cantrips_known": 0,
+                "level": 2,
+                "spells_known": 0
+            },
+            {
+                "cantrips_known": 3,
+                "level": 3,
+                "spells_known": 3
+            },
+            {
+                "cantrips_known": 3,
+                "level": 4,
+                "spells_known": 4
+            },
+            {
+                "cantrips_known": 3,
+                "level": 5,
+                "spells_known": 4
+            },
+            {
+                "cantrips_known": 3,
+                "level": 6,
+                "spells_known": 4
+            },
+            {
+                "cantrips_known": 3,
+                "level": 7,
+                "spells_known": 5
+            },
+            {
+                "cantrips_known": 3,
+                "level": 8,
+                "spells_known": 6
+            },
+            {
+                "cantrips_known": 3,
+                "level": 9,
+                "spells_known": 6
+            },
+            {
+                "cantrips_known": 4,
+                "level": 10,
+                "spells_known": 7
+            },
+            {
+                "cantrips_known": 4,
+                "level": 11,
+                "spells_known": 8
+            },
+            {
+                "cantrips_known": 4,
+                "level": 12,
+                "spells_known": 8
+            },
+            {
+                "cantrips_known": 4,
+                "level": 13,
+                "spells_known": 9
+            },
+            {
+                "cantrips_known": 4,
+                "level": 14,
+                "spells_known": 10
+            },
+            {
+                "cantrips_known": 4,
+                "level": 15,
+                "spells_known": 10
+            },
+            {
+                "cantrips_known": 4,
+                "level": 16,
+                "spells_known": 11
+            },
+            {
+                "cantrips_known": 4,
+                "level": 17,
+                "spells_known": 11
+            },
+            {
+                "cantrips_known": 4,
+                "level": 18,
+                "spells_known": 11
+            },
+            {
+                "cantrips_known": 4,
+                "level": 19,
+                "spells_known": 12
+            },
+            {
+                "cantrips_known": 4,
+                "level": 20,
+                "spells_known": 13
+            }
+        ]
+    },
+    {
+        "can_cast_cantrips": true,
+        "can_cast_rituals": true,
+        "can_learn_extra_spells": true,
+        "can_use_magic_focus": true,
+        "must_learn_spells": true,
+        "must_prepare_spells": true,
+        "name": "mago",
+        "id": "wizard",
+        "sources_rels": [
+            {
+                "page": 52,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spec_at_level": 2,
+        "spell_list_name": "mago",
+        "spellcaster_type_name": "primary",
+        "spellcasting_ability_abbreviation": "int",
+        "class_levels": [
+            {
+                "cantrips_known": 3,
+                "level": 1,
+                "spells_known": 6
+            },
+            {
+                "cantrips_known": 3,
+                "level": 2,
+                "spells_known": 8
+            },
+            {
+                "cantrips_known": 3,
+                "level": 3,
+                "spells_known": 10
+            },
+            {
+                "cantrips_known": 4,
+                "level": 4,
+                "spells_known": 12
+            },
+            {
+                "cantrips_known": 4,
+                "level": 5,
+                "spells_known": 14
+            },
+            {
+                "cantrips_known": 4,
+                "level": 6,
+                "spells_known": 16
+            },
+            {
+                "cantrips_known": 4,
+                "level": 7,
+                "spells_known": 18
+            },
+            {
+                "cantrips_known": 4,
+                "level": 8,
+                "spells_known": 20
+            },
+            {
+                "cantrips_known": 4,
+                "level": 9,
+                "spells_known": 22
+            },
+            {
+                "cantrips_known": 5,
+                "level": 10,
+                "spells_known": 24
+            },
+            {
+                "cantrips_known": 5,
+                "level": 11,
+                "spells_known": 26
+            },
+            {
+                "cantrips_known": 5,
+                "level": 12,
+                "spells_known": 28
+            },
+            {
+                "cantrips_known": 5,
+                "level": 13,
+                "spells_known": 30
+            },
+            {
+                "cantrips_known": 5,
+                "level": 14,
+                "spells_known": 32
+            },
+            {
+                "cantrips_known": 5,
+                "level": 15,
+                "spells_known": 34
+            },
+            {
+                "cantrips_known": 5,
+                "level": 16,
+                "spells_known": 36
+            },
+            {
+                "cantrips_known": 5,
+                "level": 17,
+                "spells_known": 38
+            },
+            {
+                "cantrips_known": 5,
+                "level": 18,
+                "spells_known": 40
+            },
+            {
+                "cantrips_known": 5,
+                "level": 19,
+                "spells_known": 42
+            },
+            {
+                "cantrips_known": 5,
+                "level": 20,
+                "spells_known": 44
+            }
+        ]
+    },
+    {
+        "can_cast_cantrips": false,
+        "can_cast_rituals": false,
+        "can_learn_extra_spells": false,
+        "can_use_magic_focus": false,
+        "must_learn_spells": false,
+        "must_prepare_spells": false,
+        "name": "monge",
+        "id": "monk",
+        "sources_rels": [
+            {
+                "page": 26,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spec_at_level": 3,
+        "spell_list_name": null,
+        "spellcaster_type_name": null,
+        "spellcasting_ability_abbreviation": null,
+        "class_levels": [
+            {
+                "cantrips_known": null,
+                "level": 1,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 2,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 3,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 4,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 5,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 6,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 7,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 8,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 9,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 10,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 11,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 12,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 13,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 14,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 15,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 16,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 17,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 18,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 19,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 20,
+                "spells_known": null
+            }
+        ]
+    },
+    {
+        "can_cast_cantrips": false,
+        "can_cast_rituals": false,
+        "can_learn_extra_spells": false,
+        "can_use_magic_focus": true,
+        "must_learn_spells": false,
+        "must_prepare_spells": true,
+        "name": "paladino",
+        "id": "paladin",
+        "sources_rels": [
+            {
+                "page": 30,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spec_at_level": 3,
+        "spell_list_name": "paladino",
+        "spellcaster_type_name": "secondary",
+        "spellcasting_ability_abbreviation": "car",
+        "class_levels": [
+            {
+                "cantrips_known": null,
+                "level": 1,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 2,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 3,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 4,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 5,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 6,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 7,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 8,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 9,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 10,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 11,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 12,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 13,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 14,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 15,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 16,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 17,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 18,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 19,
+                "spells_known": null
+            },
+            {
+                "cantrips_known": null,
+                "level": 20,
+                "spells_known": null
+            }
+        ]
+    },
+    {
+        "can_cast_cantrips": false,
+        "can_cast_rituals": false,
+        "can_learn_extra_spells": false,
+        "can_use_magic_focus": false,
+        "must_learn_spells": true,
+        "must_prepare_spells": false,
+        "name": "patrulheiro",
+        "id": "ranger",
+        "sources_rels": [
+            {
+                "page": 35,
+                "source_abbreviation": "DRS"
+            }
+        ],
+        "spec_at_level": 3,
+        "spell_list_name": "patrulheiro",
+        "spellcaster_type_name": "secondary",
+        "spellcasting_ability_abbreviation": "sab",
+        "class_levels": [
+            {
+                "cantrips_known": null,
+                "level": 1,
+                "spells_known": 0
+            },
+            {
+                "cantrips_known": null,
+                "level": 2,
+                "spells_known": 2
+            },
+            {
+                "cantrips_known": null,
+                "level": 3,
+                "spells_known": 3
+            },
+            {
+                "cantrips_known": null,
+                "level": 4,
+                "spells_known": 3
+            },
+            {
+                "cantrips_known": null,
+                "level": 5,
+                "spells_known": 4
+            },
+            {
+                "cantrips_known": null,
+                "level": 6,
+                "spells_known": 4
+            },
+            {
+                "cantrips_known": null,
+                "level": 7,
+                "spells_known": 5
+            },
+            {
+                "cantrips_known": null,
+                "level": 8,
+                "spells_known": 5
+            },
+            {
+                "cantrips_known": null,
+                "level": 9,
+                "spells_known": 6
+            },
+            {
+                "cantrips_known": null,
+                "level": 10,
+                "spells_known": 6
+            },
+            {
+                "cantrips_known": null,
+                "level": 11,
+                "spells_known": 7
+            },
+            {
+                "cantrips_known": null,
+                "level": 12,
+                "spells_known": 7
+            },
+            {
+                "cantrips_known": null,
+                "level": 13,
+                "spells_known": 8
+            },
+            {
+                "cantrips_known": null,
+                "level": 14,
+                "spells_known": 8
+            },
+            {
+                "cantrips_known": null,
+                "level": 15,
+                "spells_known": 9
+            },
+            {
+                "cantrips_known": null,
+                "level": 16,
+                "spells_known": 9
+            },
+            {
+                "cantrips_known": null,
+                "level": 17,
+                "spells_known": 10
+            },
+            {
+                "cantrips_known": null,
+                "level": 18,
+                "spells_known": 10
+            },
+            {
+                "cantrips_known": null,
+                "level": 19,
+                "spells_known": 11
+            },
+            {
+                "cantrips_known": null,
+                "level": 20,
+                "spells_known": 11
+            }
+        ]
+    }
+]
