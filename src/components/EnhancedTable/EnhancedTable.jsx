@@ -56,12 +56,12 @@ function generateCells(value, index, idx) {
         )
     } else {
         return (
-            <TableCell key={`cell_${value}_${idx}`} align="left">{Array.isArray(value) ? value.join(', ') : capitalize(value)}</TableCell>
+            <TableCell key={`cell_${value}_${idx}`} align="left">{Array.isArray(value) ? value.map(item => item.name).join(', ') : capitalize(value)}</TableCell>
         )
     }
 }
 
-export default function EnhancedTable({ headCells, items, setOpenModal, selected, setSelected, setDeleteModal, isAdmin }) {
+export default function EnhancedTable({ headCells, items, setOpenModal, selected, setSelected, setDeleteModal, isAdmin, title }) {
     const [order, setOrder] = useState('asc')
     const [orderBy, setOrderBy] = useState('name')
     const [page, setPage] = useState(0)
@@ -74,7 +74,6 @@ export default function EnhancedTable({ headCells, items, setOpenModal, selected
     }
 
     const handleSelectAllClick = (event) => {
-        console.log(items)
         if (event.target.checked) {
             const newSelecteds = items
             setSelected(newSelecteds)
@@ -121,16 +120,14 @@ export default function EnhancedTable({ headCells, items, setOpenModal, selected
         <React.Fragment>
             <EnhancedTableToolbar
                 numSelected={selected.length}
-                title={'Chars'}
+                title={title}
                 setOpenModal={setOpenModal}
                 setDeleteModal={setDeleteModal}
                 isAdmin={isAdmin}
             />
             <TableContainer>
                 <Table
-                    sx={{ height: isBrowser ? '57vh' : '75vh' }}
                     aria-labelledby="tableTitle"
-                    size="small"
                 >
                     <EnhancedTableHead
                         numSelected={selected.length}

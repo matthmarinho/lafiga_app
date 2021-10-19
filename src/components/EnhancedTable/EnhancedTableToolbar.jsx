@@ -52,7 +52,7 @@ export default function EnhancedTableToolbar({ numSelected, title, setOpenModal,
                         </IconButton>
                     </Tooltip>
                 )}
-                {isAdmin && <Tooltip title="Add item">
+                {isAdmin && numSelected === 0 && <Tooltip title="Add item">
                     <IconButton onClick={() => setOpenModal(true)}>
                         <AddIcon />
                     </IconButton>

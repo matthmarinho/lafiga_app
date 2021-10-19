@@ -34,17 +34,22 @@ const Form = ({ formData, values, setValues, row }) => {
             noValidate
             autoComplete="off"
         >
-            {values && currentData.map(field => (
-                <Box key={`box_${field.id}`} item sx={{ maxWidth: '100%' }}>
-                    <Field
-                        key={`field_${field.id}`}
-                        field={field}
-                        fieldChanged={fieldChanged}
-                        values={values}
-                        row={row}
-                    />
-                </Box>
-            ))}
+            {currentData.map(field => {
+                if (values[field.id]) {
+                    return (
+                        <Box key={`box_${field.id}`} item sx={{ maxWidth: '100%' }}>
+                            <Field
+                                key={`field_${field.id}`}
+                                field={field}
+                                fieldChanged={fieldChanged}
+                                values={values}
+                                row={row}
+                            />
+                        </Box>
+                    )
+                }
+            }
+            )}
         </Box>
     )
 }

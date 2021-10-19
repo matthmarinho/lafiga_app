@@ -102,7 +102,7 @@ const SidebarItems = [
             },
             {
                 name: "Teams",
-                active: false,
+                active: true,
                 icon: "Group",
                 route: "/teams"
             },

@@ -10,7 +10,7 @@ import Form from './Form'
 
 export default function FormModal({ open, setOpen, formData, row, title, Service, getAll }) {
     const isOpen = Boolean(open)
-    const [values, setValues] = useState(undefined)
+    const [values, setValues] = useState([])
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -44,12 +44,16 @@ export default function FormModal({ open, setOpen, formData, row, title, Service
         })
     }
 
+    const handleCancel = () => {
+        setValues([])
+        setOpen(false)
+    }
 
     return (
         <div>
             <Dialog
                 open={isOpen}
-                onClose={() => setOpen(false)}
+                onClose={() => handleCancel()}
                 aria-labelledby="form-dialog-title"
                 fullWidth maxWidth="md"
             >
@@ -58,7 +62,7 @@ export default function FormModal({ open, setOpen, formData, row, title, Service
                     <Form formData={formData} values={values} setValues={setValues} row={row} />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => setOpen(false)} >
+                    <Button onClick={() => handleCancel()} >
                         Cancel
                     </Button>
                     <Button onClick={(e) => handleSubmit(e)}>

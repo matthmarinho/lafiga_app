@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
-import { Container, CssBaseline, GlobalStyles, InputBase } from '@mui/material'
+import { Backdrop, Button, CircularProgress, Container, CssBaseline, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, GlobalStyles, InputBase } from '@mui/material'
 import { isBrowser } from 'react-device-detect'
 import FilterList from '../../components/FilterList/FilterList'
 import SearchIcon from '@mui/icons-material/Search'
 import { alpha, styled } from '@mui/system'
 import EnhancedTable from '../../components/EnhancedTable/EnhancedTable'
+import FormModal from '../../components/DynamicForm/FormModal'
+import Service from '../../services/team'
+import CharService from '../../services/char'
+import { userData } from '../../services/auth'
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -62,46 +66,80 @@ const BoxCustom = styled(Box)(({ theme }) => ({
     overflow: 'auto',
 }))
 
-function createData(name, members, location) {
-    return {
-        name,
-        members,
-        location,
-    }
-}
-
-const rows = [
-    createData('Grupo 1', ['Tiefling', 'Nothing', 'Fighter', 'Atirador Inigualável'], 7),
-    createData('Grupo 2', ['Half-elf', 'Drow', 'Warlock', 'Hastur'], 3),
-    createData('Grupo 3', ['Elf', 'High', 'Wizard', '-'], 7),
-    createData('Grupo 4', ['Dwarf', 'Mountain', 'Cleric', '-'], 7),
-    createData('Grupo 5', ['Dragon', 'All', 'Vilain', '7 Heads'], 20),
-    createData('Grupo 6', ['Bbbbb', 'Ccccc', 'Ddddddd', 'Eeeeeeee'], 1234),
-]
-
 const headCells = [
+    {
+        id: 'id',
+        numeric: false,
+        disablePadding: true,
+        label: 'ID',
+    },
     {
         id: 'name',
         numeric: false,
-        disablePadding: true,
+        disablePadding: false,
         label: 'Name',
     },
     {
-        id: 'members',
+        id: 'day',
         numeric: false,
         disablePadding: false,
-        label: 'Members',
+        label: 'Day',
     },
     {
-        id: 'location',
+        id: 'season',
         numeric: false,
         disablePadding: false,
-        label: 'Location',
+        label: 'Season',
+    },
+    {
+        id: 'chars',
+        numeric: false,
+        disablePadding: false,
+        label: 'Chars',
+    },
+]
+
+const dataValueDefault = [
+    {
+        "component": "text",
+        "label": "Name",
+        "type": "text",
+        "id": "name"
+    },
+    {
+        "component": "multi-select",
+        "label": "Chars",
+        "type": "multi-select",
+        "id": "chars",
+        "values": []
+    },
+    {
+        "component": "number",
+        "label": "Day",
+        "type": "number",
+        "id": "day"
+    },
+    {
+        "component": "select",
+        "label": "Season",
+        "type": "select",
+        "id": "season",
+        "values": [{ id: 0, name: 'Primavera' }, { id: 1, name: 'Verão' }, { id: 2, name: 'Outono' }, { id: 3, name: 'Inverno' }]
     },
 ]
 
 export default function Teams() {
+    const [rows, setRows] = useState([])
     const [items, setItems] = useState([])
+    const [openModal, setOpenModal] = useState(false)
+    const [selected, setSelected] = useState([])
+    const [currentRow, setCurrentRow] = useState([])
+    const [deleteModal, setDeleteModal] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [isAdmin, setIsAdmin] = useState(false)
+    const [chars, setChars] = useState(false)
+    const [dataValue, setDataValue] = useState(dataValueDefault)
+    const [loadedChars, setLoadedChars] = useState(false)
 
     const requestSearch = (searchedVal) => {
         const filteredItems = rows.filter(item => {
@@ -110,14 +148,103 @@ export default function Teams() {
         setItems(filteredItems)
     }
 
+    const remove = () => {
+        setLoading(true)
+        Service.removeInBatches({ data: JSON.stringify(selected) })
+            .then(() => {
+                setSelected([])
+                setDeleteModal(false)
+                getAll()
+            })
+            .catch(e => {
+                console.log(e)
+            })
+    }
+
+    const getChars = () => {
+        setLoading(true)
+        CharService.getAll()
+            .then(response => {
+                dataValueDefault.find((value) => value.id === 'chars').values = response.data
+                setDataValue(dataValueDefault)
+                setLoadedChars(true)
+                setLoading(false)
+            })
+            .catch(e => {
+                console.log(e)
+            })
+    }
+
+    const getAll = () => {
+        setLoading(true)
+        Service.getAll()
+            .then(response => {
+                setSelected([])
+                setItems(response.data)
+                setRows(response.data)
+                setLoading(false)
+            })
+            .catch(e => {
+                console.log(e)
+            })
+    }
+
+    const getUser = () => {
+        let user = userData()
+        setIsAdmin(Boolean(user && user.role_id === 1 ? true : false))
+    }
+
     useEffect(() => {
-        setItems(rows)
+        getAll()
+        getUser()
+        getChars()
     }, [])
+
+    useEffect(() => {
+        setCurrentRow(selected)
+    }, [selected])
 
     return (
         <React.Fragment>
             <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
             <CssBaseline />
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={loading}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
+            <Dialog
+                open={deleteModal}
+                onClose={() => setDeleteModal(false)}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    Delete {selected.length > 0 ? `teams` : `team`}?
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Are you sure?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setDeleteModal(false)}>No</Button>
+                    <Button onClick={() => remove()} autoFocus>
+                        Yes
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            {loadedChars &&
+                <FormModal
+                    open={openModal}
+                    setOpen={setOpenModal}
+                    formData={dataValue}
+                    row={currentRow[0]}
+                    title={'Team'}
+                    Service={Service}
+                    getAll={getAll}
+                />}
             <BoxCustom component="main">
                 <Container maxWidth="lg" sx={isBrowser ? { mt: 4, mb: 4 } : null}>
                     <Search>
@@ -132,10 +259,28 @@ export default function Teams() {
                     </Search>
                     <PaperCustom>
                         {isBrowser ? (
-                            <EnhancedTable headCells={headCells} items={items}/>
+                            <EnhancedTable
+                                headCells={headCells}
+                                items={items}
+                                setOpenModal={setOpenModal}
+                                selected={selected}
+                                setSelected={setSelected}
+                                setDeleteModal={setDeleteModal}
+                                isAdmin={isAdmin}
+                                title={'Teams'}
+                            />
                         ) : (
-                            <FilterList items={items} />
-                        )}
+                            <FilterList
+                                items={items}
+                                setOpenModal={setOpenModal}
+                                setDeleteModal={setDeleteModal}
+                                selected={selected}
+                                setSelected={setSelected}
+                                isAdmin={isAdmin}
+                                title={'Teams'}
+                            />
+                        )
+                        }
                     </PaperCustom>
                 </Container>
             </BoxCustom>

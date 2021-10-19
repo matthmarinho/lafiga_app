@@ -69,26 +69,6 @@ const BoxCustom = styled(Box)(({ theme }) => ({
     overflow: 'auto',
 }))
 
-function createData(name, race, sub_race, klass, sub_class, level) {
-    return {
-        name,
-        race,
-        sub_race,
-        klass,
-        sub_class,
-        level,
-    }
-}
-
-const rows = [
-    createData('Aberama', 'tiefling', 'None', 'guerreiro', 'Atirador Inigualável', 7),
-    createData('Sabrino', 'meio-elfo', 'Drow', 'bruxo', 'Hastur', 3),
-    createData('Kanlu', 'elfo', 'alto elfo', 'feiticeiro', '', 7),
-    createData('Orsik', 'anão', 'Mountain', 'clérigo', '', 7),
-    createData('Tiamat', 'Dragon', 'All', 'Vilain', '7 Heads', 20),
-    createData('Aaaaa', 'Bbbbb', 'Ccccc', 'Ddddddd', 'Eeeeeeee', 1234),
-]
-
 const headCells = [
     {
         id: 'id',
@@ -99,7 +79,7 @@ const headCells = [
     {
         id: 'name',
         numeric: false,
-        disablePadding: true,
+        disablePadding: false,
         label: 'Name',
     },
     {
@@ -180,6 +160,7 @@ const dataValue = [
 ]
 
 export default function Chars() {
+    const [rows, setRows] = useState([])
     const [items, setItems] = useState([])
     const [openModal, setOpenModal] = useState(false)
     const [selected, setSelected] = useState([])
@@ -212,6 +193,8 @@ export default function Chars() {
         setLoading(true)
         Service.getAll()
             .then(response => {
+                setSelected([])
+                setRows(response.data)
                 setItems(response.data)
                 setLoading(false)
             })
@@ -296,6 +279,7 @@ export default function Chars() {
                                 setSelected={setSelected}
                                 setDeleteModal={setDeleteModal}
                                 isAdmin={isAdmin}
+                                title={'Chars'}
                             />
                         ) : (
                             <FilterList
@@ -305,6 +289,7 @@ export default function Chars() {
                                 selected={selected}
                                 setSelected={setSelected}
                                 isAdmin={isAdmin}
+                                title={'Chars'}
                             />
                         )
                         }

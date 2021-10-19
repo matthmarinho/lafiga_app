@@ -6,6 +6,7 @@ import Checkbox from '@mui/material/Checkbox'
 import DeleteIcon from '@mui/icons-material/Delete'
 import AddIcon from '@mui/icons-material/Add'
 import EditIcon from '@mui/icons-material/Edit'
+import library from './components/library'
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -19,7 +20,7 @@ const CustomStack = styled(Stack)(({ theme }) => ({
     overflow: 'auto',
 }))
 
-export default function FilterList({ items, setOpenModal, setDeleteModal, selected, setSelected, isAdmin }) {
+export default function FilterList({ items, setOpenModal, setDeleteModal, selected, setSelected, isAdmin, title }) {
 
     const handleToggle = (value) => () => {
         const currentIndex = selected.indexOf(value)
@@ -32,6 +33,10 @@ export default function FilterList({ items, setOpenModal, setDeleteModal, select
         }
 
         setSelected(newChecked)
+    }
+
+    const capitalize = (str) => {
+        return str.toString().charAt(0).toUpperCase() + str.toString().slice(1)
     }
 
     return (
@@ -52,7 +57,7 @@ export default function FilterList({ items, setOpenModal, setDeleteModal, select
                     alignItems="center"
                 >
                     <Typography variant="h4" color="primary" gutterBottom>
-                        Chars
+                        {title}
                     </Typography>
                     {selected.length > 0 && (
                         <Typography variant="h6" color="primary" gutterBottom>
@@ -77,30 +82,26 @@ export default function FilterList({ items, setOpenModal, setDeleteModal, select
                                             />
                                         }
                                     >
-                                        {/* <ListItemAvatar>
-                                            <Avatar>
-                                                <ImageIcon />
-                                            </Avatar>
-                                        </ListItemAvatar> */}
                                         <ListItemText
                                             primary={
-                                                <>
-                                                    <Typography variant="h6">
-                                                        {item.name}
-                                                    </Typography>
-                                                </>
+                                                <Typography variant="h6">
+                                                    {item.name}
+                                                </Typography>
                                             }
+                                            secondaryTypographyProps={{
+                                                component: 'div'
+                                            }}
                                             secondary={
-                                                <Stack spacing={0.5}>
-                                                    <Typography variant="subtitle2" sx={{ whiteSpace: 'pre-line' }}>
-                                                        Race: {item.race}, {item.subrace}
-                                                    </Typography>
-                                                    <Typography variant="subtitle2" sx={{ whiteSpace: 'pre-line' }}>
-                                                        Class: {item.klass}, {item.subclass}
-                                                    </Typography>
-                                                    <Typography variant="subtitle2" sx={{ whiteSpace: 'pre-line' }}>
-                                                        Level: {item.level}
-                                                    </Typography>
+                                                <Stack spacing={'0.5'}>
+                                                    {Object.entries(item).slice(2).map(([key, value]) => (
+                                                        (value || value.length > 0) && (
+                                                            <Typography key={`item_${key}_${value}`} component="span" variant="subtitle2">
+                                                                {library[key]}: {
+                                                                    Array.isArray(value) ? value.map(i => i.name).join(', ') : capitalize(value)
+                                                                }
+                                                            </Typography>
+                                                        )
+                                                    ))}
                                                 </Stack>
                                             }
                                         />
@@ -126,14 +127,14 @@ export default function FilterList({ items, setOpenModal, setDeleteModal, select
             // onOpen={handleOpenMarkerDial}
             // open={openMarkerDial}
             >
-                <SpeedDialAction
+                {selected.length === 0 && <SpeedDialAction
                     key='New'
                     icon={<AddIcon />}
                     tooltipTitle='New'
                     tooltipOpen
                     onClick={() => setOpenModal(true)}
-                />
-                {selected.length == 1 && (
+                />}
+                {selected.length === 1 && (
                     <SpeedDialAction
                         key='Edit'
                         icon={<EditIcon />}
