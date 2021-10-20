@@ -27,7 +27,7 @@ export default function MultipleSelectChip({ field, values, fieldChanged }) {
                     labelId="demo-multiple-chip-label"
                     id="demo-multiple-chip"
                     multiple
-                    value={values[field.id].map(item => item.name)}
+                    value={values[field.id] ? values[field.id].map(item => item.name) : []}
                     onChange={e => fieldChanged(field.id, field.values.filter(item => e.target.value.includes(item.name)))}
                     input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
                     renderValue={() => (

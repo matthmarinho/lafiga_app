@@ -1,470 +1,552 @@
 [
     {
-        "dependence_name": "patrulheiro",
-        "name": "caçador",
-        "id": "caçador",
-        "sources_rels": [
-            {
-                "page": 37,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
+        "dependence_name": "bardo",
+        "name": "colégio da bravura",
+        "id": "colégio da bravura"
     },
     {
-        "dependence_name": "patrulheiro",
-        "name": "mestre das bestas",
-        "id": "mestre das bestas",
-        "sources_rels": [
-            {
-                "page": 37,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
+        "dependence_name": "bardo",
+        "name": "colégio da busca da canção",
+        "id": "colégio da busca da canção"
     },
     {
-        "dependence_name": "monge",
-        "name": "caminho da mão aberta",
-        "id": "caminho da mão aberta",
-        "sources_rels": [
-            {
-                "page": 28,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
+        "dependence_name": "bardo",
+        "name": "colégio da comédia",
+        "id": "colégio da comédia"
     },
     {
-        "dependence_name": "monge",
-        "name": "caminho sombrio",
-        "id": "caminho sombrio",
-        "sources_rels": [
-            {
-                "page": 28,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
+        "dependence_name": "bardo",
+        "name": "colégio da fortuna",
+        "id": "colégio da fortuna"
     },
     {
-        "dependence_name": "monge",
-        "name": "caminho dos quatro elementos",
-        "id": "caminho dos quatro elementos",
-        "sources_rels": [
-            {
-                "page": 28,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
-    },
-    {
-        "dependence_name": "bárbaro",
-        "name": "caminho do guerreiro totêmico",
-        "id": "caminho do guerreiro totêmico",
-        "sources_rels": [
-            {
-                "page": 9,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
-    },
-    {
-        "dependence_name": "bárbaro",
-        "name": "caminho do furioso",
-        "id": "caminho do furioso",
-        "sources_rels": [
-            {
-                "page": 9,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
-    },
-    {
-        "dependence_name": "guerreiro",
-        "name": "campeão",
-        "id": "campeão",
-        "sources_rels": [
-            {
-                "page": 25,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
-    },
-    {
-        "dependence_name": "guerreiro",
-        "name": "cavaleiro arcano",
-        "id": "cavaleiro arcano",
-        "sources_rels": [
-            {
-                "page": 25,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
-    },
-    {
-        "dependence_name": "guerreiro",
-        "name": "mestre de batalha",
-        "id": "mestre de batalha",
-        "sources_rels": [
-            {
-                "page": 25,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
-    },
-    {
-        "dependence_name": "druida",
-        "name": "círculo da terra",
-        "id": "círculo da terra",
-        "sources_rels": [
-            {
-                "page": 21,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": "círculo da terra"
-    },
-    {
-        "dependence_name": "druida",
-        "name": "círculo da lua",
-        "id": "círculo da lua",
-        "sources_rels": [
-            {
-                "page": 21,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": "círculo da lua"
+        "dependence_name": "bardo",
+        "name": "colégio da quietude",
+        "id": "colégio da quietude"
     },
     {
         "dependence_name": "bardo",
         "name": "colégio do conhecimento",
-        "id": "colégio do conhecimento",
-        "sources_rels": [
-            {
-                "page": 13,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
+        "id": "colégio do conhecimento"
     },
     {
         "dependence_name": "bardo",
-        "name": "colégio da bravura",
-        "id": "colégio da bravura",
-        "sources_rels": [
-            {
-                "page": 13,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
+        "name": "colégio do pavor",
+        "id": "colégio do pavor"
     },
     {
-        "dependence_name": "clérigo",
-        "name": "domínio da vida",
-        "id": "domínio da vida",
-        "sources_rels": [
-            {
-                "page": 17,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": "domínio da vida"
-    },
-    {
-        "dependence_name": "clérigo",
-        "name": "domínio do conhecimento",
-        "id": "domínio do conhecimento",
-        "sources_rels": [
-            {
-                "page": 17,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": "domínio do conhecimento"
-    },
-    {
-        "dependence_name": "clérigo",
-        "name": "domínio da enganação",
-        "id": "domínio da enganação",
-        "sources_rels": [
-            {
-                "page": 17,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": "domínio da enganação"
-    },
-    {
-        "dependence_name": "clérigo",
-        "name": "domínio da guerra",
-        "id": "domínio da guerra",
-        "sources_rels": [
-            {
-                "page": 17,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": "domínio da guerra"
-    },
-    {
-        "dependence_name": "clérigo",
-        "name": "domínio da luz",
-        "id": "domínio da luz",
-        "sources_rels": [
-            {
-                "page": 17,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": "domínio da luz"
-    },
-    {
-        "dependence_name": "clérigo",
-        "name": "domínio da natureza",
-        "id": "domínio da natureza",
-        "sources_rels": [
-            {
-                "page": 17,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": "domínio da natureza"
-    },
-    {
-        "dependence_name": "clérigo",
-        "name": "domínio da tempestade",
-        "id": "domínio da tempestade",
-        "sources_rels": [
-            {
-                "page": 17,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": "domínio da tempestade"
-    },
-    {
-        "dependence_name": "feiticeiro",
-        "name": "magia selvagem",
-        "id": "linhagem dracônica",
-        "sources_rels": [
-            {
-                "page": 44,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
-    },
-    {
-        "dependence_name": "feiticeiro",
-        "name": "magia selvagem",
-        "id": "magia selvagem",
-        "sources_rels": [
-            {
-                "page": 44,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
-    },
-    {
-        "dependence_name": "mago",
-        "name": "escola de evocação",
-        "id": "escola de evocação",
-        "sources_rels": [
-            {
-                "page": 54,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
-    },
-    {
-        "dependence_name": "mago",
-        "name": "escola da abjuração",
-        "id": "escola da abjuração",
-        "sources_rels": [
-            {
-                "page": 54,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
-    },
-    {
-        "dependence_name": "mago",
-        "name": "escola da advinhação",
-        "id": "escola da advinhação",
-        "sources_rels": [
-            {
-                "page": 54,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
-    },
-    {
-        "dependence_name": "mago",
-        "name": "escola da conjuração",
-        "id": "escola da conjuração",
-        "sources_rels": [
-            {
-                "page": 54,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
-    },
-    {
-        "dependence_name": "mago",
-        "name": "escola do encantamento",
-        "id": "escola do encantamento",
-        "sources_rels": [
-            {
-                "page": 54,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
-    },
-    {
-        "dependence_name": "mago",
-        "name": "escola da ilusão",
-        "id": "escola da ilusão",
-        "sources_rels": [
-            {
-                "page": 54,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
-    },
-    {
-        "dependence_name": "mago",
-        "name": "escola da necromancia",
-        "id": "escola da necromancia",
-        "sources_rels": [
-            {
-                "page": 54,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
-    },
-    {
-        "dependence_name": "paladino",
-        "name": "juramento da devoção",
-        "id": "juramento da devoção",
-        "sources_rels": [
-            {
-                "page": 32,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": "juramento da devoção"
-    },
-    {
-        "dependence_name": "paladino",
-        "name": "juramento dos anciões",
-        "id": "juramento dos anciões",
-        "sources_rels": [
-            {
-                "page": 32,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": "juramento dos anciões"
-    },
-    {
-        "dependence_name": "paladino",
-        "name": "juramento da vingança",
-        "id": "juramento da vingança",
-        "sources_rels": [
-            {
-                "page": 32,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": "juramento da vingança"
-    },
-    {
-        "dependence_name": "ladino",
-        "name": "ladrão",
-        "id": "ladrão",
-        "sources_rels": [
-            {
-                "page": 40,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
-    },
-    {
-        "dependence_name": "ladino",
-        "name": "assassino",
-        "id": "assassino",
-        "sources_rels": [
-            {
-                "page": 40,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
-    },
-    {
-        "dependence_name": "ladino",
-        "name": "trapaceiro arcano",
-        "id": "trapaceiro arcano",
-        "sources_rels": [
-            {
-                "page": 40,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null
-    },
-    {
-        "dependence_name": "bruxo",
-        "name": "o corruptor",
-        "id": "o corruptor",
-        "sources_rels": [
-            {
-                "page": 50,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": "o corruptor"
+        "dependence_name": "bardo",
+        "name": "colégio do virtuosismo",
+        "id": "colégio do virtuosismo"
     },
     {
         "dependence_name": "bruxo",
         "name": "a arquifada",
-        "id": "a arquifada",
-        "sources_rels": [
-            {
-                "page": 50,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": "a arquifada"
+        "id": "a arquifada"
+    },
+    {
+        "dependence_name": "bruxo",
+        "name": "a morte",
+        "id": "a morte"
+    },
+    {
+        "dependence_name": "bruxo",
+        "name": "o arcanjo vingador",
+        "id": "o arcanjo vingador"
+    },
+    {
+        "dependence_name": "bruxo",
+        "name": "o corruptor",
+        "id": "o corruptor"
+    },
+    {
+        "dependence_name": "bruxo",
+        "name": "o espírito heroico",
+        "id": "o espírito heroico"
     },
     {
         "dependence_name": "bruxo",
         "name": "o grande antigo",
-        "id": "o grande antigo",
-        "sources_rels": [
-            {
-                "page": 50,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": "o grande antigo"
+        "id": "o grande antigo"
+    },
+    {
+        "dependence_name": "bruxo",
+        "name": "o supragênio",
+        "id": "o supragênio"
+    },
+    {
+        "dependence_name": "bruxo",
+        "name": "o titã caído",
+        "id": "o titã caído"
+    },
+    {
+        "dependence_name": "bruxo",
+        "name": "o vazio",
+        "id": "o vazio"
+    },
+    {
+        "dependence_name": "bárbaro",
+        "name": "caminho do bárbaro das cicatrizes rúnicas",
+        "id": "caminho do bárbaro das cicatrizes rúnicas"
+    },
+    {
+        "dependence_name": "bárbaro",
+        "name": "caminho do desistente",
+        "id": "caminho do desistente"
+    },
+    {
+        "dependence_name": "bárbaro",
+        "name": "caminho do furioso",
+        "id": "caminho do furioso"
+    },
+    {
+        "dependence_name": "bárbaro",
+        "name": "caminho do furioso imortal",
+        "id": "caminho do furioso imortal"
+    },
+    {
+        "dependence_name": "bárbaro",
+        "name": "caminho do guerreiro totêmico",
+        "id": "caminho do guerreiro totêmico"
+    },
+    {
+        "dependence_name": "bárbaro",
+        "name": "caminho do guerreiro urso",
+        "id": "caminho do guerreiro urso"
+    },
+    {
+        "dependence_name": "bárbaro",
+        "name": "caminho do protetor tribal",
+        "id": "caminho do protetor tribal"
+    },
+    {
+        "dependence_name": "bárbaro",
+        "name": "caminho do raivoso elemental",
+        "id": "caminho do raivoso elemental"
+    },
+    {
+        "dependence_name": "clérigo",
+        "name": "domínio da criação",
+        "id": "domínio da criação"
+    },
+    {
+        "dependence_name": "clérigo",
+        "name": "domínio da enganação",
+        "id": "domínio da enganação"
+    },
+    {
+        "dependence_name": "clérigo",
+        "name": "domínio da guerra",
+        "id": "domínio da guerra"
+    },
+    {
+        "dependence_name": "clérigo",
+        "name": "domínio da luz",
+        "id": "domínio da luz"
+    },
+    {
+        "dependence_name": "clérigo",
+        "name": "domínio da mente",
+        "id": "domínio da mente"
+    },
+    {
+        "dependence_name": "clérigo",
+        "name": "domínio da natureza",
+        "id": "domínio da natureza"
+    },
+    {
+        "dependence_name": "clérigo",
+        "name": "domínio da tempestade",
+        "id": "domínio da tempestade"
+    },
+    {
+        "dependence_name": "clérigo",
+        "name": "domínio da terra",
+        "id": "domínio da terra"
+    },
+    {
+        "dependence_name": "clérigo",
+        "name": "domínio da vida",
+        "id": "domínio da vida"
+    },
+    {
+        "dependence_name": "clérigo",
+        "name": "domínio da água",
+        "id": "domínio da água"
+    },
+    {
+        "dependence_name": "clérigo",
+        "name": "domínio do ar",
+        "id": "domínio do ar"
+    },
+    {
+        "dependence_name": "clérigo",
+        "name": "domínio do conhecimento",
+        "id": "domínio do conhecimento"
+    },
+    {
+        "dependence_name": "clérigo",
+        "name": "domínio do tempo",
+        "id": "domínio do tempo"
+    },
+    {
+        "dependence_name": "druida",
+        "name": "círculo da infestação",
+        "id": "círculo da infestação"
+    },
+    {
+        "dependence_name": "druida",
+        "name": "círculo da lua",
+        "id": "círculo da lua"
+    },
+    {
+        "dependence_name": "druida",
+        "name": "círculo da terra",
+        "id": "círculo da terra"
+    },
+    {
+        "dependence_name": "druida",
+        "name": "círculo da vida",
+        "id": "círculo da vida"
+    },
+    {
+        "dependence_name": "druida",
+        "name": "círculo das fadas",
+        "id": "círculo das fadas"
+    },
+    {
+        "dependence_name": "druida",
+        "name": "círculo das feras",
+        "id": "círculo das feras"
+    },
+    {
+        "dependence_name": "druida",
+        "name": "círculo dos mundos",
+        "id": "círculo dos mundos"
+    },
+    {
+        "dependence_name": "druida",
+        "name": "círculo verdejante",
+        "id": "círculo verdejante"
+    },
+    {
+        "dependence_name": "feiticeiro",
+        "name": "feitiçaria da espada",
+        "id": "feitiçaria da espada"
+    },
+    {
+        "dependence_name": "feiticeiro",
+        "name": "feitiçaria do sangue",
+        "id": "feitiçaria do sangue"
+    },
+    {
+        "dependence_name": "feiticeiro",
+        "name": "magia selvagem",
+        "id": "linhagem dracônica"
+    },
+    {
+        "dependence_name": "feiticeiro",
+        "name": "linhagem elemental",
+        "id": "linhagem elemental"
+    },
+    {
+        "dependence_name": "feiticeiro",
+        "name": "magia selvagem",
+        "id": "magia selvagem"
+    },
+    {
+        "dependence_name": "feiticeiro",
+        "name": "origem aberrante",
+        "id": "origem aberrante"
+    },
+    {
+        "dependence_name": "feiticeiro",
+        "name": "origem abissal",
+        "id": "origem abissal"
+    },
+    {
+        "dependence_name": "feiticeiro",
+        "name": "origem mutável",
+        "id": "origem mutável"
+    },
+    {
+        "dependence_name": "guerreiro",
+        "name": "atirador inigualável",
+        "id": "atirador inigualável"
+    },
+    {
+        "dependence_name": "guerreiro",
+        "name": "campeão",
+        "id": "campeão"
+    },
+    {
+        "dependence_name": "guerreiro",
+        "name": "cavaleiro arcano",
+        "id": "cavaleiro arcano"
+    },
+    {
+        "dependence_name": "guerreiro",
+        "name": "cavaleiro implacável",
+        "id": "cavaleiro implacável"
+    },
+    {
+        "dependence_name": "guerreiro",
+        "name": "defensor dedicado",
+        "id": "defensor dedicado"
+    },
+    {
+        "dependence_name": "guerreiro",
+        "name": "kensai",
+        "id": "kensai"
+    },
+    {
+        "dependence_name": "guerreiro",
+        "name": "mestre das correntes",
+        "id": "mestre das correntes"
+    },
+    {
+        "dependence_name": "guerreiro",
+        "name": "mestre de batalha",
+        "id": "mestre de batalha"
+    },
+    {
+        "dependence_name": "guerreiro",
+        "name": "mestre do arremesso",
+        "id": "mestre do arremesso"
+    },
+    {
+        "dependence_name": "ladino",
+        "name": "assassino",
+        "id": "assassino"
+    },
+    {
+        "dependence_name": "ladino",
+        "name": "caçador de tesouros",
+        "id": "caçador de tesouros"
+    },
+    {
+        "dependence_name": "ladino",
+        "name": "dançarino das sombras",
+        "id": "dançarino das sombras"
+    },
+    {
+        "dependence_name": "ladino",
+        "name": "face fantasmagórica",
+        "id": "face fantasmagórica"
+    },
+    {
+        "dependence_name": "ladino",
+        "name": "ladrão",
+        "id": "ladrão"
+    },
+    {
+        "dependence_name": "ladino",
+        "name": "larápio de almas",
+        "id": "larápio de almas"
+    },
+    {
+        "dependence_name": "ladino",
+        "name": "lâmina invisível",
+        "id": "lâmina invisível"
+    },
+    {
+        "dependence_name": "ladino",
+        "name": "mimetizador",
+        "id": "mimetizador"
+    },
+    {
+        "dependence_name": "ladino",
+        "name": "trapaceiro arcano",
+        "id": "trapaceiro arcano"
+    },
+    {
+        "dependence_name": "mago",
+        "name": "arquearia arcana",
+        "id": "arquearia arcana"
+    },
+    {
+        "dependence_name": "mago",
+        "name": "escola da abjuração",
+        "id": "escola da abjuração"
+    },
+    {
+        "dependence_name": "mago",
+        "name": "escola da advinhação",
+        "id": "escola da advinhação"
+    },
+    {
+        "dependence_name": "mago",
+        "name": "escola da conjuração",
+        "id": "escola da conjuração"
+    },
+    {
+        "dependence_name": "mago",
+        "name": "escola da ilusão",
+        "id": "escola da ilusão"
+    },
+    {
+        "dependence_name": "mago",
+        "name": "escola da necromancia",
+        "id": "escola da necromancia"
+    },
+    {
+        "dependence_name": "mago",
+        "name": "escola de evocação",
+        "id": "escola de evocação"
+    },
+    {
+        "dependence_name": "mago",
+        "name": "escola do encantamento",
+        "id": "escola do encantamento"
+    },
+    {
+        "dependence_name": "mago",
+        "name": "iniciação em demonologia",
+        "id": "iniciação em demonologia"
+    },
+    {
+        "dependence_name": "mago",
+        "name": "maestria alquímica",
+        "id": "maestria alquímica"
+    },
+    {
+        "dependence_name": "mago",
+        "name": "maestria dos autômatos",
+        "id": "maestria dos autômatos"
+    },
+    {
+        "dependence_name": "mago",
+        "name": "navegação planar",
+        "id": "navegação planar"
+    },
+    {
+        "dependence_name": "mago",
+        "name": "teurgia mística",
+        "id": "teurgia mística"
+    },
+    {
+        "dependence_name": "monge",
+        "name": "caminho da mão aberta",
+        "id": "caminho da mão aberta"
+    },
+    {
+        "dependence_name": "monge",
+        "name": "caminho do aço",
+        "id": "caminho do aço"
+    },
+    {
+        "dependence_name": "monge",
+        "name": "caminho do mestre bêbado",
+        "id": "caminho do mestre bêbado"
+    },
+    {
+        "dependence_name": "monge",
+        "name": "caminho do monge tatuado",
+        "id": "caminho do monge tatuado"
+    },
+    {
+        "dependence_name": "monge",
+        "name": "caminho do ninjútsu",
+        "id": "caminho do ninjútsu"
+    },
+    {
+        "dependence_name": "monge",
+        "name": "caminho do punho sagrado",
+        "id": "caminho do punho sagrado"
+    },
+    {
+        "dependence_name": "monge",
+        "name": "caminho do sadhaka",
+        "id": "caminho do sadhaka"
+    },
+    {
+        "dependence_name": "monge",
+        "name": "caminho dos quatro elementos",
+        "id": "caminho dos quatro elementos"
+    },
+    {
+        "dependence_name": "monge",
+        "name": "caminho sombrio",
+        "id": "caminho sombrio"
+    },
+    {
+        "dependence_name": "paladino",
+        "name": "juramento da devoção",
+        "id": "juramento da devoção"
+    },
+    {
+        "dependence_name": "paladino",
+        "name": "juramento da vingança",
+        "id": "juramento da vingança"
+    },
+    {
+        "dependence_name": "paladino",
+        "name": "juramento de danação",
+        "id": "juramento de danação"
+    },
+    {
+        "dependence_name": "paladino",
+        "name": "juramento de equilíbrio",
+        "id": "juramento de equilíbrio"
+    },
+    {
+        "dependence_name": "paladino",
+        "name": "juramento de liberdade",
+        "id": "juramento de liberdade"
+    },
+    {
+        "dependence_name": "paladino",
+        "name": "juramento de misericórdia",
+        "id": "juramento de misericórdia"
+    },
+    {
+        "dependence_name": "paladino",
+        "name": "juramento de ordenação",
+        "id": "juramento de ordenação"
+    },
+    {
+        "dependence_name": "paladino",
+        "name": "juramento de pureza",
+        "id": "juramento de pureza"
+    },
+    {
+        "dependence_name": "paladino",
+        "name": "juramento dos anciões",
+        "id": "juramento dos anciões"
+    },
+    {
+        "dependence_name": "patrulheiro",
+        "name": "arqueiro da floresta alta",
+        "id": "arqueiro da floresta alta"
+    },
+    {
+        "dependence_name": "patrulheiro",
+        "name": "batedor",
+        "id": "batedor"
+    },
+    {
+        "dependence_name": "patrulheiro",
+        "name": "caçador",
+        "id": "caçador"
+    },
+    {
+        "dependence_name": "patrulheiro",
+        "name": "flagelo dos inimigos",
+        "id": "flagelo dos inimigos"
+    },
+    {
+        "dependence_name": "patrulheiro",
+        "name": "guardião selvagem",
+        "id": "guardião selvagem"
+    },
+    {
+        "dependence_name": "patrulheiro",
+        "name": "mestre das bestas",
+        "id": "mestre das bestas"
+    },
+    {
+        "dependence_name": "patrulheiro",
+        "name": "rastreador urbano",
+        "id": "rastreador urbano"
     }
 ]

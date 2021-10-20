@@ -2,21 +2,121 @@
     {
         "dependence_name": "elfo",
         "name": "alto elfo",
-        "id": "high-elf"
-    },
-    {
-        "dependence_name": "anão",
-        "name": "anão da colina",
-        "id": "hill-dwarf"
-    },
-    {
-        "dependence_name": "gnomo",
-        "name": "gnomo das rochas",
-        "id": "rock-gnome"
+        "id": "alto elfo"
     },
     {
         "dependence_name": "elfo",
         "name": "drow elfo",
-        "id": "drow-elf"
+        "id": "drow elfo"
+    },
+    {
+        "dependence_name": "elfo",
+        "name": "elfo da floresta",
+        "id": "elfo da floresta"
+    },
+    {
+        "dependence_name": "anão",
+        "name": "anão da colina",
+        "id": "anão da colina"
+    },
+    {
+        "dependence_name": "anão",
+        "name": "anão da montanha",
+        "id": "anão da montanha"
+    },
+    {
+        "dependence_name": "gnomo",
+        "name": "gnomo das rochas",
+        "id": "gnomo das rochas"
+    },
+    {
+        "dependence_name": "gnomo",
+        "name": "gnomo da floresta",
+        "id": "gnomo da floresta"
+    },
+    {
+        "dependence_name": "halfling",
+        "name": "pés leves",
+        "id": "pés leves"
+    },
+    {
+        "dependence_name": "halfling",
+        "name": "robusto",
+        "id": "robusto"
+    },
+    {
+        "dependence_name": "draconato",
+        "name": "azul (elétrico)",
+        "id": "azul (elétrico)"
+    },
+    {
+        "dependence_name": "draconato",
+        "name": "branco (frio)",
+        "id": "branco (frio)"
+    },
+    {
+        "dependence_name": "draconato",
+        "name": "bronze (elétrico)",
+        "id": "bronze (elétrico)"
+    },
+    {
+        "dependence_name": "draconato",
+        "name": "cobre (ácido)",
+        "id": "cobre (ácido)"
+    },
+    {
+        "dependence_name": "draconato",
+        "name": "latão (fogo)",
+        "id": "latão (fogo)"
+    },
+    {
+        "dependence_name": "draconato",
+        "name": "negro (ácido)",
+        "id": "negro (ácido)"
+    },
+    {
+        "dependence_name": "draconato",
+        "name": "prata (frio)",
+        "id": "prata (frio)"
+    },
+    {
+        "dependence_name": "draconato",
+        "name": "verde (veneno)",
+        "id": "verde (veneno)"
+    },
+    {
+        "dependence_name": "draconato",
+        "name": "vermelho (fogo)",
+        "id": "vermelho (fogo)"
+    },
+    {
+        "dependence_name": "meio-elfo",
+        "name": "alto elfo",
+        "id": "alto elfo"
+    },
+    {
+        "dependence_name": "meio-elfo",
+        "name": "drow elfo",
+        "id": "drow elfo"
+    },
+    {
+        "dependence_name": "meio-elfo",
+        "name": "elfo da floresta",
+        "id": "elfo da floresta"
+    },
+    {
+        "dependence_name": "meio-orc",
+        "name": "comum",
+        "id": "comum"
+    },
+    {
+        "dependence_name": "humano",
+        "name": "comum",
+        "id": "comum"
+    },
+    {
+        "dependence_name": "tiefling",
+        "name": "comum",
+        "id": "comum"
     }
 ]

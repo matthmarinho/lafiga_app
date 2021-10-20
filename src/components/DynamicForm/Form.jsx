@@ -35,7 +35,7 @@ const Form = ({ formData, values, setValues, row }) => {
             autoComplete="off"
         >
             {currentData.map(field => {
-                if (values[field.id]) {
+                if (values[field.id] !== undefined) {
                     return (
                         <Box key={`box_${field.id}`} item sx={{ maxWidth: '100%' }}>
                             <Field
