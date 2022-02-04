@@ -1,6 +1,7 @@
 import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material"
 import React from "react"
 import MultipleSelectChip from "./MultiSelectChip"
+import FileInput from "./FileInput"
 
 const Field = ({ field, fieldChanged, values }) => {
     const capitalize = (str) => {
@@ -8,6 +9,10 @@ const Field = ({ field, fieldChanged, values }) => {
     }
     
     switch (field.component) {
+        case "file-input":
+            return (
+                <FileInput field={field} values={values} fieldChanged={fieldChanged}/>
+            )
         case "multi-select":
             return (
                 <MultipleSelectChip field={field} values={values} fieldChanged={fieldChanged}/>

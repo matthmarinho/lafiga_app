@@ -1,5 +1,11 @@
 import api from "./api";
 
+const config = {
+  headers: {
+    'Content-Type': 'multipart/form-data'
+  }
+};
+
 const getAll = () => {
   return api.get("/api/v1/maps");
 };
@@ -9,7 +15,11 @@ const get = id => {
 };
 
 const create = data => {
-  return api.post("/api/v1/maps", data);
+  const formData = new FormData();
+  formData.append('image', data.image)
+  formData.append('name', data.name)
+
+  return api.post("/api/v1/maps", formData, config);
 };
 
 const update = (id, data) => {

@@ -15,13 +15,14 @@ import { Box } from '@mui/system'
 import { SketchPicker } from 'react-color'
 import { styled } from '@mui/material/styles'
 
-export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModal, categories, markerInfo }) {
+export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModal, categories, markerInfo, teams }) {
     const [name, setName] = useState('')
     const [color, setColor] = useState('#fff')
     const [openPicker, setOpenPicker] = useState(false)
     const [description, setDescription] = useState('')
     const [category, setCategory] = useState('')
-    const [categoryName, setCategoryName] = useState('')
+    // const [categoryName, setCategoryName] = useState('')
+    const [team, setTeam] = useState('')
     const isOpen = Boolean(openModal)
 
     const componentToHex = (c) => {
@@ -29,7 +30,7 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
         return hex.length === 1 ? "0" + hex : hex;
     }
 
-    const rgbToHex = ({r, g, b}) => {
+    const rgbToHex = ({ r, g, b }) => {
         return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
     }
 
@@ -48,9 +49,10 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
             name: name,
             description: description,
             color: hexToRgb(color),
-            category: category,
-            categoryName: categoryName,
+            category: categories.find(item => item.name === category),
+            team: teams.find(item => item.name === team),
         }
+        console.log(data)
         if (Object.values(markerInfo).length === 0) {
             addNewMarker(data)
         } else {
@@ -58,8 +60,9 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
         }
         setName('')
         setDescription('')
-        setCategory('')
-        setCategoryName('')
+        setCategory({ name: '' })
+        // setCategoryName('')
+        setTeam({name: ''})
         setOpenModal(false)
     }
 
@@ -73,14 +76,15 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
     }));
 
     useEffect(() => {
-        if (markerInfo) {
+        if (Object.keys(markerInfo).length > 0) {
             setName(markerInfo.name)
             setDescription(markerInfo.description)
-            setCategory(markerInfo.category_id)
-            setCategoryName(markerInfo.category_name)
+            setCategory(markerInfo.category.name)
+            // setCategoryName(markerInfo.category_name)
+            setTeam(markerInfo.team.name)
             if (markerInfo.color) {
                 let hex = rgbToHex(markerInfo.color)
-                setColor(hex) 
+                setColor(hex)
             }
         }
     }, [markerInfo])// eslint-disable-line react-hooks/exhaustive-deps
@@ -95,24 +99,16 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
             >
                 <DialogTitle id="form-dialog-title">New Marker</DialogTitle>
                 <DialogContent>
-                    <Box component="form"
+                    <Box
+                        component="form"
+                        sx={{
+                            '& .MuiTextField-root': { m: 1, maxWidth: '100%' },
+                        }}
                         noValidate
-                        sx={{ flexGrow: 1 }}
+                        autoComplete="off"
                     >
-                        <Box item sx={{ paddingTop: 1, paddingBottom: 2 }}>
-                            <FormControl fullWidth>
-                                <TextField
-                                    label="Name"
-                                    id="outlined-margin-none"
-                                    variant="outlined"
-                                    value={name}
-                                    onInput={e => setName(e.target.value)}
-                                    required={true}
-                                />
-                            </FormControl>
-                        </Box>
-                        <Box item sx={{ paddingBottom: 2 }}>
-                            <FormControl fullWidth>
+                        <Box item>
+                            <FormControl sx={{ m: '8px', pr: '16px' }} fullWidth>
                                 <InputLabel id="demo-simple-select-helper-label">Category *</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-filled-label"
@@ -120,15 +116,45 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
                                     value={category}
                                     label={'Category*'}
                                     onChange={e => setCategory(e.target.value)}
-                                    required={true}
                                 >
                                     {categories.map((category) => (
-                                        <MenuItem key={category.id} value={category.id} onClick={e => setCategoryName(category.name)}>{category.name}</MenuItem>
+                                        <MenuItem key={category.id} value={category.name}>{category.name}</MenuItem>
                                     ))}
                                 </Select>
                             </FormControl>
                         </Box>
-                        <Box item sx={{ paddingBottom: 2 }}>
+                        {category === 'Equipe' ? (
+                            <Box item>
+                                <FormControl sx={{ m: '8px', pr: '16px' }} fullWidth>
+                                    <InputLabel id="demo-simple-select-helper-label">Team *</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-filled-label"
+                                        id="demo-simple-select-filled"
+                                        value={team}
+                                        label={'Team*'}
+                                        onChange={e => setTeam(e.target.value)}
+                                    >
+                                        {teams.map((team) => (
+                                            <MenuItem key={team.id} value={team.name}>{team.name}</MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </Box>
+                        ) : (
+                            <Box item>
+                                <FormControl fullWidth>
+                                    <TextField
+                                        label="Name"
+                                        id="outlined-margin-none"
+                                        variant="outlined"
+                                        value={name}
+                                        onInput={e => setName(e.target.value)}
+                                        required={true}
+                                    />
+                                </FormControl>
+                            </Box>
+                        )}
+                        <Box item>
                             <FormControl fullWidth>
                                 <TextField
                                     id="outlined-full-width"
@@ -142,8 +168,8 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
                                 />
                             </FormControl>
                         </Box>
-                        {categoryName === 'Equipe' &&
-                            <Box item>
+                        {category === 'Equipe' &&
+                            <Box item sx={{m: 1}}>
                                 <FormControl fullWidth>
                                     <ColorButton variant="contained" color="primary" onClick={() => setOpenPicker(!openPicker)}>
                                         Color
@@ -157,7 +183,7 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
                     <Button onClick={() => setOpenModal(false)} >
                         Cancel
                     </Button>
-                    <Button onClick={(e) => handleSubmit(e)} disabled={name === '' || description === '' || category === ''}>
+                    <Button onClick={(e) => handleSubmit(e)} disabled={description === '' || category === ''}>
                         {Object.values(markerInfo).length === 0 ? 'Create' : 'Edit'}
                     </Button>
                 </DialogActions>

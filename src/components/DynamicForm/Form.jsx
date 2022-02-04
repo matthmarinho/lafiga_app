@@ -6,6 +6,7 @@ const Form = ({ formData, values, setValues, row }) => {
     const [currentData, setCurrentData] = useState(formData)
 
     const fieldChanged = (fieldId, value) => {
+        console.log(value)
         setValues(currentValues => {
             currentValues[fieldId] = value
             return currentValues

@@ -34,6 +34,7 @@ export default function FormModal({ open, setOpen, formData, row, title, Service
     }
 
     const create = () => {
+        console.log(values)
         Service.create(values)
         .then(response => {
             setOpen(false)

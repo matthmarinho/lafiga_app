@@ -9,6 +9,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import { isBrowser } from 'react-device-detect'
+import ImageIcon from '@mui/icons-material/Image'
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -39,10 +40,14 @@ function stableSort(array, comparator) {
 }
 
 function capitalize(str) {
-    return str.toString().charAt(0).toUpperCase() + str.toString().slice(1)
+    return str ? str.toString().charAt(0).toUpperCase() + str.toString().slice(1) : null
 }
 
-function generateCells(value, index, idx) {
+function isBase64(str) {
+    return str && typeof str === 'string' && str !== '' && str.split(',')[0] === 'data:image/jpeg;base64' ? true : false
+}
+
+function generateCells(value, idx) {
     if (idx == 0) {
         return (
             <TableCell
@@ -54,9 +59,23 @@ function generateCells(value, index, idx) {
                 {capitalize(value)}
             </TableCell>
         )
+    } else if (Array.isArray(value)) {
+        return (
+            <TableCell key={`cell_${value}_${idx}`} align="left">
+                {value.map(item => item.name).join(', ')}
+            </TableCell>
+        )
+    } else if (isBase64(value)) {
+        return (
+            <TableCell key={`cell_${value}_${idx}`} align="left">
+                <ImageIcon />
+            </TableCell>
+        )
     } else {
         return (
-            <TableCell key={`cell_${value}_${idx}`} align="left">{Array.isArray(value) ? value.map(item => item.name).join(', ') : capitalize(value)}</TableCell>
+            <TableCell key={`cell_${value}_${idx}`} align="left">
+                {capitalize(value)}
+            </TableCell>
         )
     }
 }
@@ -157,17 +176,17 @@ export default function EnhancedTable({ headCells, items, setOpenModal, selected
                                         selected={isItemSelected}
                                     >
                                         <TableCell padding="checkbox">
-                                        {isAdmin && 
-                                            <Checkbox
-                                                color="primary"
-                                                checked={isItemSelected}
-                                                inputProps={{
-                                                    'aria-labelledby': labelId,
-                                                }}
-                                            />}
+                                            {isAdmin &&
+                                                <Checkbox
+                                                    color="primary"
+                                                    checked={isItemSelected}
+                                                    inputProps={{
+                                                        'aria-labelledby': labelId,
+                                                    }}
+                                                />}
                                         </TableCell>
                                         {Object.values(row).map((value, idx) =>
-                                            generateCells(value, index, idx)
+                                            generateCells(value, idx)
                                         )}
                                     </TableRow>
                                 )
