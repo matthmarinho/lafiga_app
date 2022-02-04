@@ -17,6 +17,8 @@ import L from "leaflet"
 import { useParams } from "react-router-dom"
 import 'leaflet/dist/leaflet.css'
 import { userData } from '../../services/auth'
+import TeamService from '../../services/team'
+import MapsService from '../../services/maps'
 
 var Leaflet = require('leaflet')
 
@@ -67,6 +69,7 @@ export default function ImageMap() {
     const [openInfoModal, setOpenInfoModal] = useState(false)
     const [infoMarker, setInfoMarker] = useState({})
     const [isAdmin, setIsAdmin] = useState(false)
+    const [teams, setTeams] = useState([])
 
     const actions = [
         { icon: <AddLocationIcon />, name: 'Config Markers', function: () => handleCreate() },
@@ -102,8 +105,10 @@ export default function ImageMap() {
             position: [lat, lng],
             draggable: true,
             color: marker.color,
-            category_id: marker.category,
-            category_name: marker.categoryName,
+            category_id: marker.category.id,
+            category_name: marker.category.name,
+            team_id: marker.team.id,
+            team_name: marker.team_name,
             new: true,
         }
 
@@ -129,8 +134,9 @@ export default function ImageMap() {
             position: [lat, lng],
             draggable: true,
             color: marker.color,
-            category_id: marker.category,
-            category_name: marker.categoryName,
+            category_id: marker.category.id,
+            category_name: marker.category.name,
+            team_id: marker.team.id,
             new: true,
         }
 
@@ -182,15 +188,32 @@ export default function ImageMap() {
 
     const setMap = () => {
         setLoaded(false)
-        let imageName = require('../../_assets/img/' + mapName.toLowerCase() + '.jpg')
-        let img = new Image()
-        img.src = imageName.default
-        img.onload = async () => {
-            setImage(img)
-            setCenter([img.height / 2, img.width / 2])
-            setBounds([[0, 0], [img.height, img.width]])
+
+        MapsService.get(19)
+        .then(response => {
+            let img = new Image()
+            img.src = response.data.image
+            img.onload = async () => {
+                setImage(img)
+                setCenter([img.height / 2, img.width / 2])
+                setBounds([[0, 0], [img.height, img.width]])
+                setLoaded(true)
+            }
+        })
+        .catch(e => {
+            console.log(e)
             setLoaded(true)
-        }
+        })
+
+        // let imageName = require('../../_assets/img/' + mapName.toLowerCase() + '.jpg')
+        // let img = new Image()
+        // img.src = imageName.default
+        // img.onload = async () => {
+        //     setImage(img)
+        //     setCenter([img.height / 2, img.width / 2])
+        //     setBounds([[0, 0], [img.height, img.width]])
+        //     setLoaded(true)
+        // }
     }
 
     const getMap = async () => {
@@ -219,6 +242,7 @@ export default function ImageMap() {
 
     const customIcon = (marker) => {
         let icon
+        console.log(marker)
         switch (marker.category_name) {
             case 'Região':
                 icon = L.divIcon({
@@ -317,7 +341,7 @@ export default function ImageMap() {
                     draggable={creating}
                     eventHandlers={eventHandlers}
                 >
-                    <Tooltip direction="top" offset={[0, -17]}>{marker.name}</Tooltip>
+                    <Tooltip direction="top" offset={[0, -17]}>{marker.name !== '' ? marker.name : marker.team_name}</Tooltip>
                 </Marker>
             )
         })
@@ -345,6 +369,17 @@ export default function ImageMap() {
             })
     }
 
+    const getTeams = () => {
+        setLoading(true)
+        TeamService.getAll()
+            .then(response => {
+                setTeams(response.data)
+            })
+            .catch(e => {
+                console.log(e)
+            })
+    }
+
     const getUser = () => {
         let user = userData()
         setIsAdmin(Boolean(user && user.role_id === 1 ? true : false))
@@ -354,11 +389,20 @@ export default function ImageMap() {
         getMap()
         getCategories()
         getUser()
+        getTeams()
     }, [mapId])
 
     return (
         <MapDiv>
-            <MarkerModal openModal={openModal} setOpenModal={setOpenModal} addNewMarker={addNewMarker} edit={editMarker} categories={categories} markerInfo={infoMarker} />
+            <MarkerModal
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+                addNewMarker={addNewMarker}
+                edit={editMarker}
+                categories={categories}
+                markerInfo={infoMarker}
+                teams={teams}
+            />
             <InfoModal
                 openModal={openInfoModal}
                 setOpenModal={setOpenInfoModal}
