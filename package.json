@@ -1,6 +1,6 @@
 {
   "name": "lafiga_app",
-  "version": "0.1.4-beta",
+  "version": "0.1.5-beta",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.4.1",
