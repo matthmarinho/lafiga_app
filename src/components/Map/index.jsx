@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Stage, Layer, Star, Text, Image } from 'react-konva'
 import useImage from 'use-image'
-import mundi from '../../_assets/img/mundi.jpg'
+import mundi from '../../_assets/img/mundi.jpeg'
 import MarkerService from '../../services/marker'
 
 function generateShapes() {

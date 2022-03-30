@@ -178,10 +178,10 @@ export default function Chars() {
 
     const remove = () => {
         setLoading(true)
+        setDeleteModal(false)
         Service.removeInBatches({ data: JSON.stringify(selected) })
             .then(response => {
                 setSelected([])
-                setDeleteModal(false)
                 getAll()
             })
             .catch(e => {

@@ -23,6 +23,7 @@ export default function FormModal({ open, setOpen, formData, row, title, Service
     }
 
     const edit = () => {
+        console.log(values)
         Service.update(row.id, values)
             .then(response => {
                 setOpen(false)
@@ -34,6 +35,7 @@ export default function FormModal({ open, setOpen, formData, row, title, Service
     }
 
     const create = () => {
+        console.log(values)
         Service.create(values)
         .then(response => {
             setOpen(false)

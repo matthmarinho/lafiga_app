@@ -97,7 +97,6 @@ function NavBarContent() {
     const [openCollapse, setOpenCollapse] = useState(generateCollapseState(SidebarItems, 'name', false))
     const [map, setMap] = useState(null)
     const [mapName, setMapName] = useState(null)
-    const [maps, setMaps] = useState([])
     const [user, setUser] = useState(null)
     const [anchorEl, setAnchorEl] = useState(null)
     const [logged, setLogged] = useState(false)
@@ -122,6 +121,7 @@ function NavBarContent() {
 
     const toggleDrawer = () => {
         setOpen(!open)
+        getMenuData()
     }
 
     const handleProfileMenuOpen = (event) => {
@@ -136,29 +136,18 @@ function NavBarContent() {
         user ? null : <LoginModal anchorEl={anchorEl} setAnchorEl={setAnchorEl} setLogged={setLogged} />
     )
 
-    const setMapsId = (data) => {
+    const setMaps = (data) => {
         const sideItems = SidebarItems
         const index = sideItems.findIndex(item => item.name === "Map")
-        const sideMaps = sideItems[index].items
-
-        SidebarItems[index].items = sideMaps.map((item) => {
-            let info = data.find((e) => e.name === item.name)
-            if (info) {
-                item.route += `/${info.id}`
-                return { ...info, ...item }
-            } else {
-                return { ...item }
-            }
-        })
+        SidebarItems[index].items = data
 
         setSideBarItems(SidebarItems)
     }
 
     const getMenuData = () => {
-        MapService.getAll()
+        MapService.getNames()
             .then(response => {
                 setMaps(response.data)
-                setMapsId(response.data)
             })
             .catch(e => {
                 console.log(e)
