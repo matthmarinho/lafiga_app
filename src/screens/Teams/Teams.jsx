@@ -150,10 +150,10 @@ export default function Teams() {
 
     const remove = () => {
         setLoading(true)
+        setDeleteModal(false)
         Service.removeInBatches({ data: JSON.stringify(selected) })
             .then(() => {
                 setSelected([])
-                setDeleteModal(false)
                 getAll()
             })
             .catch(e => {

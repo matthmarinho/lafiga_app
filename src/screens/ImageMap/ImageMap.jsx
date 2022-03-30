@@ -105,10 +105,8 @@ export default function ImageMap() {
             position: [lat, lng],
             draggable: true,
             color: marker.color,
-            category_id: marker.category.id,
-            category_name: marker.category.name,
-            team_id: marker.team.id,
-            team_name: marker.team_name,
+            category: { id: marker.category.id, name: marker.category.name },
+            team: marker.category.name == "Equipe" ? {id: marker.team.id, name: marker.team.name } : null,
             new: true,
         }
 
@@ -134,9 +132,8 @@ export default function ImageMap() {
             position: [lat, lng],
             draggable: true,
             color: marker.color,
-            category_id: marker.category.id,
-            category_name: marker.category.name,
-            team_id: marker.team.id,
+            category: { id: marker.category.id, name: marker.category.name },
+            team: {id: marker.team.id, name: marker.team.name },
             new: true,
         }
 
@@ -159,13 +156,14 @@ export default function ImageMap() {
             payload.push(
                 {
                     id: marker.id,
-                    category_id: marker.category_id,
+                    category_id: marker.category.id,
                     description: marker.description,
                     latitude: marker.position[0],
                     longitude: marker.position[1],
                     map_id: marker.map_id,
                     name: marker.name,
-                    color: marker.color
+                    color: marker.color,
+                    team_id: marker.team.id
                 }
             )
         )
@@ -189,7 +187,7 @@ export default function ImageMap() {
     const setMap = () => {
         setLoaded(false)
 
-        MapsService.get(19)
+        MapsService.get(mapId)
         .then(response => {
             let img = new Image()
             img.src = response.data.image
@@ -243,7 +241,7 @@ export default function ImageMap() {
     const customIcon = (marker) => {
         let icon
         console.log(marker)
-        switch (marker.category_name) {
+        switch (marker.category.name) {
             case 'Região':
                 icon = L.divIcon({
                     className: "dummy",
@@ -341,7 +339,7 @@ export default function ImageMap() {
                     draggable={creating}
                     eventHandlers={eventHandlers}
                 >
-                    <Tooltip direction="top" offset={[0, -17]}>{marker.name !== '' ? marker.name : marker.team_name}</Tooltip>
+                    <Tooltip direction="top" offset={[0, -17]}>{marker.name !== '' ? marker.name : marker.team.name}</Tooltip>
                 </Marker>
             )
         })
