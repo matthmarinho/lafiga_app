@@ -11,6 +11,7 @@ import Form from './Form'
 export default function FormModal({ open, setOpen, formData, row, title, Service, getAll }) {
     const isOpen = Boolean(open)
     const [values, setValues] = useState([])
+    const [selectedFiles, setSelectedFiles] = useState();
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -34,8 +35,17 @@ export default function FormModal({ open, setOpen, formData, row, title, Service
     }
 
     const create = () => {
+        let oldValue = ''
+        if (values['attachment']) {
+            oldValue = values['attachment']
+            values['attachment'] = selectedFiles
+        }
         Service.create(values)
         .then(response => {
+            if (values['attachment']) {
+                values['attachment'] = oldValue
+            }
+            values['attachment'] = oldValue
             setOpen(false)
             getAll()
         })
@@ -59,7 +69,7 @@ export default function FormModal({ open, setOpen, formData, row, title, Service
             >
                 <DialogTitle id="form-dialog-title">New {title}</DialogTitle>
                 <DialogContent>
-                    <Form formData={formData} values={values} setValues={setValues} row={row} />
+                    <Form formData={formData} values={values} setValues={setValues} row={row} selectedFiles={selectedFiles} setSelectedFiles={setSelectedFiles}/>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => handleCancel()} >

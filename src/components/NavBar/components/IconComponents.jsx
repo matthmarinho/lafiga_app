@@ -1,6 +1,7 @@
 let IconComponents = {}
 
 IconComponents['Home'] = require('@mui/icons-material/Home').default
+IconComponents['Files'] = require('@mui/icons-material/Archive').default
 IconComponents['Map'] = require('@mui/icons-material/Map').default
 IconComponents['Public'] = require('@mui/icons-material/Public').default
 IconComponents['Settings'] = require('@mui/icons-material/Settings').default
