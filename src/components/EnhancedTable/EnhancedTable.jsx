@@ -83,7 +83,7 @@ export default function EnhancedTable({ headCells, items, setOpenModal, selected
     }
 
     const handleClick = (event, row) => {
-        const selectedIndex = selected.findIndex((item) => item.name === row.name)
+        const selectedIndex = selected.findIndex((item) => item.id === row.id)
         let newSelected = []
 
         if (selectedIndex === -1) {
@@ -111,8 +111,9 @@ export default function EnhancedTable({ headCells, items, setOpenModal, selected
         setPage(0)
     }
 
-    const isSelected = (row) => selected.findIndex(item => item.name === row.name) !== -1
-
+    const isSelected = (row) => {
+        return selected.findIndex(item => item.id === row.id) !== -1
+    }
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - items.length) : 0
 
@@ -153,7 +154,7 @@ export default function EnhancedTable({ headCells, items, setOpenModal, selected
                                         role="checkbox"
                                         aria-checked={isItemSelected}
                                         tabIndex={-1}
-                                        key={row.name}
+                                        key={row.id}
                                         selected={isItemSelected}
                                     >
                                         <TableCell padding="checkbox">

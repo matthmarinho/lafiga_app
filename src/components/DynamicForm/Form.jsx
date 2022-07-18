@@ -2,7 +2,7 @@ import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import Field from './Field'
 
-const Form = ({ formData, values, setValues, row }) => {
+const Form = ({ formData, values, setValues, row, setSelectedFiles,  }) => {
     const [currentData, setCurrentData] = useState(formData)
 
     const fieldChanged = (fieldId, value) => {
@@ -10,9 +10,21 @@ const Form = ({ formData, values, setValues, row }) => {
             currentValues[fieldId] = value
             return currentValues
         })
-
         setCurrentData([...currentData])
     }
+
+    const onFileChange = (fieldId, targetFile) => {
+        setValues(currentValues => {
+            currentValues[fieldId] = targetFile.value
+            return currentValues
+        })
+        selectFile(targetFile)
+        setCurrentData([...currentData])
+    }
+
+    const selectFile = (targetFile) => {
+        setSelectedFiles(targetFile.files.item(0));
+    };
 
     useEffect(() => {
         const upcomingData = formData
@@ -42,6 +54,7 @@ const Form = ({ formData, values, setValues, row }) => {
                                 key={`field_${field.id}`}
                                 field={field}
                                 fieldChanged={fieldChanged}
+                                onFileChange={onFileChange}
                                 values={values}
                                 row={row}
                             />

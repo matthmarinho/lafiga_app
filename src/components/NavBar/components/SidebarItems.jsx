@@ -90,6 +90,12 @@ const SidebarItems = [
         icon: "Group",
     },
     {
+        name: "Files",
+        active: false,
+        icon: "Files",
+        route: "/files"
+    },
+    {
         name: "Settings",
         active: false,
         icon: "Settings",
@@ -105,6 +111,12 @@ const SidebarItems = [
                 active: true,
                 icon: "Group",
                 route: "/teams"
+            },
+            {
+                name: "Uploads",
+                active: true,
+                icon: "Group",
+                route: "/uploads"
             },
             {
                 name: "Maps",

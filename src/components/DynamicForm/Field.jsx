@@ -2,7 +2,7 @@ import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/mater
 import React from "react"
 import MultipleSelectChip from "./MultiSelectChip"
 
-const Field = ({ field, fieldChanged, values }) => {
+const Field = ({ field, fieldChanged, values, onFileChange }) => {
     const capitalize = (str) => {
         return str.charAt(0).toUpperCase() + str.slice(1)
     }
@@ -34,6 +34,20 @@ const Field = ({ field, fieldChanged, values }) => {
                             ))
                         }
                     </Select>
+                </FormControl>
+            )
+        case "file":
+            return (
+                <FormControl key={`form_control_${field.id}`} fullWidth>
+                    <TextField
+                        id={field.id}
+                        key={`text_field_${field.id}`}
+                        label={field.label}
+                        type={field.component}
+                        value={values[field.id] || ''}
+                        onChange={e => onFileChange(field.id, e.target)}
+                        required
+                    />
                 </FormControl>
             )
         default:
