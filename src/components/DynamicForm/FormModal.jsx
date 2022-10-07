@@ -8,14 +8,14 @@ import {
 } from '@mui/material'
 import Form from './Form'
 
-export default function FormModal({ open, setOpen, formData, row, title, Service, getAll }) {
+export default function FormModal({ open, setOpen, formData, data, title, Service, getAll }) {
     const isOpen = Boolean(open)
     const [values, setValues] = useState([])
 
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        if (row) {
+        if (data) {
             edit()
         } else {
             create()
@@ -24,7 +24,7 @@ export default function FormModal({ open, setOpen, formData, row, title, Service
 
     const edit = () => {
         console.log(values)
-        Service.update(row.id, values)
+        Service.update(data.id, values)
             .then(response => {
                 setOpen(false)
                 getAll()
@@ -61,14 +61,14 @@ export default function FormModal({ open, setOpen, formData, row, title, Service
             >
                 <DialogTitle id="form-dialog-title">New {title}</DialogTitle>
                 <DialogContent>
-                    <Form formData={formData} values={values} setValues={setValues} row={row} />
+                    <Form formData={formData} values={values} setValues={setValues} data={data} />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => handleCancel()} >
                         Cancel
                     </Button>
                     <Button onClick={(e) => handleSubmit(e)}>
-                        {row ? 'Edit' : 'Create'}
+                        {data ? 'Edit' : 'Create'}
                     </Button>
                 </DialogActions>
             </Dialog>

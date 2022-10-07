@@ -252,7 +252,7 @@ export default function Chars() {
                 open={openModal}
                 setOpen={setOpenModal}
                 formData={dataValue}
-                row={currentRow[0]}
+                data={currentRow[0]}
                 title={'Char'}
                 Service={Service}
                 getAll={getAll}

@@ -2,20 +2,21 @@ import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/mater
 import React from "react"
 import MultipleSelectChip from "./MultiSelectChip"
 import FileInput from "./FileInput"
+import ColorPicker from "./ColorPicker"
 
 const Field = ({ field, fieldChanged, values }) => {
     const capitalize = (str) => {
         return str.charAt(0).toUpperCase() + str.slice(1)
     }
-    
+
     switch (field.component) {
         case "file-input":
             return (
-                <FileInput field={field} values={values} fieldChanged={fieldChanged}/>
+                <FileInput field={field} values={values} fieldChanged={fieldChanged} />
             )
         case "multi-select":
             return (
-                <MultipleSelectChip field={field} values={values} fieldChanged={fieldChanged}/>
+                <MultipleSelectChip field={field} values={values} fieldChanged={fieldChanged} />
             )
         case "select":
             return (
@@ -39,6 +40,27 @@ const Field = ({ field, fieldChanged, values }) => {
                             ))
                         }
                     </Select>
+                </FormControl>
+            )
+        case "color-picker":
+            console.log(values, field, values[field.id])
+            return (
+                <ColorPicker field={field} values={values} fieldChanged={fieldChanged} />
+            )
+        case "multiline-text":
+            return (
+                <FormControl key={`form_control_${field.id}`} fullWidth>
+                    <TextField
+                        id={field.id}
+                        key={`text_field_${field.id}`}
+                        label={field.label}
+                        type={field.component}
+                        value={values[field.id] || ''}
+                        onChange={e => fieldChanged(field.id, e.target.value)}
+                        multiline
+                        rows={5}
+                        required
+                    />
                 </FormControl>
             )
         default:

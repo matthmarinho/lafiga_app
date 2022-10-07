@@ -91,18 +91,6 @@ const headCells = [
         disablePadding: false,
         label: 'File Name',
     },
-    {
-        id: 'height',
-        numeric: false,
-        disablePadding: false,
-        label: 'Height',
-    },
-    {
-        id: 'width',
-        numeric: false,
-        disablePadding: false,
-        label: 'Width',
-    },
 ]
 
 const dataValueDefault = [
@@ -216,7 +204,7 @@ export default function Maps() {
                 open={openModal}
                 setOpen={setOpenModal}
                 formData={dataValue}
-                row={currentRow[0]}
+                data={currentRow[0]}
                 title={'Map'}
                 Service={Service}
                 getAll={getAll}

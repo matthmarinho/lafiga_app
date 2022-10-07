@@ -100,14 +100,10 @@ export default function ImageMap() {
         let newMarker = {
             id: lastId + 1,
             map_id: mapId,
-            name: marker.name,
-            description: marker.description,
             position: [lat, lng],
             draggable: true,
-            color: marker.color,
-            category: { id: marker.category.id, name: marker.category.name },
-            team: marker.category.name == "Equipe" ? {id: marker.team.id, name: marker.team.name } : null,
             new: true,
+            ...marker
         }
 
         let filtered = newMarkers.filter(function (value) {
@@ -119,22 +115,14 @@ export default function ImageMap() {
     }
 
     const editMarker = (marker) => {
-        let lat = infoMarker.latitude
-        let lng = infoMarker.longitude
-
         setLoading(true)
         setShowInfo(false)
 
         let data = {
             map_id: mapId,
-            name: marker.name,
-            description: marker.description,
-            position: [lat, lng],
-            draggable: true,
-            color: marker.color,
-            category: { id: marker.category.id, name: marker.category.name },
-            team: {id: marker.team.id, name: marker.team.name },
-            new: true,
+            latitude: infoMarker.latitude,
+            longitude: infoMarker.longitude,
+            ...marker
         }
 
         MarkerService.update(mapId, infoMarker.id, data)
@@ -147,25 +135,38 @@ export default function ImageMap() {
             })
     }
 
+    const editTeam = (team) => {
+        setLoading(true)
+        TeamService.update(team.markerable_id, team.markerable)
+            .then(response => {
+                getMap()
+                setShowInfo(false)
+                setLoading(false)
+            })
+            .catch(e => {
+                console.log(e)
+            })
+    }
+
     const saveNewMarkers = () => {
         setCreating(false)
         setLoading(true)
 
         let payload = []
-        newMarkers.map((marker) =>
+        newMarkers.map((marker) => {
+            console.log(marker)
             payload.push(
                 {
                     id: marker.id,
-                    category_id: marker.category.id,
-                    description: marker.description,
+                    markerable: marker.markerable,
+                    markerable_id: marker.markerable_id,
+                    markerable_type: marker.markerable_type,
                     latitude: marker.position[0],
                     longitude: marker.position[1],
                     map_id: marker.map_id,
-                    name: marker.name,
-                    color: marker.color,
-                    team_id: marker.team.id
                 }
             )
+        }
         )
 
         MarkerService.create(mapId, { data: JSON.stringify(payload) })
@@ -202,16 +203,6 @@ export default function ImageMap() {
             console.log(e)
             setLoaded(true)
         })
-
-        // let imageName = require('../../_assets/img/' + mapName.toLowerCase() + '.jpg')
-        // let img = new Image()
-        // img.src = imageName.default
-        // img.onload = async () => {
-        //     setImage(img)
-        //     setCenter([img.height / 2, img.width / 2])
-        //     setBounds([[0, 0], [img.height, img.width]])
-        //     setLoaded(true)
-        // }
     }
 
     const getMap = async () => {
@@ -240,8 +231,7 @@ export default function ImageMap() {
 
     const customIcon = (marker) => {
         let icon
-        console.log(marker)
-        switch (marker.category.name) {
+        switch (marker.markerable_type) {
             case 'Região':
                 icon = L.divIcon({
                     className: "dummy",
@@ -258,7 +248,7 @@ export default function ImageMap() {
             case 'Masmorra':
                 icon = iconDungeon
                 break
-            case 'Equipe':
+            case 'Team':
                 icon = L.divIcon({
                     className: "dummy",
                     iconSize: [25, 25],
@@ -266,7 +256,7 @@ export default function ImageMap() {
                     html: `
                     <div style="overflow:visible">
                         <i class="material-icons" 
-                            style="color: rgb(${marker.color.r}, ${marker.color.g}, ${marker.color.b})"
+                            style="color: ${marker.markerable.color}"
                         >
                             room
                         </i>
@@ -339,7 +329,7 @@ export default function ImageMap() {
                     draggable={creating}
                     eventHandlers={eventHandlers}
                 >
-                    <Tooltip direction="top" offset={[0, -17]}>{marker.name !== '' ? marker.name : marker.team.name}</Tooltip>
+                    {/* <Tooltip direction="top" offset={[0, -17]}>{marker.name !== '' ? marker.name : marker.team.name}</Tooltip> */}
                 </Marker>
             )
         })
@@ -348,6 +338,7 @@ export default function ImageMap() {
     const GetMarkerPos = () => {
         mapEvent({
             click(e) {
+                setShowInfo(false)
                 setCurrentPoint(e.latlng)
                 if (creating) {
                     setOpenModal(true)
@@ -396,7 +387,7 @@ export default function ImageMap() {
                 openModal={openModal}
                 setOpenModal={setOpenModal}
                 addNewMarker={addNewMarker}
-                edit={editMarker}
+                edit={editTeam}
                 categories={categories}
                 markerInfo={infoMarker}
                 teams={teams}
@@ -476,7 +467,7 @@ export default function ImageMap() {
                     />
                 ))}
             </SpeedDial>}
-            {showInfo && <SpeedDialCustom
+            {showInfo && !creating && <SpeedDialCustom
                 ariaLabel="SpeedDial info"
                 isAdmin={isAdmin}
                 icon={<InfoIcon />}

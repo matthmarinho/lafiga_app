@@ -240,7 +240,7 @@ export default function Teams() {
                     open={openModal}
                     setOpen={setOpenModal}
                     formData={dataValue}
-                    row={currentRow[0]}
+                    data={currentRow[0]}
                     title={'Team'}
                     Service={Service}
                     getAll={getAll}
