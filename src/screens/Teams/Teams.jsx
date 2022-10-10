@@ -163,7 +163,7 @@ export default function Teams() {
 
     const getChars = () => {
         setLoading(true)
-        CharService.getAll()
+        CharService.withoutTeam()
             .then(response => {
                 dataValueDefault.find((value) => value.id === 'chars').values = response.data
                 setDataValue(dataValueDefault)

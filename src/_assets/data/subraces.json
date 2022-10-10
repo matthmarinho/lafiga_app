@@ -110,13 +110,78 @@
         "id": "comum"
     },
     {
-        "dependence_name": "humano",
+        "dependence_name": "tiefling",
         "name": "comum",
         "id": "comum"
     },
     {
-        "dependence_name": "tiefling",
+        "dependence_name": "centauro",
         "name": "comum",
         "id": "comum"
+    },
+    {
+        "dependence_name": "minotauro",
+        "name": "comum",
+        "id": "comum"
+    },
+    {
+        "dependence_name": "humano",
+        "name": "scandörianos",
+        "id": "scandörianos"
+    },
+    {
+        "dependence_name": "humano",
+        "name": "naarianos",
+        "id": "naarianos"
+    },
+    {
+        "dependence_name": "humano",
+        "name": "argulanos",
+        "id": "argulanos"
+    },
+    {
+        "dependence_name": "humano",
+        "name": "austerianos",
+        "id": "austerianos"
+    },
+    {
+        "dependence_name": "humano",
+        "name": "omarenses",
+        "id": "omarenses"
+    },
+    {
+        "dependence_name": "humano",
+        "name": "kordarianos",
+        "id": "kordarianos"
+    },
+    {
+        "dependence_name": "humano",
+        "name": "kunmarenses",
+        "id": "kunmarenses"
+    },
+    {
+        "dependence_name": "humano",
+        "name": "onmerianos",
+        "id": "onmerianos"
+    },
+    {
+        "dependence_name": "humano",
+        "name": "najrianos",
+        "id": "najrianos"
+    },
+    {
+        "dependence_name": "aarakocra",
+        "name": "falconicos",
+        "id": "falconicos"
+    },
+    {
+        "dependence_name": "aarakocra",
+        "name": "nocturnos",
+        "id": "nocturnos"
+    },
+    {
+        "dependence_name": "aarakocra",
+        "name": "cypselanos",
+        "id": "cypselanos"
     }
 ]
