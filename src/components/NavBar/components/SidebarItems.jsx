@@ -90,11 +90,11 @@ const SidebarItems = [
             }
         ]
     },
-    {
-        name: "Teams",
-        active: true,
-        icon: "Group",
-    },
+    // {
+    //     name: "Teams",
+    //     active: true,
+    //     icon: "Group",
+    // },
     {
         name: "Settings",
         active: false,
