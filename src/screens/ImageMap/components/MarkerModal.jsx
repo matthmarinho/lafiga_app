@@ -97,7 +97,7 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
             setCategory(markerInfo.markerable_type)
             setMarkerableId(markerInfo.markerable.id)
         }
-        
+        setCategory('')
         setTeams()
     }, [markerInfo])// eslint-disable-line react-hooks/exhaustive-deps
 

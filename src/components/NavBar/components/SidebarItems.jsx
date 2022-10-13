@@ -5,12 +5,12 @@ const SidebarItems = [
         icon: "Home",
         route: "/"
     },
-    {
-        name: "Wiki",
-        active: false,
-        icon: "Home",
-        route: "/wiki"
-    },
+    // {
+    //     name: "Wiki",
+    //     active: false,
+    //     icon: "Home",
+    //     route: "/wiki"
+    // },
     {
         name: "Map",
         active: true,

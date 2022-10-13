@@ -329,7 +329,7 @@ export default function ImageMap() {
                     draggable={creating}
                     eventHandlers={eventHandlers}
                 >
-                    {/* <Tooltip direction="top" offset={[0, -17]}>{marker.name !== '' ? marker.name : marker.team.name}</Tooltip> */}
+                    <Tooltip direction="top" offset={[0, -17]}>{marker.markerable && marker.markerable.name}</Tooltip>
                 </Marker>
             )
         })
@@ -339,6 +339,7 @@ export default function ImageMap() {
         mapEvent({
             click(e) {
                 setShowInfo(false)
+                setInfoMarker({})
                 setCurrentPoint(e.latlng)
                 if (creating) {
                     setOpenModal(true)
