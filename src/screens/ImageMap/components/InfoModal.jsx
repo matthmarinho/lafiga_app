@@ -57,67 +57,69 @@ export default function InfoModal({
     }, [markerInfo])
 
     return (
-        <div>
-            <Dialog
-                open={open}
-                onClose={() => setOpen(false)}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">
-                    Delete "{marker.name}"
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        Are you sure?
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setOpen(false)}>No</Button>
-                    <Button onClick={() => handleDelete()} autoFocus>
-                        Yes
-                    </Button>
-                </DialogActions>
-            </Dialog>
-            <Dialog
-                open={isOpen}
-                onClose={setCloseModal}
-                aria-labelledby="form-dialog-title"
-                fullWidth maxWidth="md"
-            >
-                <DialogTitle id="alert-dialog-title">
-                    <DivTitle >
-                        {marker.name}
-                        {isAdmin &&
-                            <>
-                                <DivButton>
-                                    <IconButton color="primary" aria-label="edit picture" component="span" size="small" onClick={handleOpenEdit}>
-                                        <EditIcon />
-                                    </IconButton>
-                                </DivButton>
-                                <DivButton>
-                                    <IconButton color="primary" aria-label="edit picture" component="span" size="small" onClick={() => setOpen(true)}>
-                                        <DeleteIcon />
-                                    </IconButton>
-                                </DivButton>
-                            </>
-                        }
-                    </DivTitle>
-                </DialogTitle>
-                <DialogContent>
-                    <Typography variant="caption" display="block" gutterBottom>
-                        {marker.category_name}
-                    </Typography>
-                    <DialogContentText id="alert-dialog-description" sx={{ whiteSpace: 'pre-line' }}>
-                        {marker.description}
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={setCloseModal} >
-                        Close
-                    </Button>
-                </DialogActions>
-            </Dialog>
-        </div>
+        marker && marker.markerable ? (
+            <div>
+                <Dialog
+                    open={open}
+                    onClose={() => setOpen(false)}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        Delete "{marker.markerable.name}"
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            Are you sure?
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => setOpen(false)}>No</Button>
+                        <Button onClick={() => handleDelete()} autoFocus>
+                            Yes
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+                <Dialog
+                    open={isOpen}
+                    onClose={setCloseModal}
+                    aria-labelledby="form-dialog-title"
+                    fullWidth maxWidth="md"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        <DivTitle >
+                            {marker.markerable.name}
+                            {isAdmin &&
+                                <>
+                                    <DivButton>
+                                        <IconButton color="primary" aria-label="edit picture" component="span" size="small" onClick={handleOpenEdit}>
+                                            <EditIcon />
+                                        </IconButton>
+                                    </DivButton>
+                                    <DivButton>
+                                        <IconButton color="primary" aria-label="edit picture" component="span" size="small" onClick={() => setOpen(true)}>
+                                            <DeleteIcon />
+                                        </IconButton>
+                                    </DivButton>
+                                </>
+                            }
+                        </DivTitle>
+                    </DialogTitle>
+                    <DialogContent>
+                        <Typography variant="caption" display="block" gutterBottom>
+                            {marker.markerable_type}
+                        </Typography>
+                        <DialogContentText id="alert-dialog-description" sx={{ whiteSpace: 'pre-line' }}>
+                            Dia {marker.markerable.day} do {marker.markerable.season}: {marker.markerable.description}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={setCloseModal} >
+                            Close
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
+        ) : null
     )
 }

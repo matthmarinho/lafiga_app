@@ -9,6 +9,9 @@ import TableContainer from '@mui/material/TableContainer'
 import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import { isBrowser } from 'react-device-detect'
+import ImageIcon from '@mui/icons-material/Image'
+import ImageModal from '../ImageModal/ImageModal'
+import IconButton from '@mui/material/IconButton'
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -39,10 +42,18 @@ function stableSort(array, comparator) {
 }
 
 function capitalize(str) {
-    return str.toString().charAt(0).toUpperCase() + str.toString().slice(1)
+    return str ? str.toString().charAt(0).toUpperCase() + str.toString().slice(1) : null
 }
 
-function generateCells(value, index, idx) {
+function manipulateSplit(str) {
+    return str.split(',')[0].split('/')[0]
+}
+
+function isBase64(str) {
+    return str && typeof str === 'string' && str !== '' && manipulateSplit(str) === 'data:image' ? true : false
+}
+
+function generateCells(value, idx, handleImgClick) {
     if (idx == 0) {
         return (
             <TableCell
@@ -54,9 +65,25 @@ function generateCells(value, index, idx) {
                 {capitalize(value)}
             </TableCell>
         )
+    } else if (Array.isArray(value)) {
+        return (
+            <TableCell key={`cell_${value}_${idx}`} align="left">
+                {value.map(item => item.name).join(', ')}
+            </TableCell>
+        )
+    } else if (isBase64(value)) {
+        return (
+            <TableCell key={`cell_${value}_${idx}`} align="left">
+                <IconButton onClick={(event) => handleImgClick(event, value)}>
+                    <ImageIcon />
+                </IconButton>
+            </TableCell>
+        )
     } else {
         return (
-            <TableCell key={`cell_${value}_${idx}`} align="left">{Array.isArray(value) ? value.map(item => item.name).join(', ') : capitalize(value)}</TableCell>
+            <TableCell key={`cell_${value}_${idx}`} align="left">
+                {capitalize(value)}
+            </TableCell>
         )
     }
 }
@@ -66,6 +93,8 @@ export default function EnhancedTable({ headCells, items, setOpenModal, selected
     const [orderBy, setOrderBy] = useState('name')
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(5)
+    const [img, setImg] = useState(null)
+    const [openImgModal, setOpenImgModal] = useState(0)
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc'
@@ -111,6 +140,16 @@ export default function EnhancedTable({ headCells, items, setOpenModal, selected
         setPage(0)
     }
 
+    const handleImgClick = (event, img) => {
+        setImg(img)
+        setOpenImgModal(true)
+    }
+
+    const handleImgClickClose = (event) => {
+        setImg(null)
+        setOpenImgModal(false)
+    }
+
     const isSelected = (row) => selected.findIndex(item => item.name === row.name) !== -1
 
     const emptyRows =
@@ -125,6 +164,7 @@ export default function EnhancedTable({ headCells, items, setOpenModal, selected
                 setDeleteModal={setDeleteModal}
                 isAdmin={isAdmin}
             />
+            <ImageModal src={img} open={openImgModal} handleClose={handleImgClickClose} />
             <TableContainer>
                 <Table
                     aria-labelledby="tableTitle"
@@ -149,7 +189,6 @@ export default function EnhancedTable({ headCells, items, setOpenModal, selected
                                 return (
                                     <TableRow
                                         hover
-                                        onClick={(event) => handleClick(event, row)}
                                         role="checkbox"
                                         aria-checked={isItemSelected}
                                         tabIndex={-1}
@@ -157,17 +196,18 @@ export default function EnhancedTable({ headCells, items, setOpenModal, selected
                                         selected={isItemSelected}
                                     >
                                         <TableCell padding="checkbox">
-                                        {isAdmin && 
-                                            <Checkbox
-                                                color="primary"
-                                                checked={isItemSelected}
-                                                inputProps={{
-                                                    'aria-labelledby': labelId,
-                                                }}
-                                            />}
+                                            {isAdmin &&
+                                                <Checkbox
+                                                    color="primary"
+                                                    onClick={(event) => handleClick(event, row)}
+                                                    checked={isItemSelected}
+                                                    inputProps={{
+                                                        'aria-labelledby': labelId,
+                                                    }}
+                                                />}
                                         </TableCell>
                                         {Object.values(row).map((value, idx) =>
-                                            generateCells(value, index, idx)
+                                            generateCells(value, idx, handleImgClick)
                                         )}
                                     </TableRow>
                                 )

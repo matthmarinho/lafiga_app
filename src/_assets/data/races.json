@@ -1,220 +1,50 @@
 [
     {
-        "abilities_rels": [
-            {
-                "ability_abbreviation": "des",
-                "modifier": 2
-            },
-            {
-                "ability_abbreviation": "int",
-                "modifier": 1
-            }
-        ],
         "name": "elfo",
-        "id": "elf",
-        "sources_rels": [
-            {
-                "page": 4,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": "elfo",
-        "spellcasting_ability_abbreviation": "int"
+        "id": "elf"
     },
     {
-        "abilities_rels": [
-            {
-                "ability_abbreviation": "con",
-                "modifier": 2
-            },
-            {
-                "ability_abbreviation": "sab",
-                "modifier": 1
-            }
-        ],
         "name": "anão",
-        "id": "dwarf",
-        "sources_rels": [
-            {
-                "page": 3,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null,
-        "spellcasting_ability_abbreviation": null
+        "id": "dwarf"
     },
     {
-        "abilities_rels": [
-            {
-                "ability_abbreviation": "for",
-                "modifier": 2
-            },
-            {
-                "ability_abbreviation": "car",
-                "modifier": 1
-            }
-        ],
         "name": "draconato",
-        "id": "dragonborn",
-        "sources_rels": [
-            {
-                "page": 5,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null,
-        "spellcasting_ability_abbreviation": null
+        "id": "dragonborn"
     },
     {
-        "abilities_rels": [
-            {
-                "ability_abbreviation": "con",
-                "modifier": 1
-            },
-            {
-                "ability_abbreviation": "int",
-                "modifier": 2
-            }
-        ],
         "name": "gnomo",
-        "id": "gnome",
-        "sources_rels": [
-            {
-                "page": 6,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null,
-        "spellcasting_ability_abbreviation": null
+        "id": "gnome"
     },
     {
-        "abilities_rels": [
-            {
-                "ability_abbreviation": null,
-                "modifier": 1
-            },
-            {
-                "ability_abbreviation": null,
-                "modifier": 1
-            },
-            {
-                "ability_abbreviation": "car",
-                "modifier": 2
-            }
-        ],
         "name": "meio-elfo",
-        "id": "half-elf",
-        "sources_rels": [
-            {
-                "page": 7,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null,
-        "spellcasting_ability_abbreviation": null
+        "id": "half-elf"
     },
     {
-        "abilities_rels": [
-            {
-                "ability_abbreviation": "for",
-                "modifier": 2
-            },
-            {
-                "ability_abbreviation": "con",
-                "modifier": 1
-            }
-        ],
         "name": "meio-orc",
-        "id": "half-orc",
-        "sources_rels": [
-            {
-                "page": 7,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null,
-        "spellcasting_ability_abbreviation": null
+        "id": "half-orc"
     },
     {
-        "abilities_rels": [
-            {
-                "ability_abbreviation": "des",
-                "modifier": 2
-            },
-            {
-                "ability_abbreviation": "car",
-                "modifier": 1
-            }
-        ],
         "name": "halfling",
-        "id": "halfling",
-        "sources_rels": [
-            {
-                "page": 5,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null,
-        "spellcasting_ability_abbreviation": null
+        "id": "halfling"
     },
     {
-        "abilities_rels": [
-            {
-                "ability_abbreviation": "for",
-                "modifier": 1
-            },
-            {
-                "ability_abbreviation": "des",
-                "modifier": 1
-            },
-            {
-                "ability_abbreviation": "con",
-                "modifier": 1
-            },
-            {
-                "ability_abbreviation": "int",
-                "modifier": 1
-            },
-            {
-                "ability_abbreviation": "sab",
-                "modifier": 1
-            },
-            {
-                "ability_abbreviation": "car",
-                "modifier": 1
-            }
-        ],
         "name": "humano",
-        "id": "human",
-        "sources_rels": [
-            {
-                "page": 5,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": null,
-        "spellcasting_ability_abbreviation": null
+        "id": "human"
     },
     {
-        "abilities_rels": [
-            {
-                "ability_abbreviation": "int",
-                "modifier": 1
-            },
-            {
-                "ability_abbreviation": "car",
-                "modifier": 2
-            }
-        ],
         "name": "tiefling",
-        "id": "tiefling",
-        "sources_rels": [
-            {
-                "page": 7,
-                "source_abbreviation": "DRS"
-            }
-        ],
-        "spell_list_name": "tiefling",
-        "spellcasting_ability_abbreviation": "car"
+        "id": "tiefling"
+    },
+    {
+        "name": "minotauro",
+        "id": "minotaur"
+    },
+    {
+        "name": "centauro",
+        "id": "centaur"
+    },
+    {
+        "name": "aarakocra",
+        "id": "aarakocra"
     }
 ]

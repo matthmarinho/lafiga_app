@@ -14,75 +14,91 @@ import {
 import { Box } from '@mui/system'
 import { SketchPicker } from 'react-color'
 import { styled } from '@mui/material/styles'
+import Form from '../../../components/DynamicForm/Form'
 
-export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModal, categories, markerInfo }) {
-    const [name, setName] = useState('')
+const dataValueTeam = [
+    {
+        "component": "select",
+        "label": "Team",
+        "type": "select",
+        "id": "name",
+        "values": []
+    },
+    {
+        "component": "number",
+        "label": "Day",
+        "type": "number",
+        "id": "day"
+    },
+    {
+        "component": "select",
+        "label": "Season",
+        "type": "select",
+        "id": "season",
+        "values": [{ id: 0, name: 'Primavera' }, { id: 1, name: 'Verão' }, { id: 2, name: 'Outono' }, { id: 3, name: 'Inverno' }]
+    },
+    {
+        "component": "multiline-text",
+        "label": "Description",
+        "type": "text",
+        "id": "description",
+    },
+    {
+        "component": "color-picker",
+        "label": "Color",
+        "type": "color",
+        "id": "color",
+    },
+]
+
+export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModal, categories, markerInfo, teams }) {
     const [color, setColor] = useState('#fff')
     const [openPicker, setOpenPicker] = useState(false)
-    const [description, setDescription] = useState('')
-    const [category, setCategory] = useState('')
-    const [categoryName, setCategoryName] = useState('')
+    const [markerableType, setCategory] = useState('')
+    const [markerableId, setMarkerableId] = useState()
     const isOpen = Boolean(openModal)
 
-    const componentToHex = (c) => {
-        var hex = c.toString(16);
-        return hex.length === 1 ? "0" + hex : hex;
-    }
-
-    const rgbToHex = ({r, g, b}) => {
-        return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-    }
-
-    const hexToRgb = (hex) => {
-        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-        return result ? {
-            r: parseInt(result[1], 16),
-            g: parseInt(result[2], 16),
-            b: parseInt(result[3], 16)
-        } : null;
-    }
+    const [values, setValues] = useState([])
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        let data = {
-            name: name,
-            description: description,
-            color: hexToRgb(color),
-            category: category,
-            categoryName: categoryName,
+
+        let mId
+
+        if (!markerableId) {
+            switch (markerableType) {
+                case 'Team': mId = teams.find((val) => val.name === values.name).id
+            }
         }
+
+        let data = {
+            markerable: {
+                ...values
+            },
+            markerable_id: markerableId ? markerableId : mId,
+            markerable_type: markerableType,
+        }
+            
         if (Object.values(markerInfo).length === 0) {
             addNewMarker(data)
         } else {
             edit(data)
         }
-        setName('')
-        setDescription('')
-        setCategory('')
-        setCategoryName('')
+        setValues([])
         setOpenModal(false)
     }
 
-    const ColorButton = styled(Button)(({ theme }) => ({
-        color: theme.palette.getContrastText(color),
-        backgroundColor: color,
-        '&:hover': {
-            backgroundColor: color,
-        },
-        alignContent: 'left'
-    }));
+    const setTeams = () => {
+        dataValueTeam.find((value) => value.id === 'name').values = teams
+    }
 
     useEffect(() => {
-        if (markerInfo) {
-            setName(markerInfo.name)
-            setDescription(markerInfo.description)
-            setCategory(markerInfo.category_id)
-            setCategoryName(markerInfo.category_name)
-            if (markerInfo.color) {
-                let hex = rgbToHex(markerInfo.color)
-                setColor(hex) 
-            }
+        if (Object.keys(markerInfo).length > 0) {
+            setCategory(markerInfo.markerable_type)
+            setMarkerableId(markerInfo.markerable.id)
         }
+        
+        setTeams()
     }, [markerInfo])// eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -93,71 +109,43 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
                 aria-labelledby="form-dialog-title"
                 fullWidth maxWidth="md"
             >
-                <DialogTitle id="form-dialog-title">New Marker</DialogTitle>
+                <DialogTitle id="form-dialog-title">{Object.values(markerInfo).length === 0 ? 'New' : 'Edit'} Marker</DialogTitle>
                 <DialogContent>
-                    <Box component="form"
+                    <Box
+                        component="form"
+                        sx={{
+                            '& .MuiTextField-root': { m: 1, maxWidth: '100%' },
+                        }}
                         noValidate
-                        sx={{ flexGrow: 1 }}
+                        autoComplete="off"
                     >
-                        <Box item sx={{ paddingTop: 1, paddingBottom: 2 }}>
-                            <FormControl fullWidth>
-                                <TextField
-                                    label="Name"
-                                    id="outlined-margin-none"
-                                    variant="outlined"
-                                    value={name}
-                                    onInput={e => setName(e.target.value)}
-                                    required={true}
-                                />
-                            </FormControl>
-                        </Box>
-                        <Box item sx={{ paddingBottom: 2 }}>
-                            <FormControl fullWidth>
+                        <Box item>
+                            <FormControl sx={{ m: '8px', pr: '16px' }} fullWidth>
                                 <InputLabel id="demo-simple-select-helper-label">Category *</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-filled-label"
                                     id="demo-simple-select-filled"
-                                    value={category}
+                                    value={markerableType}
                                     label={'Category*'}
                                     onChange={e => setCategory(e.target.value)}
-                                    required={true}
+                                    disabled={Object.values(markerInfo).length !== 0}
                                 >
-                                    {categories.map((category) => (
-                                        <MenuItem key={category.id} value={category.id} onClick={e => setCategoryName(category.name)}>{category.name}</MenuItem>
+                                    {categories.map((markerableType) => (
+                                        <MenuItem key={markerableType.id} value={markerableType.class_name}>{markerableType.name}</MenuItem>
                                     ))}
                                 </Select>
                             </FormControl>
                         </Box>
-                        <Box item sx={{ paddingBottom: 2 }}>
-                            <FormControl fullWidth>
-                                <TextField
-                                    id="outlined-full-width"
-                                    label="Description"
-                                    multiline
-                                    rows={5}
-                                    variant="outlined"
-                                    value={description}
-                                    onInput={e => setDescription(e.target.value)}
-                                    required={true}
-                                />
-                            </FormControl>
-                        </Box>
-                        {categoryName === 'Equipe' &&
-                            <Box item>
-                                <FormControl fullWidth>
-                                    <ColorButton variant="contained" color="primary" onClick={() => setOpenPicker(!openPicker)}>
-                                        Color
-                                    </ColorButton>
-                                </FormControl>
-                            </Box>
-                        }
                     </Box>
+                    {markerableType === 'Team' &&
+                        <Form formData={dataValueTeam} values={values} setValues={setValues} data={markerInfo.markerable} />
+                    }
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => setOpenModal(false)} >
                         Cancel
                     </Button>
-                    <Button onClick={(e) => handleSubmit(e)} disabled={name === '' || description === '' || category === ''}>
+                    <Button onClick={(e) => handleSubmit(e)} >
                         {Object.values(markerInfo).length === 0 ? 'Create' : 'Edit'}
                     </Button>
                 </DialogActions>

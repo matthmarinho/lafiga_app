@@ -6,6 +6,12 @@ const SidebarItems = [
         route: "/"
     },
     {
+        name: "Wiki",
+        active: false,
+        icon: "Home",
+        route: "/wiki"
+    },
+    {
         name: "Map",
         active: true,
         icon: "Public",
@@ -108,7 +114,7 @@ const SidebarItems = [
             },
             {
                 name: "Maps",
-                active: false,
+                active: true,
                 icon: "Map",
                 route: "/maps"
             }

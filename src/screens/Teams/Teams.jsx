@@ -79,18 +79,18 @@ const headCells = [
         disablePadding: false,
         label: 'Name',
     },
-    {
-        id: 'day',
-        numeric: false,
-        disablePadding: false,
-        label: 'Day',
-    },
-    {
-        id: 'season',
-        numeric: false,
-        disablePadding: false,
-        label: 'Season',
-    },
+    // {
+    //     id: 'day',
+    //     numeric: false,
+    //     disablePadding: false,
+    //     label: 'Day',
+    // },
+    // {
+    //     id: 'season',
+    //     numeric: false,
+    //     disablePadding: false,
+    //     label: 'Season',
+    // },
     {
         id: 'chars',
         numeric: false,
@@ -113,19 +113,19 @@ const dataValueDefault = [
         "id": "chars",
         "values": []
     },
-    {
-        "component": "number",
-        "label": "Day",
-        "type": "number",
-        "id": "day"
-    },
-    {
-        "component": "select",
-        "label": "Season",
-        "type": "select",
-        "id": "season",
-        "values": [{ id: 0, name: 'Primavera' }, { id: 1, name: 'Verão' }, { id: 2, name: 'Outono' }, { id: 3, name: 'Inverno' }]
-    },
+    // {
+    //     "component": "number",
+    //     "label": "Day",
+    //     "type": "number",
+    //     "id": "day"
+    // },
+    // {
+    //     "component": "select",
+    //     "label": "Season",
+    //     "type": "select",
+    //     "id": "season",
+    //     "values": [{ id: 0, name: 'Primavera' }, { id: 1, name: 'Verão' }, { id: 2, name: 'Outono' }, { id: 3, name: 'Inverno' }]
+    // },
 ]
 
 export default function Teams() {
@@ -150,10 +150,10 @@ export default function Teams() {
 
     const remove = () => {
         setLoading(true)
+        setDeleteModal(false)
         Service.removeInBatches({ data: JSON.stringify(selected) })
             .then(() => {
                 setSelected([])
-                setDeleteModal(false)
                 getAll()
             })
             .catch(e => {
@@ -163,7 +163,7 @@ export default function Teams() {
 
     const getChars = () => {
         setLoading(true)
-        CharService.getAll()
+        CharService.withoutTeam()
             .then(response => {
                 dataValueDefault.find((value) => value.id === 'chars').values = response.data
                 setDataValue(dataValueDefault)
@@ -240,7 +240,7 @@ export default function Teams() {
                     open={openModal}
                     setOpen={setOpenModal}
                     formData={dataValue}
-                    row={currentRow[0]}
+                    data={currentRow[0]}
                     title={'Team'}
                     Service={Service}
                     getAll={getAll}

@@ -24,6 +24,10 @@ const removeInBatches = (data) => {
   return api.delete(`/api/v1/chars/remove_in_batches`, {data: data});
 };
 
+const withoutTeam = () => {
+  return api.get(`/api/v1/chars/without_team`);
+};
+
 const findByTitle = title => {
   return api.get(`/api/v1/chars?title=${title}`);
 };
@@ -35,6 +39,7 @@ const exportedObject = {
   update,
   remove,
   removeInBatches,
+  withoutTeam,
   findByTitle
 }
 

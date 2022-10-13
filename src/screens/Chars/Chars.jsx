@@ -178,10 +178,10 @@ export default function Chars() {
 
     const remove = () => {
         setLoading(true)
+        setDeleteModal(false)
         Service.removeInBatches({ data: JSON.stringify(selected) })
             .then(response => {
                 setSelected([])
-                setDeleteModal(false)
                 getAll()
             })
             .catch(e => {
@@ -252,7 +252,7 @@ export default function Chars() {
                 open={openModal}
                 setOpen={setOpenModal}
                 formData={dataValue}
-                row={currentRow[0]}
+                data={currentRow[0]}
                 title={'Char'}
                 Service={Service}
                 getAll={getAll}

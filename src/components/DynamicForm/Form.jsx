@@ -2,7 +2,7 @@ import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import Field from './Field'
 
-const Form = ({ formData, values, setValues, row }) => {
+const Form = ({ formData, values, setValues, data }) => {
     const [currentData, setCurrentData] = useState(formData)
 
     const fieldChanged = (fieldId, value) => {
@@ -19,11 +19,11 @@ const Form = ({ formData, values, setValues, row }) => {
         setCurrentData(upcomingData)
         setValues(() => {
             return upcomingData.reduce((obj, field) => {
-                obj[field.id] = row ? row[field.id] : ""
+                obj[field.id] = data ? data[field.id] : ""
                 return obj
             }, {})
         })
-    }, [row])
+    }, [data])
 
     return (
         <Box
@@ -43,7 +43,7 @@ const Form = ({ formData, values, setValues, row }) => {
                                 field={field}
                                 fieldChanged={fieldChanged}
                                 values={values}
-                                row={row}
+                                data={data}
                             />
                         </Box>
                     )
