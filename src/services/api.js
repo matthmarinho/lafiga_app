@@ -1,8 +1,8 @@
 import axios from "axios";
 import { getToken } from "./auth";
 const api = axios.create({
-  // baseURL: 'https://api-lafiga.herokuapp.com/',
-  baseURL: 'http://127.0.0.1:3000/',
+  baseURL: 'https://api-lafiga.herokuapp.com/',
+  // baseURL: 'http://127.0.0.1:3000/',
 });
 
 api.interceptors.request.use(async (config) => {
