@@ -78,7 +78,7 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
             markerable_id: markerableId ? markerableId : mId,
             markerable_type: markerableType,
         }
-            
+
         if (Object.values(markerInfo).length === 0) {
             addNewMarker(data)
         } else {
@@ -93,11 +93,12 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
     }
 
     useEffect(() => {
-        if (Object.keys(markerInfo).length > 0) {
+        if (markerInfo.markerable_type) {
             setCategory(markerInfo.markerable_type)
             setMarkerableId(markerInfo.markerable.id)
+        } else {
+            setCategory('')
         }
-        setCategory('')
         setTeams()
     }, [markerInfo])// eslint-disable-line react-hooks/exhaustive-deps
 
