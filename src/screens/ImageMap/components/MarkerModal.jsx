@@ -55,7 +55,7 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
     const [color, setColor] = useState('#fff')
     const [openPicker, setOpenPicker] = useState(false)
     const [markerableType, setCategory] = useState('')
-    const [markerableId, setMarkerableId] = useState()
+    const [markerableId, setMarkerableId] = useState('')
     const isOpen = Boolean(openModal)
 
     const [values, setValues] = useState([])
@@ -98,6 +98,7 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
             setMarkerableId(markerInfo.markerable.id)
         } else {
             setCategory('')
+            setMarkerableId('')
         }
         setTeams()
     }, [markerInfo])// eslint-disable-line react-hooks/exhaustive-deps
