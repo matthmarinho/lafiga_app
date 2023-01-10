@@ -3,7 +3,7 @@ import { Checkbox, TableCell, TableHead, TableRow, TableSortLabel } from "@mui/m
 import { Box } from "@mui/system"
 import { visuallyHidden } from '@mui/utils'
 
-export default function EnhancedTableHead({ onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells, isAdmin }) {
+export default function EnhancedTableHead({ onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, headCells, isadmin }) {
     const createSortHandler = (property) => (event) => {
         onRequestSort(event, property)
     }
@@ -12,7 +12,7 @@ export default function EnhancedTableHead({ onSelectAllClick, order, orderBy, nu
         <TableHead>
             <TableRow>
                 <TableCell padding="checkbox">
-                    {isAdmin &&
+                    {isadmin &&
                         <Checkbox
                             color="primary"
                             indeterminate={numSelected > 0 && numSelected < rowCount}

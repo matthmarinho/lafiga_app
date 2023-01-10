@@ -23,7 +23,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { userData, logout } from '../../services/auth'
 import LoginModal from '../Login/LoginModal'
 import SidebarItems from './components/SidebarItems'
-import IconComponents from './components/IconComponents'
+import IconComponents from './../IconComponents/IconComponents'
 import { Link } from "react-router-dom"
 import SwipeableDrawer from '@mui/material/SwipeableDrawer'
 import TeamModal from './components/TeamModal'
@@ -92,11 +92,11 @@ const generateCollapseState = (array, key, value) => {
     }, initialValue);
 }
 
-function NavBarContent() {
+export default function NavBar() {
     const [open, setOpen] = useState(false)
     const [openCollapse, setOpenCollapse] = useState(generateCollapseState(SidebarItems, 'name', false))
-    const [map, setMap] = useState(null)
-    const [mapName, setMapName] = useState(null)
+    const [map] = useState(null)
+    const [mapName] = useState(null)
     const [user, setUser] = useState(null)
     const [anchorEl, setAnchorEl] = useState(null)
     const [logged, setLogged] = useState(false)
@@ -126,10 +126,6 @@ function NavBarContent() {
 
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget)
-    }
-
-    const capitalize = (str) => {
-        return str.charAt(0).toUpperCase() + str.slice(1)
     }
 
     const renderMenu = (
@@ -360,8 +356,4 @@ function NavBarContent() {
             {renderMenu}
         </>
     )
-}
-
-export default function NavBar() {
-    return <NavBarContent />
 }

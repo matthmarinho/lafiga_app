@@ -27,7 +27,7 @@ const DivTitle = styled('div')(({ theme }) => ({
 
 export default function InfoModal({
     openModal, setCloseModal, markerInfo,
-    openEdit, setOpenModal, getMap, isAdmin
+    openEdit, setOpenModal, getMap, isadmin
 }) {
     const isOpen = Boolean(openModal)
     const [marker, setMarker] = useState({})
@@ -89,7 +89,7 @@ export default function InfoModal({
                     <DialogTitle id="alert-dialog-title">
                         <DivTitle >
                             {marker.markerable.name}
-                            {isAdmin &&
+                            {isadmin &&
                                 <>
                                     <DivButton>
                                         <IconButton color="primary" aria-label="edit picture" component="span" size="small" onClick={handleOpenEdit}>

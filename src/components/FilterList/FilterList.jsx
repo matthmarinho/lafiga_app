@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { List, ListItem, ListItemText, Paper, SpeedDial, SpeedDialAction, Stack, Typography } from "@mui/material"
 import { styled } from '@mui/system'
 import SettingsIcon from '@mui/icons-material/Settings'
@@ -7,6 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import AddIcon from '@mui/icons-material/Add'
 import EditIcon from '@mui/icons-material/Edit'
 import library from './components/library'
+import ImageModal from '../ImageModal/ImageModal'
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -20,7 +21,19 @@ const CustomStack = styled(Stack)(({ theme }) => ({
     overflow: 'auto',
 }))
 
-export default function FilterList({ items, setOpenModal, setDeleteModal, selected, setSelected, isAdmin, title }) {
+export default function FilterList({ items, setOpenModal, setDeleteModal, selected, setSelected, isadmin, title }) {
+    const [img, setImg] = useState(null)
+    const [openImgModal, setOpenImgModal] = useState(0)
+
+    const handleImgClick = (event, img) => {
+        setImg(img)
+        setOpenImgModal(true)
+    }
+
+    const handleImgClickClose = (event) => {
+        setImg(null)
+        setOpenImgModal(false)
+    }
 
     const handleToggle = (value) => () => {
         const currentIndex = selected.indexOf(value)
@@ -39,8 +52,28 @@ export default function FilterList({ items, setOpenModal, setDeleteModal, select
         return str.toString().charAt(0).toUpperCase() + str.toString().slice(1)
     }
 
+    const generateContent = (key, value) => {
+        switch (key) {
+            case 'image':
+                return (
+                    null
+                )
+            default: 
+                return (
+                    (value || value.length > 0) && (
+                        <Typography key={`item_${key}_${value}`} component="span" variant="subtitle2">
+                            {library[key]}: {
+                                Array.isArray(value) ? value.map(i => i.name).join(', ') : capitalize(value)
+                            }
+                        </Typography>
+                    )
+                )
+        }
+    }
+
     return (
         <React.Fragment>
+            <ImageModal src={img} open={openImgModal} handleClose={handleImgClickClose} />
             <Paper
                 elevation={0}
                 sx={{
@@ -72,8 +105,9 @@ export default function FilterList({ items, setOpenModal, setDeleteModal, select
                                 <List>
                                     <ListItem
                                         key={`listItem_${index}`}
+                                        onClick={(e) => item && item.image && handleImgClick(e, item.image)}
                                         secondaryAction={
-                                            isAdmin &&
+                                            isadmin &&
                                             <Checkbox
                                                 edge="end"
                                                 onChange={handleToggle(item)}
@@ -94,13 +128,7 @@ export default function FilterList({ items, setOpenModal, setDeleteModal, select
                                             secondary={
                                                 <Stack spacing={'0.5'}>
                                                     {Object.entries(item).slice(2).map(([key, value]) => (
-                                                        (value || value.length > 0) && (
-                                                            <Typography key={`item_${key}_${value}`} component="span" variant="subtitle2">
-                                                                {library[key]}: {
-                                                                    Array.isArray(value) ? value.map(i => i.name).join(', ') : capitalize(value)
-                                                                }
-                                                            </Typography>
-                                                        )
+                                                        generateContent(key, value)
                                                     ))}
                                                 </Stack>
                                             }
@@ -119,7 +147,7 @@ export default function FilterList({ items, setOpenModal, setDeleteModal, select
                     </div>
                 )}
             </Paper>
-            {isAdmin && <SpeedDial
+            {isadmin && <SpeedDial
                 ariaLabel="SpeedDial create actions"
                 sx={{ position: 'absolute', bottom: 16, right: 16 }}
                 icon={<SettingsIcon />}

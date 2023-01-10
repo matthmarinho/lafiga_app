@@ -5,12 +5,12 @@ const SidebarItems = [
         icon: "Home",
         route: "/"
     },
-    {
-        name: "Wiki",
-        active: false,
-        icon: "Home",
-        route: "/wiki"
-    },
+    // {
+    //     name: "Wiki",
+    //     active: false,
+    //     icon: "Home",
+    //     route: "/wiki"
+    // },
     {
         name: "Map",
         active: true,
@@ -90,11 +90,11 @@ const SidebarItems = [
             }
         ]
     },
-    {
-        name: "Teams",
-        active: true,
-        icon: "Group",
-    },
+    // {
+    //     name: "Teams",
+    //     active: true,
+    //     icon: "Group",
+    // },
     {
         name: "Settings",
         active: false,
@@ -117,7 +117,19 @@ const SidebarItems = [
                 active: true,
                 icon: "Map",
                 route: "/maps"
-            }
+            },
+            // {
+            //     name: "Articles",
+            //     active: true,
+            //     icon: "Article",
+            //     route: "/articles"
+            // },
+            // {
+            //     name: "Categories",
+            //     active: true,
+            //     icon: "Category",
+            //     route: "/categories"
+            // }
         ]
     },
 ];

@@ -9,11 +9,9 @@ import {
     InputLabel,
     MenuItem,
     Select,
-    TextField,
 } from '@mui/material'
 import { Box } from '@mui/system'
 import { SketchPicker } from 'react-color'
-import { styled } from '@mui/material/styles'
 import Form from '../../../components/DynamicForm/Form'
 
 const dataValueTeam = [
@@ -55,7 +53,7 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
     const [color, setColor] = useState('#fff')
     const [openPicker, setOpenPicker] = useState(false)
     const [markerableType, setCategory] = useState('')
-    const [markerableId, setMarkerableId] = useState()
+    const [markerableId, setMarkerableId] = useState('')
     const isOpen = Boolean(openModal)
 
     const [values, setValues] = useState([])
@@ -68,6 +66,8 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
         if (!markerableId) {
             switch (markerableType) {
                 case 'Team': mId = teams.find((val) => val.name === values.name).id
+                    break
+                default: mId = null
             }
         }
 
@@ -78,7 +78,7 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
             markerable_id: markerableId ? markerableId : mId,
             markerable_type: markerableType,
         }
-            
+
         if (Object.values(markerInfo).length === 0) {
             addNewMarker(data)
         } else {
@@ -93,11 +93,13 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
     }
 
     useEffect(() => {
-        if (Object.keys(markerInfo).length > 0) {
+        if (markerInfo.markerable_type) {
             setCategory(markerInfo.markerable_type)
             setMarkerableId(markerInfo.markerable.id)
+        } else {
+            setCategory('')
+            setMarkerableId('')
         }
-        
         setTeams()
     }, [markerInfo])// eslint-disable-line react-hooks/exhaustive-deps
 
