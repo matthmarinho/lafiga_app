@@ -21,7 +21,7 @@ const CustomStack = styled(Stack)(({ theme }) => ({
     overflow: 'auto',
 }))
 
-export default function FilterList({ items, setOpenModal, setDeleteModal, selected, setSelected, isAdmin, title }) {
+export default function FilterList({ items, setOpenModal, setDeleteModal, selected, setSelected, isadmin, title }) {
     const [img, setImg] = useState(null)
     const [openImgModal, setOpenImgModal] = useState(0)
 
@@ -107,7 +107,7 @@ export default function FilterList({ items, setOpenModal, setDeleteModal, select
                                         key={`listItem_${index}`}
                                         onClick={(e) => item && item.image && handleImgClick(e, item.image)}
                                         secondaryAction={
-                                            isAdmin &&
+                                            isadmin &&
                                             <Checkbox
                                                 edge="end"
                                                 onChange={handleToggle(item)}
@@ -147,7 +147,7 @@ export default function FilterList({ items, setOpenModal, setDeleteModal, select
                     </div>
                 )}
             </Paper>
-            {isAdmin && <SpeedDial
+            {isadmin && <SpeedDial
                 ariaLabel="SpeedDial create actions"
                 sx={{ position: 'absolute', bottom: 16, right: 16 }}
                 icon={<SettingsIcon />}

@@ -3,6 +3,7 @@ import React from "react"
 import MultipleSelectChip from "./MultiSelectChip"
 import FileInput from "./FileInput"
 import ColorPicker from "./ColorPicker"
+import RichText from "./RichText"
 
 const Field = ({ field, fieldChanged, values }) => {
     const capitalize = (str) => {
@@ -61,6 +62,12 @@ const Field = ({ field, fieldChanged, values }) => {
                         rows={5}
                         required
                     />
+                </FormControl>
+            )
+        case "rich-text":
+            return (
+                <FormControl key={`form_control_${field.id}`} fullWidth>
+                    <RichText field={field} values={values} fieldChanged={fieldChanged} />
                 </FormControl>
             )
         default:

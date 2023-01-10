@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {
     Button,
     Dialog,
@@ -23,7 +23,6 @@ export default function FormModal({ open, setOpen, formData, data, title, Servic
     }
 
     const edit = () => {
-        console.log(values)
         Service.update(data.id, values)
             .then(response => {
                 setOpen(false)
@@ -35,7 +34,7 @@ export default function FormModal({ open, setOpen, formData, data, title, Servic
     }
 
     const create = () => {
-        console.log(values)
+        console.log(values, 'opa')
         Service.create(values)
         .then(response => {
             setOpen(false)

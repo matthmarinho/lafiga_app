@@ -117,7 +117,19 @@ const SidebarItems = [
                 active: true,
                 icon: "Map",
                 route: "/maps"
-            }
+            },
+            // {
+            //     name: "Articles",
+            //     active: true,
+            //     icon: "Article",
+            //     route: "/articles"
+            // },
+            // {
+            //     name: "Categories",
+            //     active: true,
+            //     icon: "Category",
+            //     route: "/categories"
+            // }
         ]
     },
 ];

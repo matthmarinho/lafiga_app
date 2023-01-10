@@ -8,7 +8,8 @@ import SearchIcon from '@mui/icons-material/Search'
 import { alpha, styled } from '@mui/system'
 import EnhancedTable from '../../components/EnhancedTable/EnhancedTable'
 import FormModal from '../../components/DynamicForm/FormModal'
-import Service from '../../services/maps'
+import Service from '../../services/article'
+import CharService from '../../services/char'
 import { userData } from '../../services/auth'
 
 const Search = styled('div')(({ theme }) => ({
@@ -73,31 +74,25 @@ const headCells = [
         label: 'ID',
     },
     {
-        id: 'name',
+        id: 'title',
         numeric: false,
         disablePadding: false,
-        label: 'Name',
-    },
-    {
-        id: 'file',
-        numeric: false,
-        disablePadding: false,
-        label: 'File',
-    },
-    {
-        id: 'file_name',
-        numeric: false,
-        disablePadding: false,
-        label: 'File Name',
+        label: 'Title',
     },
 ]
 
 const dataValueDefault = [
     {
         "component": "text",
-        "label": "Name",
+        "label": "Title",
         "type": "text",
-        "id": "name"
+        "id": "title"
+    },
+    {
+        "component": "rich-text",
+        "label": "Content",
+        "type": "rich-text",
+        "id": "content",
     },
     {
         "component": "file-input",
@@ -107,7 +102,7 @@ const dataValueDefault = [
     },
 ]
 
-export default function Maps() {
+export default function Articles() {
     const [rows, setRows] = useState([])
     const [items, setItems] = useState([])
     const [openModal, setOpenModal] = useState(false)
@@ -116,7 +111,9 @@ export default function Maps() {
     const [deleteModal, setDeleteModal] = useState(false)
     const [loading, setLoading] = useState(false)
     const [isadmin, setIsAdmin] = useState(false)
-    const [dataValue] = useState(dataValueDefault)
+    const [chars, setChars] = useState(false)
+    const [dataValue, setDataValue] = useState(dataValueDefault)
+    const [loadedChars, setLoadedChars] = useState(false)
 
     const requestSearch = (searchedVal) => {
         const filteredItems = rows.filter(item => {
@@ -132,6 +129,20 @@ export default function Maps() {
             .then(() => {
                 setSelected([])
                 getAll()
+            })
+            .catch(e => {
+                console.log(e)
+            })
+    }
+
+    const getChars = () => {
+        setLoading(true)
+        CharService.withoutArticle()
+            .then(response => {
+                dataValueDefault.find((value) => value.id === 'chars').values = response.data
+                setDataValue(dataValueDefault)
+                setLoadedChars(true)
+                setLoading(false)
             })
             .catch(e => {
                 console.log(e)
@@ -160,6 +171,7 @@ export default function Maps() {
     useEffect(() => {
         getAll()
         getUser()
+        // getChars()
     }, [])
 
     useEffect(() => {
@@ -167,7 +179,7 @@ export default function Maps() {
     }, [selected])
 
     return (
-        <React.Fragment>
+        <>
             <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
             <CssBaseline />
             <Backdrop
@@ -183,7 +195,7 @@ export default function Maps() {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    Delete {selected.length > 0 ? `maps` : `map`}?
+                    Delete {selected.length > 0 ? `articles` : `article`}?
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
@@ -197,15 +209,16 @@ export default function Maps() {
                     </Button>
                 </DialogActions>
             </Dialog>
-            <FormModal
-                open={openModal}
-                setOpen={setOpenModal}
-                formData={dataValue}
-                data={currentRow[0]}
-                title={'Map'}
-                Service={Service}
-                getAll={getAll}
-            />
+            {true &&
+                <FormModal
+                    open={openModal}
+                    setOpen={setOpenModal}
+                    formData={dataValue}
+                    data={currentRow[0]}
+                    title={'Article'}
+                    Service={Service}
+                    getAll={getAll}
+                />}
             <BoxCustom component="main">
                 <Container maxWidth="lg" sx={isBrowser ? { mt: 4, mb: 4 } : null}>
                     <Search>
@@ -228,7 +241,7 @@ export default function Maps() {
                                 setSelected={setSelected}
                                 setDeleteModal={setDeleteModal}
                                 isadmin={isadmin}
-                                title={'Maps'}
+                                title={'Articles'}
                             />
                         ) : (
                             <FilterList
@@ -238,13 +251,13 @@ export default function Maps() {
                                 selected={selected}
                                 setSelected={setSelected}
                                 isadmin={isadmin}
-                                title={'Maps'}
+                                title={'Articles'}
                             />
                         )
                         }
                     </PaperCustom>
                 </Container>
             </BoxCustom>
-        </React.Fragment >
+        </>
     )
 }

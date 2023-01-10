@@ -136,8 +136,7 @@ export default function Teams() {
     const [currentRow, setCurrentRow] = useState([])
     const [deleteModal, setDeleteModal] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [isAdmin, setIsAdmin] = useState(false)
-    const [chars, setChars] = useState(false)
+    const [isadmin, setIsAdmin] = useState(false)
     const [dataValue, setDataValue] = useState(dataValueDefault)
     const [loadedChars, setLoadedChars] = useState(false)
 
@@ -266,7 +265,7 @@ export default function Teams() {
                                 selected={selected}
                                 setSelected={setSelected}
                                 setDeleteModal={setDeleteModal}
-                                isAdmin={isAdmin}
+                                isadmin={isadmin}
                                 title={'Teams'}
                             />
                         ) : (
@@ -276,7 +275,7 @@ export default function Teams() {
                                 setDeleteModal={setDeleteModal}
                                 selected={selected}
                                 setSelected={setSelected}
-                                isAdmin={isAdmin}
+                                isadmin={isadmin}
                                 title={'Teams'}
                             />
                         )

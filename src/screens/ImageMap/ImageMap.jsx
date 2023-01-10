@@ -32,11 +32,11 @@ const iconDungeon = L.icon({
     iconUrl: markerDungeon,
 })
 
-const SpeedDialCustom = styled(SpeedDial)(({ theme, isAdmin }) => ({
+const SpeedDialCustom = styled(SpeedDial)(({ theme, isadmin }) => ({
     position: 'absolute',
     bottom: 16,
     right: 16,
-    ...(isAdmin && {
+    ...(isadmin && {
         right: 88
     }),
 }))
@@ -50,7 +50,7 @@ const MapDiv = styled('div')(({ theme }) => ({
 
 export default function ImageMap() {
 
-    const { mapName, mapId } = useParams()
+    const { mapId } = useParams()
     const [bounds, setBounds] = useState([[0, 0], [0, 0]])
     const [center, setCenter] = useState([0, 0])
     const [loaded, setLoaded] = useState(false)
@@ -68,7 +68,7 @@ export default function ImageMap() {
     const [categories, setCategories] = useState([])
     const [openInfoModal, setOpenInfoModal] = useState(false)
     const [infoMarker, setInfoMarker] = useState({})
-    const [isAdmin, setIsAdmin] = useState(false)
+    const [isadmin, setIsAdmin] = useState(false)
     const [teams, setTeams] = useState([])
 
     const actions = [
@@ -114,26 +114,26 @@ export default function ImageMap() {
         setNewMarkers([...filtered, newMarker])
     }
 
-    const editMarker = (marker) => {
-        setLoading(true)
-        setShowInfo(false)
+    // const editMarker = (marker) => {
+    //     setLoading(true)
+    //     setShowInfo(false)
 
-        let data = {
-            map_id: mapId,
-            latitude: infoMarker.latitude,
-            longitude: infoMarker.longitude,
-            ...marker
-        }
+    //     let data = {
+    //         map_id: mapId,
+    //         latitude: infoMarker.latitude,
+    //         longitude: infoMarker.longitude,
+    //         ...marker
+    //     }
 
-        MarkerService.update(mapId, infoMarker.id, data)
-            .then(response => {
-                getMap()
-                setLoading(false)
-            })
-            .catch(e => {
-                console.log(e)
-            })
-    }
+    //     MarkerService.update(mapId, infoMarker.id, data)
+    //         .then(response => {
+    //             getMap()
+    //             setLoading(false)
+    //         })
+    //         .catch(e => {
+    //             console.log(e)
+    //         })
+    // }
 
     const editTeam = (team) => {
         setLoading(true)
@@ -154,7 +154,6 @@ export default function ImageMap() {
 
         let payload = []
         newMarkers.map((marker) => {
-            console.log(marker)
             payload.push(
                 {
                     id: marker.id,
@@ -400,7 +399,7 @@ export default function ImageMap() {
                 markerInfo={infoMarker}
                 openEdit={setOpenModal}
                 getMap={getMap}
-                isAdmin={isAdmin}
+                isadmin={isadmin}
             />
 
             {loaded ? (
@@ -432,7 +431,7 @@ export default function ImageMap() {
                     <CircularProgress color="inherit" />
                 </Backdrop>
             )}
-            {isAdmin && !creating && <SpeedDial
+            {isadmin && !creating && <SpeedDial
                 ariaLabel="SpeedDial actions"
                 sx={{ position: 'absolute', bottom: 16, right: 16 }}
                 icon={<SettingsIcon />}
@@ -450,7 +449,7 @@ export default function ImageMap() {
                     />
                 ))}
             </SpeedDial>}
-            {isAdmin && creating && <SpeedDial
+            {isadmin && creating && <SpeedDial
                 ariaLabel="SpeedDial create actions"
                 sx={{ position: 'absolute', bottom: 16, right: 16 }}
                 icon={<AddLocationIcon />}
@@ -470,7 +469,7 @@ export default function ImageMap() {
             </SpeedDial>}
             {showInfo && !creating && <SpeedDialCustom
                 ariaLabel="SpeedDial info"
-                isAdmin={isAdmin}
+                isadmin={isadmin}
                 icon={<InfoIcon />}
                 onClick={() => setOpenInfoModal(true)}
             >

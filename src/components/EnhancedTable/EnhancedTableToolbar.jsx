@@ -5,7 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import AddIcon from '@mui/icons-material/Add'
 import EditIcon from '@mui/icons-material/Edit'
 
-export default function EnhancedTableToolbar({ numSelected, title, setOpenModal, setDeleteModal, isAdmin }) {
+export default function EnhancedTableToolbar({ numSelected, title, setOpenModal, setDeleteModal, isadmin }) {
     return (
         <React.Fragment>
             <Toolbar
@@ -38,25 +38,27 @@ export default function EnhancedTableToolbar({ numSelected, title, setOpenModal,
                     </Typography>
                 )}
 
-                {isAdmin && numSelected > 0 && (
+                {isadmin && numSelected > 0 && (
                     <Tooltip title="Delete item">
                         <IconButton onClick={() => setDeleteModal(true)}>
                             <DeleteIcon />
                         </IconButton>
                     </Tooltip>
                 )}
-                {isAdmin && numSelected == 1 && (
+                {isadmin && numSelected === 1 && (
                     <Tooltip title="Edit item">
                         <IconButton onClick={() => setOpenModal(true)}>
                             <EditIcon />
                         </IconButton>
                     </Tooltip>
                 )}
-                {isAdmin && numSelected === 0 && <Tooltip title="Add item">
-                    <IconButton onClick={() => setOpenModal(true)}>
-                        <AddIcon />
-                    </IconButton>
-                </Tooltip>}
+                {isadmin && numSelected === 0 && (
+                    <Tooltip title="Add item">
+                        <IconButton onClick={() => setOpenModal(true)}>
+                            <AddIcon />
+                        </IconButton>
+                    </Tooltip>
+                )}
             </Toolbar>
         </React.Fragment>
     )

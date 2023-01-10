@@ -7,6 +7,8 @@ import Home from "./screens/Home/Home"
 import Teams from "./screens/Teams/Teams"
 import Maps from "./screens/Maps/Maps"
 import Wiki from "./screens/Wiki/Wiki"
+import Articles from "./screens/Articles/Articles"
+import Categories from "./screens/Categories/Categories"
 
 function Routes() {
     return (
@@ -17,6 +19,8 @@ function Routes() {
             <Route path="/teams" component={Teams} />
             <Route path="/maps" component={Maps} />
             <Route path="/wiki" component={Wiki} />
+            <Route path="/articles" component={Articles} />
+            <Route path="/categories" component={Categories} />
             <Route component={NotFound} />
         </Switch>
     )

@@ -9,11 +9,9 @@ import {
     InputLabel,
     MenuItem,
     Select,
-    TextField,
 } from '@mui/material'
 import { Box } from '@mui/system'
 import { SketchPicker } from 'react-color'
-import { styled } from '@mui/material/styles'
 import Form from '../../../components/DynamicForm/Form'
 
 const dataValueTeam = [
@@ -68,6 +66,8 @@ export default function MarkerModal({ openModal, addNewMarker, edit, setOpenModa
         if (!markerableId) {
             switch (markerableType) {
                 case 'Team': mId = teams.find((val) => val.name === values.name).id
+                    break
+                default: mId = null
             }
         }
 

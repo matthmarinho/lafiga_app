@@ -1,6 +1,6 @@
 import { Button, Dialog, FormControl } from '@mui/material'
 import { styled } from '@mui/system'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { SketchPicker } from 'react-color';
 import { Box } from '@mui/system'
 

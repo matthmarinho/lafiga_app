@@ -167,7 +167,7 @@ export default function Chars() {
     const [currentRow, setCurrentRow] = useState([])
     const [deleteModal, setDeleteModal] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [isAdmin, setIsAdmin] = useState(false)
+    const [isadmin, setIsAdmin] = useState(false)
 
     const requestSearch = (searchedVal) => {
         const filteredItems = rows.filter(item => {
@@ -278,7 +278,7 @@ export default function Chars() {
                                 selected={selected}
                                 setSelected={setSelected}
                                 setDeleteModal={setDeleteModal}
-                                isAdmin={isAdmin}
+                                isadmin={isadmin}
                                 title={'Chars'}
                             />
                         ) : (
@@ -288,7 +288,7 @@ export default function Chars() {
                                 setDeleteModal={setDeleteModal}
                                 selected={selected}
                                 setSelected={setSelected}
-                                isAdmin={isAdmin}
+                                isadmin={isadmin}
                                 title={'Chars'}
                             />
                         )

@@ -5,20 +5,17 @@ import Link from '@mui/material/Link'
 import GlobalStyles from '@mui/material/GlobalStyles'
 import Container from '@mui/material/Container'
 import { Box } from '@mui/system'
-import { Breadcrumbs, Card, CardContent, CardHeader, CardMedia, Collapse, Grid, Paper, styled } from '@mui/material'
+import { Breadcrumbs, Card, CardContent, CardHeader, CardMedia, Grid, Paper, styled } from '@mui/material'
 import { isBrowser } from 'react-device-detect'
-import Aberama from './../../_assets/img/aberama_ryco.png'
 import mockInfo from './components/_mock_info.json'
 import library from './components/library'
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import { useEffect } from 'react'
-import { useState } from 'react'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableRow from '@mui/material/TableRow'
+import { useEffect, useState } from 'react'
 
 function Copyright(props) {
   return (
@@ -44,23 +41,8 @@ const DivTwo = styled('div')(({ theme }) => ({
   columnGap: "30px"
 }))
 
-function createData(
-  key, value
-) {
-  return { key, value };
-}
-
-const rows = [
-  createData('Raça', 'Tiefling'),
-  createData('Subraça', 'Comum'),
-  createData('Classe', 'Guerreiro'),
-  createData('Subclasse', 'Atirador Inigualável'),
-  createData('Level', 7),
-];
-
 function WikiContent() {
   const [article, setArticle] = useState({})
-  const [img, setImg] = useState(null)
 
   const capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1)

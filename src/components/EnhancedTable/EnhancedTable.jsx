@@ -8,7 +8,6 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
-import { isBrowser } from 'react-device-detect'
 import ImageIcon from '@mui/icons-material/Image'
 import ImageModal from '../ImageModal/ImageModal'
 import IconButton from '@mui/material/IconButton'
@@ -54,7 +53,7 @@ function isBase64(str) {
 }
 
 function generateCells(value, idx, handleImgClick) {
-    if (idx == 0) {
+    if (idx === 0) {
         return (
             <TableCell
                 component="th"
@@ -88,7 +87,7 @@ function generateCells(value, idx, handleImgClick) {
     }
 }
 
-export default function EnhancedTable({ headCells, items, setOpenModal, selected, setSelected, setDeleteModal, isAdmin, title }) {
+export default function EnhancedTable({ headCells, items, setOpenModal, selected, setSelected, setDeleteModal, isadmin, title }) {
     const [order, setOrder] = useState('asc')
     const [orderBy, setOrderBy] = useState('name')
     const [page, setPage] = useState(0)
@@ -162,7 +161,7 @@ export default function EnhancedTable({ headCells, items, setOpenModal, selected
                 title={title}
                 setOpenModal={setOpenModal}
                 setDeleteModal={setDeleteModal}
-                isAdmin={isAdmin}
+                isadmin={isadmin}
             />
             <ImageModal src={img} open={openImgModal} handleClose={handleImgClickClose} />
             <TableContainer>
@@ -177,7 +176,7 @@ export default function EnhancedTable({ headCells, items, setOpenModal, selected
                         onRequestSort={handleRequestSort}
                         rowCount={items.length}
                         headCells={headCells}
-                        isAdmin={isAdmin}
+                        isadmin={isadmin}
                     />
                     <TableBody>
                         {stableSort(items, getComparator(order, orderBy))
@@ -196,7 +195,7 @@ export default function EnhancedTable({ headCells, items, setOpenModal, selected
                                         selected={isItemSelected}
                                     >
                                         <TableCell padding="checkbox">
-                                            {isAdmin &&
+                                            {isadmin &&
                                                 <Checkbox
                                                     color="primary"
                                                     onClick={(event) => handleClick(event, row)}

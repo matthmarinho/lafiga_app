@@ -2,7 +2,6 @@ import React from 'react'
 import Carousel from 'react-material-ui-carousel'
 import {
     Paper,
-    Button,
     Typography,
 } from '@mui/material'
 import { styled } from '@mui/system'

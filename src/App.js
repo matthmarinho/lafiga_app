@@ -1,8 +1,7 @@
 import React from 'react'
-import Home from './screens/Home/Home'
-import Map from './components/Map/index'
 import Layout from './components/Layout/Layout'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline'
 import darkScrollbar from '@mui/material/darkScrollbar'
 import { isBrowser } from 'react-device-detect'
 import './index.css'
@@ -29,7 +28,7 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      {/* <Map /> */}
+      <CssBaseline />
       <Layout />
     </ThemeProvider>
   );

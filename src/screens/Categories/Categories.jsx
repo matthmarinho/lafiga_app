@@ -8,7 +8,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import { alpha, styled } from '@mui/system'
 import EnhancedTable from '../../components/EnhancedTable/EnhancedTable'
 import FormModal from '../../components/DynamicForm/FormModal'
-import Service from '../../services/maps'
+import Service from '../../services/article_category'
 import { userData } from '../../services/auth'
 
 const Search = styled('div')(({ theme }) => ({
@@ -79,16 +79,10 @@ const headCells = [
         label: 'Name',
     },
     {
-        id: 'file',
+        id: 'type',
         numeric: false,
         disablePadding: false,
-        label: 'File',
-    },
-    {
-        id: 'file_name',
-        numeric: false,
-        disablePadding: false,
-        label: 'File Name',
+        label: 'Type',
     },
 ]
 
@@ -100,14 +94,15 @@ const dataValueDefault = [
         "id": "name"
     },
     {
-        "component": "file-input",
-        "label": "Image",
-        "type": "select",
-        "id": "image"
+        "component": "multi-select",
+        "label": "Subcategories",
+        "type": "multi-select",
+        "id": "sub_categories",
+        "values": []
     },
 ]
 
-export default function Maps() {
+export default function Categories() {
     const [rows, setRows] = useState([])
     const [items, setItems] = useState([])
     const [openModal, setOpenModal] = useState(false)
@@ -116,7 +111,8 @@ export default function Maps() {
     const [deleteModal, setDeleteModal] = useState(false)
     const [loading, setLoading] = useState(false)
     const [isadmin, setIsAdmin] = useState(false)
-    const [dataValue] = useState(dataValueDefault)
+    const [dataValue, setDataValue] = useState(dataValueDefault)
+    const [loadedChars, setLoadedChars] = useState(false)
 
     const requestSearch = (searchedVal) => {
         const filteredItems = rows.filter(item => {
@@ -145,6 +141,7 @@ export default function Maps() {
                 setSelected([])
                 setItems(response.data)
                 setRows(response.data)
+                dataValueDefault.find((value) => value.id === 'sub_categories').values = response.data.filter((el) => el.type === 'Category')
                 setLoading(false)
             })
             .catch(e => {
@@ -183,7 +180,7 @@ export default function Maps() {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    Delete {selected.length > 0 ? `maps` : `map`}?
+                    Delete {selected.length > 0 ? `teams` : `team`}?
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
@@ -202,7 +199,7 @@ export default function Maps() {
                 setOpen={setOpenModal}
                 formData={dataValue}
                 data={currentRow[0]}
-                title={'Map'}
+                title={'Team'}
                 Service={Service}
                 getAll={getAll}
             />
@@ -228,7 +225,7 @@ export default function Maps() {
                                 setSelected={setSelected}
                                 setDeleteModal={setDeleteModal}
                                 isadmin={isadmin}
-                                title={'Maps'}
+                                title={'Categories'}
                             />
                         ) : (
                             <FilterList
@@ -238,7 +235,7 @@ export default function Maps() {
                                 selected={selected}
                                 setSelected={setSelected}
                                 isadmin={isadmin}
-                                title={'Maps'}
+                                title={'Categories'}
                             />
                         )
                         }
